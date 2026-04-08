@@ -1,0 +1,196 @@
+---
+import { pageNavLinks, primaryNavLinks } from "../data/site";
+
+const currentPath = Astro.url.pathname;
+const currentHash = Astro.url.hash;
+
+const isActiveLink = (href: string) => {
+  if (href === "/") return currentPath === "/";
+  if (href.startsWith("/#")) return currentPath === "/" && currentHash === href.slice(1);
+  return currentPath === href;
+};
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.03] bg-black/60 backdrop-blur-xl transition-all duration-500" data-navbar-surface>
+  <div class="mx-auto flex h-18 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-8 lg:px-10">
+    <!-- Logo -->
+    <a href="/" class="group flex items-center">
+      <img
+        src="/Logotransparant.svg"
+        alt="Agenter Group logotyp"
+        class="h-16 w-auto max-w-[18rem] shrink-0 object-contain transition-transform duration-700 group-hover:-translate-y-0.5 scale-[1.7] origin-left sm:h-20 sm:max-w-[22rem] sm:scale-[1.9]"
+      />
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden items-center gap-8 lg:flex xl:gap-12">
+      {primaryNavLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "text-[10px] font-bold uppercase tracking-[0.3em] transition-all",
+            isActiveLink(link.href) ? "text-white" : "text-white/30 hover:text-white",
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+
+      <div class="group relative">
+        <button
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 transition-all hover:text-white"
+        >
+          <span>Sidor</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-px group-hover:rotate-180">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+
+        <div class="pointer-events-none absolute left-1/2 top-full z-20 w-[19rem] -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+          <div class="rounded-[1.75rem] border border-white/10 bg-black/95 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+            {pageNavLinks.map((link) => (
+              <a
+                href={link.href}
+                class:list={[
+                  "flex items-center justify-between rounded-2xl px-4 py-3 text-[11px] font-bold uppercase tracking-[0.14em] transition-all",
+                  isActiveLink(link.href)
+                    ? "bg-white/[0.08] text-white"
+                    : "text-white/60 hover:bg-white/[0.04] hover:text-white",
+                ]}
+              >
+                <span>{link.label}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="opacity-50">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="flex items-center gap-1.5 sm:gap-3">
+      <button
+        type="button"
+        aria-label="Öppna meny"
+        aria-expanded="false"
+        aria-controls="mobile-nav-panel"
+        data-mobile-nav-toggle
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/70 transition-colors duration-300 hover:bg-white/[0.08] hover:text-white active:scale-[0.98] lg:hidden"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+      <button 
+        type="button"
+        onclick="window.openAgenter()"
+        class="group relative overflow-hidden rounded-full bg-white px-3 py-3 text-[9px] font-bold uppercase tracking-[0.14em] text-black shadow-[0_15px_35px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:px-6 sm:text-[10px] sm:tracking-[0.2em] lg:px-8"
+      >
+        <span class="relative z-10 flex items-center justify-between gap-3">
+          <span class="hidden sm:inline">Boka möte</span>
+          <span class="sm:hidden">Demo</span>
+          <div class="flex items-center justify-center rounded-full bg-black/5 p-1 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 group-hover:translate-x-1 group-hover:-translate-y-[1px]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-nav-panel"
+    data-mobile-nav-panel
+    hidden
+    class="border-t border-white/[0.05] bg-black/90 backdrop-blur-2xl lg:hidden"
+  >
+    <div class="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 sm:px-8">
+      {primaryNavLinks.map((link) => (
+        <a href={link.href} class="rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 transition-colors duration-300 hover:text-white">
+          {link.label}
+        </a>
+      ))}
+      <div class="rounded-[1.5rem] border border-white/[0.06] bg-white/[0.03] p-2">
+        <div class="px-3 pb-2 pt-1 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
+          Sidor
+        </div>
+        <div class="flex flex-col gap-1">
+          {pageNavLinks.map((link) => (
+            <a href={link.href} class="rounded-2xl px-3 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white/70 transition-colors duration-300 hover:bg-white/[0.04] hover:text-white">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+      <button
+        type="button"
+        onclick="window.openAgenter()"
+        class="mt-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-black transition-transform duration-300 active:scale-[0.98]"
+      >
+        Prata med vår AI
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navRoot = document.querySelector<HTMLElement>('[data-navbar-surface]');
+  const navSurface = document.querySelector<HTMLElement>('[data-navbar-surface]');
+  const mobileToggle = document.querySelector<HTMLButtonElement>('[data-mobile-nav-toggle]');
+  const mobilePanel = document.querySelector<HTMLElement>('[data-mobile-nav-panel]');
+
+  const setMobileMenu = (open: boolean) => {
+    if (!mobileToggle || !mobilePanel) return;
+    mobileToggle.setAttribute('aria-expanded', String(open));
+    mobilePanel.hidden = !open;
+  };
+
+  const updateNavbarState = () => {
+    if (window.scrollY > 40) {
+      navSurface?.classList.add('bg-black/80', 'backdrop-blur-2xl');
+      navSurface?.classList.remove('bg-black/60');
+    } else {
+      navSurface?.classList.remove('bg-black/80', 'backdrop-blur-2xl');
+      navSurface?.classList.add('bg-black/60');
+    }
+  };
+
+  mobileToggle?.addEventListener('click', () => {
+    const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+    setMobileMenu(!isOpen);
+  });
+
+  mobilePanel?.querySelectorAll('a, button').forEach((item) => {
+    item.addEventListener('click', () => setMobileMenu(false));
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target instanceof Node && !navRoot?.contains(target)) {
+      setMobileMenu(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setMobileMenu(false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      setMobileMenu(false);
+    }
+  });
+
+  window.addEventListener('scroll', updateNavbarState, { passive: true });
+  updateNavbarState();
+  setMobileMenu(false);
+</script>

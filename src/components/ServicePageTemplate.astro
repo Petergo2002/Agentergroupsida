@@ -1,0 +1,160 @@
+---
+interface Stat {
+  label: string;
+  value: string;
+}
+
+interface Block {
+  title: string;
+  body: string;
+  bullets?: string[];
+}
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface RelatedLink {
+  href: string;
+  title: string;
+}
+
+interface Props {
+  badge: string;
+  title: string;
+  description: string;
+  stats: Stat[];
+  blocks: Block[];
+  faqs: FAQ[];
+  relatedLinks: RelatedLink[];
+}
+
+const { badge, title, description, stats, blocks, faqs, relatedLinks } = Astro.props as Props;
+---
+
+<section class="relative overflow-hidden pt-32 pb-18 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-28">
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10">
+    <div class="max-w-4xl">
+      <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">
+        {badge}
+      </div>
+      <h1 class="mb-6 max-w-[11ch] text-[clamp(3rem,12vw,6rem)] font-medium leading-[0.9] tracking-[-0.06em] text-white/92">
+        {title}
+      </h1>
+      <p class="max-w-3xl text-sm font-medium leading-relaxed text-white/40 sm:text-lg lg:text-xl">
+        {description}
+      </p>
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+        <button
+          type="button"
+          onclick="window.openAgenter()"
+          class="group relative w-full overflow-hidden rounded-full bg-white py-2 pl-6 pr-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:w-auto sm:pl-8 sm:text-[10px] sm:tracking-[0.2em]"
+        >
+          <span class="relative z-10 flex items-center justify-between gap-6">
+            Prata med AI direkt
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-black/5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
+          </span>
+        </button>
+        <a
+          href="/"
+          class="w-full rounded-full border border-white/10 px-6 py-4 text-center text-[9px] font-bold uppercase tracking-[0.16em] text-white/45 transition-colors duration-300 hover:bg-white/5 hover:text-white sm:w-auto sm:px-8 sm:text-[10px] sm:tracking-[0.2em]"
+        >
+          Till startsidan
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+      {stats.map((stat) => (
+        <div class="glass-outer">
+          <div class="glass-inner p-8">
+            <p class="mb-3 text-[9px] font-bold uppercase tracking-[0.34em] text-white/20">{stat.label}</p>
+            <p class="text-2xl font-medium tracking-[-0.04em] text-white/88">{stat.value}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="relative border-t border-white/[0.03] py-18 sm:py-24 lg:py-28">
+  <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-5 px-4 sm:px-8 lg:grid-cols-2 lg:px-10">
+    {blocks.map((block) => (
+      <article class="glass-outer">
+        <div class="glass-inner h-full p-8 sm:p-10">
+          <h2 class="mb-5 text-3xl font-medium tracking-[-0.04em] text-white/9૦ sm:text-4xl">
+            {block.title}
+          </h2>
+          <p class="text-sm font-medium leading-relaxed text-white/38 sm:text-base">
+            {block.body}
+          </p>
+          {block.bullets && (
+            <ul class="mt-8 space-y-4">
+              {block.bullets.map((bullet) => (
+                <li class="flex items-start gap-3 text-sm font-medium leading-relaxed text-white/45">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-orange"></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="relative border-t border-white/[0.03] py-18 sm:py-24 lg:py-28">
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10">
+    <div class="mb-12 max-w-3xl">
+      <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">
+        Vanliga frågor
+      </div>
+      <h2 class="text-[clamp(2.5rem,10vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.05em] text-white/92">
+        Det här behöver <span class="text-white/20">beslutsfattare veta.</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+      {faqs.map((faq) => (
+        <article class="glass-outer">
+          <div class="glass-inner h-full p-8 sm:p-10">
+            <h3 class="mb-4 text-xl font-medium tracking-[-0.03em] text-white/88">
+              {faq.question}
+            </h3>
+            <p class="text-sm font-medium leading-relaxed text-white/38 sm:text-base">
+              {faq.answer}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="relative border-t border-white/[0.03] py-18 sm:py-24 lg:py-28">
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10">
+    <div class="mb-10 max-w-2xl">
+      <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">
+        Relaterade sidor
+      </div>
+      <h2 class="text-[clamp(2.4rem,9vw,4rem)] font-medium leading-[0.95] tracking-[-0.05em] text-white/92">
+        Fortsätt till <span class="text-white/20">nästa steg.</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      {relatedLinks.map((link) => (
+        <a href={link.href} class="glass-outer block transition-transform duration-300 hover:-translate-y-1">
+          <div class="glass-inner h-full p-8">
+            <p class="text-lg font-medium tracking-[-0.03em] text-white/88">{link.title}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

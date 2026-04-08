@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI leadkvalificering | AgenterGroup";
+const description =
+  "Använd AI för leadkvalificering på svenska. Samla rätt information, filtrera bort brus och skicka bättre leads vidare till sälj.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-leadkvalificering`,
+    inLanguage: "sv-SE",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI leadkvalificering",
+    provider: { "@type": "Organization", name: "AgenterGroup", url: SITE_URL },
+    areaServed: "SE",
+    availableLanguage: "sv-SE",
+    description,
+  },
+];
+---
+
+<Layout title={title} description={description} canonicalPath="/ai-leadkvalificering" structuredData={structuredData}>
+  <ServicePageTemplate
+    badge="AI leadkvalificering"
+    title="AI för leadkvalificering som minskar brus"
+    description="Få bättre kontroll över inkommande dialoger. Agenten ställer rätt frågor, fångar rätt data och hjälper säljteamet att fokusera på leads som faktiskt är värda att följa upp."
+    stats={[
+      { label: "Mål", value: "Färre lågkvalitativa leads" },
+      { label: "Input", value: "Formulär, chatt och dialog" },
+      { label: "Output", value: "Bättre routing till sälj" },
+    ]}
+    blocks={[
+      {
+        title: "Så fungerar AI leadkvalificering",
+        body: "Agenten fångar upp dialogen tidigt, ställer relevanta följdfrågor och bedömer om personen matchar ert erbjudande innan den skickas vidare till sälj eller bokning.",
+        bullets: [
+          "Samla behov, storlek, timing och kontaktdata",
+          "Filtrera bort irrelevanta förfrågningar",
+          "Skicka kvalificerade leads vidare direkt",
+        ],
+      },
+      {
+        title: "Varför det spelar roll för små och medelstora bolag",
+        body: "När säljteamet är litet blir varje felprioriterad kontakt dyr. En bättre kvalificering gör att ni kan jobba snabbare och lägga tiden på samtal med högre sannolikhet att bli affär.",
+        bullets: [
+          "Högre fokus i säljarbetet",
+          "Mindre manuell sortering",
+          "Snabbare väg från intresse till möte",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Kan agenten anpassas efter vår säljprocess?",
+        answer: "Ja. Vi bygger frågorna och logiken utifrån hur ni kvalificerar leads idag och vad som räknas som rätt affär för er.",
+      },
+      {
+        question: "Kan den skicka leads till CRM?",
+        answer: "Ja. Poängen med lösningen är att den ska kunna kopplas till de system ni redan arbetar i.",
+      },
+      {
+        question: "Fungerar detta även om vi säljer komplexa tjänster?",
+        answer: "Ja, ofta ännu bättre, eftersom komplexa tjänster kräver att rätt information samlas in tidigt i dialogen.",
+      },
+      {
+        question: "Kan agenten boka möte efter kvalificeringen?",
+        answer: "Ja. Det är ett naturligt nästa steg när leadet matchar rätt kriterier.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-motesbokning", title: "AI för mötesbokning" },
+      { href: "/ai-chatbot-for-foretag", title: "AI chatbot för företag" },
+      { href: "/integrationer", title: "Integrationer" },
+    ]}
+  />
+</Layout>

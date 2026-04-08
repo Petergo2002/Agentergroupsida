@@ -1,0 +1,84 @@
+---
+---
+<div class="relative w-full">
+  <!-- Ultra-subtle Glow -->
+  <div class="absolute -inset-10 bg-white/[0.02] blur-[120px] -z-10 rounded-full"></div>
+  
+  <div class="relative w-full overflow-hidden rounded-2xl border border-white/[0.05] bg-[#0A0A0A] shadow-[0_40px_100px_rgba(0,0,0,0.9)] animate-fade-up">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-white/[0.03] bg-white/[0.01] px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-8">
+      <div class="flex items-center gap-2 sm:gap-4">
+        <div class="flex gap-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-white/[0.05]"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-white/[0.05]"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-white/[0.05]"></div>
+        </div>
+        <div class="mx-1 hidden h-4 w-[1px] bg-white/[0.05] sm:block"></div>
+        <span class="text-[8px] font-bold uppercase tracking-[0.3em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">Operations / Active</span>
+      </div>
+      <div class="flex items-center gap-2 rounded-full border border-white/[0.05] bg-white/[0.02] px-3 py-1.5 sm:gap-4 sm:px-4">
+        <div class="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse"></div>
+        <span class="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Live</span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="grid grid-cols-1 gap-6 p-4 sm:gap-8 sm:p-6 lg:grid-cols-12 lg:gap-8 lg:p-10 xl:gap-10 xl:p-12">
+      <!-- Activity Card -->
+      <div class="group relative overflow-hidden rounded-xl border border-white/[0.03] bg-white/[0.01] p-5 sm:p-6 lg:col-span-8 lg:p-8 xl:p-10">
+        <div class="relative z-10">
+          <p class="text-[9px] font-bold text-white/20 uppercase tracking-[0.4em] mb-4">Aktivitet</p>
+          <div class="mb-8 flex items-baseline gap-3 sm:gap-4 lg:mb-10 xl:mb-12">
+            <h3 class="text-3xl font-medium tracking-[-0.05em] text-white/90 sm:text-4xl lg:text-5xl">42 850</h3>
+            <span class="text-xs font-bold text-green-500/50">+24.5%</span>
+          </div>
+
+          <!-- Refined Chart -->
+          <div class="relative mb-8 flex h-32 items-end gap-2 sm:h-40 lg:mb-10 lg:h-44 xl:mb-12 xl:h-48 xl:gap-3">
+            {[30, 45, 35, 60, 50, 75, 65, 90, 80, 100, 85, 95].map((h, i) => (
+              <div 
+                style={`height: ${h}%`} 
+                class={`flex-1 rounded-sm transition-all duration-1000 ${i === 9 ? 'bg-brand-orange/40 shadow-[0_0_30px_rgba(255,92,0,0.2)]' : 'bg-white/[0.03] hover:bg-white/[0.1]'}`}
+              ></div>
+            ))}
+          </div>
+
+          <div class="flex flex-wrap gap-6 border-t border-white/[0.03] pt-6 sm:gap-8 lg:gap-12 lg:pt-8">
+            <div>
+              <p class="text-[8px] font-bold text-white/10 uppercase tracking-[0.4em] mb-2">Lead Score</p>
+              <p class="text-xl font-medium text-white/60">92.4%</p>
+            </div>
+            <div class="hidden h-10 w-px bg-white/[0.03] sm:block"></div>
+            <div>
+              <p class="text-[8px] font-bold text-white/10 uppercase tracking-[0.4em] mb-2">Bokningar</p>
+              <p class="text-xl font-medium text-white/60">1 204</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Column -->
+      <div class="flex flex-col gap-6 lg:col-span-4 lg:gap-8 xl:gap-10">
+        <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] p-5 sm:p-6 xl:p-8">
+          <p class="text-[9px] font-bold text-white/20 uppercase tracking-[0.4em] mb-6">Agenter</p>
+          <h3 class="mb-6 text-3xl font-medium tracking-[-0.05em] text-white/90 sm:text-4xl xl:mb-8">12</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between text-[9px] font-bold text-white/10 uppercase tracking-[0.3em]">
+              <span>Svarstid</span>
+              <span class="text-white/40">1.2s</span>
+            </div>
+            <div class="h-[2px] w-full bg-white/[0.03] rounded-full overflow-hidden">
+              <div class="h-full w-[85%] bg-white/20"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-white/[0.03] bg-brand-orange/[0.02] p-5 sm:p-6 xl:p-8">
+          <p class="text-[9px] font-bold text-white/20 uppercase tracking-[0.4em] mb-6">Effektivitet</p>
+          <h3 class="mb-4 text-3xl font-medium tracking-[-0.05em] text-white/90 sm:text-4xl xl:mb-6">140h</h3>
+          <p class="text-[9px] font-bold text-white/10 uppercase tracking-[0.3em]">Insparad tid / mån</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

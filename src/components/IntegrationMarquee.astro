@@ -1,0 +1,218 @@
+---
+import { integrations } from "../data/integrations";
+
+const tracks = [integrations, integrations];
+---
+
+<section
+  class="scroll-scene relative border-t border-white/[0.03] py-20 sm:py-24 lg:py-28"
+  data-scroll-scene
+  data-scene-kind="integrations"
+  data-scene-mode="sticky"
+>
+  <div class="scene-divider" data-scene-divider></div>
+  <div class="pointer-events-none absolute inset-x-0 top-8 h-48 bg-[radial-gradient(circle_at_center,_rgba(255,92,0,0.08),_transparent_68%)] opacity-70" data-scene-backdrop></div>
+
+  <div data-scene-stage>
+    <div class="mx-auto mb-12 w-full max-w-7xl px-6 text-center sm:mb-14 sm:px-8 lg:px-10">
+      <div data-scene-content>
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/40 sm:mb-6">
+          Integrations
+        </div>
+        <h2 class="text-3xl font-extrabold tracking-tighter sm:text-4xl lg:text-5xl">Anslut till hundratals verktyg.</h2>
+        <p class="mx-auto mt-5 max-w-2xl text-sm font-medium leading-relaxed text-white/34 sm:mt-6 sm:text-base lg:text-lg">
+          Kalender, inkorg, CRM och resten av din stack i samma agentflöde. Bygg ovanpå verktygen teamet redan använder.
+        </p>
+      </div>
+    </div>
+
+    <div class="relative" data-scene-visual>
+      <div class="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-black via-black/90 to-transparent sm:w-24 lg:w-40"></div>
+      <div class="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-black via-black/90 to-transparent sm:w-24 lg:w-40"></div>
+
+      <div class="integration-marquee-shell">
+        <div class="integration-marquee" aria-label="Verktygsintegrationer">
+          {tracks.map((track, trackIndex) => (
+            <div class="integration-track" aria-hidden={trackIndex === 1 ? "true" : undefined}>
+              {track.map((integration) => (
+                <div
+                  class="integration-pill"
+                  aria-label={`${integration.name} integration`}
+                  tabindex={trackIndex === 0 ? 0 : -1}
+                  style={`--brand-rgb: ${integration.brandRgb};`}
+                >
+                  <span class="integration-pill__icon" aria-hidden="true">
+                    <Fragment set:html={integration.svg} />
+                  </span>
+                  <span class="integration-pill__label">{integration.name}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .integration-marquee-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .integration-marquee {
+    --marquee-gap: 0.95rem;
+    display: flex;
+    gap: var(--marquee-gap);
+    width: max-content;
+    min-width: 100%;
+    padding-inline: 1.5rem;
+  }
+
+  .integration-track {
+    display: flex;
+    flex: none;
+    min-width: max-content;
+    align-items: center;
+    gap: var(--marquee-gap);
+    padding-block: 0.5rem;
+    animation: integration-marquee 38s linear infinite;
+    will-change: transform;
+  }
+
+  .integration-pill {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+    padding: 0.95rem 1.15rem;
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease,
+      color 220ms ease;
+  }
+
+  .integration-pill:focus-visible {
+    outline: none;
+  }
+
+  .integration-pill__icon {
+    display: inline-flex;
+    height: 1.4rem;
+    width: 1.4rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.56);
+    transition: color 220ms ease;
+  }
+
+  .integration-pill__icon :global(svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .integration-pill__label {
+    white-space: nowrap;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  .integration-marquee:hover .integration-track,
+  .integration-marquee:focus-within .integration-track {
+    animation-play-state: paused;
+  }
+
+  .integration-pill:hover,
+  .integration-pill:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(var(--brand-rgb), 0.38);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+    color: rgba(255, 255, 255, 0.96);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 24px 60px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(var(--brand-rgb), 0.12),
+      0 0 40px rgba(var(--brand-rgb), 0.14);
+  }
+
+  .integration-pill:hover .integration-pill__icon,
+  .integration-pill:focus-visible .integration-pill__icon {
+    color: rgb(var(--brand-rgb));
+  }
+
+  @keyframes integration-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-100% - var(--marquee-gap)));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .integration-marquee {
+      --marquee-gap: 0.75rem;
+      padding-inline: 1rem;
+    }
+
+    .integration-pill {
+      gap: 0.65rem;
+      padding: 0.85rem 1rem;
+    }
+
+    .integration-pill__icon {
+      height: 1.2rem;
+      width: 1.2rem;
+    }
+
+    .integration-pill__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .integration-marquee-shell {
+      overflow: visible;
+    }
+
+    .integration-marquee {
+      display: block;
+      width: 100%;
+      padding-inline: 1.5rem;
+    }
+
+    .integration-track {
+      animation: none;
+      flex-wrap: wrap;
+      min-width: 0;
+      justify-content: center;
+      padding-block: 0;
+    }
+
+    .integration-track[aria-hidden="true"] {
+      display: none;
+    }
+
+    .integration-pill:hover,
+    .integration-pill:focus-visible {
+      transform: none;
+    }
+  }
+</style>

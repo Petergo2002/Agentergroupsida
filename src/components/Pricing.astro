@@ -1,0 +1,75 @@
+---
+// Pricing.astro (Now Contact & Tailored Solutions)
+---
+
+<section
+  id="prissattning"
+  class="scroll-scene relative border-t border-white/[0.03] py-20 sm:py-32 lg:py-40"
+  data-scroll-scene
+  data-scene-kind="pricing"
+  data-scene-mode="soft"
+>
+  <div class="scene-divider" data-scene-divider></div>
+  <div class="pointer-events-none absolute inset-x-0 top-20 h-96 bg-[radial-gradient(circle_at_top,_rgba(255,92,0,0.08),_transparent_75%)]" data-scene-backdrop></div>
+  
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10" data-scene-stage>
+    <!-- Header -->
+    <div class="mb-16 text-left sm:mb-20 lg:mb-24" data-scene-content>
+      <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
+        Våra lösningar
+      </div>
+      <h2 class="mb-8 max-w-[12ch] text-[clamp(3rem,12vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-10">
+        Skräddarsytt för <br class="hidden sm:block" /> <span class="text-white/20">din framgång.</span>
+      </h2>
+      <p class="max-w-xl text-sm font-medium leading-relaxed text-white/40 sm:text-lg lg:max-w-2xl lg:text-xl">
+        Vi tror inte på "one size fits all". Varje verksamhet har unika behov, och våra AI-arkitekter bygger din lösning från grunden.
+      </p>
+    </div>
+
+    <!-- Contact Card -->
+    <div class="relative mx-auto w-full" data-scene-visual>
+      <div class="glass-outer group overflow-hidden transition-all duration-700 hover:shadow-[0_64px_128px_-12px_rgba(0,0,0,0.5)]">
+        <div class="glass-inner relative flex flex-col items-start justify-between gap-10 overflow-hidden p-7 sm:p-12 lg:flex-row lg:items-center lg:gap-12 lg:p-20">
+          <!-- Left: Value Prop -->
+          <div class="relative z-10 max-w-xl text-left">
+            <h3 class="mb-6 text-2xl font-medium tracking-tight text-white/90 sm:text-4xl lg:mb-8">
+              Redo att automatisera? <br class="hidden sm:block" />
+              <span class="text-brand-orange">Boka ett möte med vår AI.</span>
+            </h3>
+            <ul class="mb-10 space-y-4 sm:mb-12">
+              {[
+                "Skräddarsydda onboarding-planer",
+                "Integration med befintliga system",
+                "Fullständig anpassning av AI-personlighet",
+                "Högsta säkerhetsstandarder"
+              ].map((item) => (
+                <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-white/30">
+                  <div class="h-1 w-1 rounded-full bg-brand-orange/40"></div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Right: Action -->
+          <div class="relative z-10 w-full max-w-sm lg:w-auto lg:max-w-none">
+            <button 
+              type="button"
+              onclick="window.openAgenter()"
+              class="group relative w-full overflow-hidden rounded-full bg-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.18em] text-black shadow-[0_40px_80px_rgba(255,255,255,0.08)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98] sm:px-10 sm:py-6 sm:text-[11px] sm:tracking-[0.25em] lg:w-[320px]"
+            >
+              <span class="relative z-10 flex items-center justify-center gap-4">
+                  Börja automatisera nu
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-700 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </button>
+
+          </div>
+
+          <!-- Decorative element inside the card -->
+          <div class="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-brand-orange/5 blur-[120px] transition-all duration-700 group-hover:bg-brand-orange/10 group-hover:blur-[140px]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

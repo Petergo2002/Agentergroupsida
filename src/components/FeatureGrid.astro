@@ -1,0 +1,65 @@
+---
+interface FeatureItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  id?: string;
+  items: FeatureItem[];
+  title: string;
+  subtitle: string;
+}
+
+const { id, items, title, subtitle } = Astro.props as Props;
+const sceneKind = id === "plattform" ? "feature-followup" : "feature-intro";
+---
+
+<section
+  id={id}
+  class="scroll-scene relative border-t border-white/[0.03] py-18 sm:py-24 lg:py-28"
+  data-scroll-scene
+  data-scene-kind={sceneKind}
+  data-scene-mode="sticky"
+>
+  <div class="scene-divider" data-scene-divider></div>
+  <div class="pointer-events-none absolute inset-x-0 top-10 h-44 bg-[radial-gradient(circle_at_top,_rgba(255,92,0,0.06),_transparent_72%)]" data-scene-backdrop></div>
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10" data-scene-stage>
+    <!-- Section Header -->
+    <div class="mb-14 text-left sm:mb-16 lg:mb-20" data-scene-content>
+      <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
+        {id === "plattform" ? "Plattform" : "Funktioner"}
+      </div>
+      <h2 class="mb-6 max-w-[12ch] text-[clamp(2.75rem,11vw,5.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-8">
+        {title.split(' ').slice(0, -1).join(' ')} <br class="hidden sm:block" />
+        <span class="text-white/20">{title.split(' ').slice(-1)}</span>
+      </h2>
+      <p class="max-w-xl text-sm font-medium leading-relaxed text-white/30 sm:text-lg lg:max-w-2xl lg:text-xl">{subtitle}</p>
+    </div>
+
+    <!-- Magazine Grid -->
+    <div class="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-6" data-scene-visual>
+      {items.map((item, index) => (
+        <div
+          class={`group relative glass-outer transition-all duration-1000 ${index % 3 === 0 ? 'md:col-span-2 lg:col-span-4' : 'md:col-span-1 lg:col-span-2'}`}
+          data-scene-card
+          style={`--card-index:${index};`}
+        >
+          <div class="glass-inner relative flex h-full flex-col overflow-hidden p-8 sm:p-10 lg:p-12">
+            <!-- Icon -->
+            <div class="mb-8 flex h-12 w-12 items-center justify-center text-white/40 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:-translate-y-1 group-hover:scale-110 group-hover:text-brand-orange sm:mb-10 lg:mb-12">
+              <Fragment set:html={item.icon} />
+            </div>
+            
+            <h3 class="mb-4 text-xl font-medium tracking-[-0.03em] text-white/80 transition-colors duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:text-white sm:mb-5 sm:text-2xl">{item.title}</h3>
+            <p class="max-w-sm text-sm font-medium leading-relaxed text-white/30 transition-colors duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:text-white/40">{item.description}</p>
+            
+            <!-- Subtle Glow -->
+            <div class="absolute -bottom-[20%] -right-[10%] h-32 w-32 rounded-full bg-brand-orange/40 opacity-0 blur-[100px] transition-opacity duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:opacity-20"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

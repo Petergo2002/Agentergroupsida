@@ -1,0 +1,89 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI chatbot för företag | AgenterGroup";
+const description =
+  "Vi bygger AI-chatbots för svenska företag som vill automatisera kundservice, kvalificera leads och boka möten med koppling till befintliga system.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-chatbot-for-foretag`,
+    inLanguage: "sv-SE",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI chatbot för företag",
+    provider: {
+      "@type": "Organization",
+      name: "AgenterGroup",
+      url: SITE_URL,
+    },
+    areaServed: "SE",
+    availableLanguage: "sv-SE",
+    description,
+  },
+];
+---
+
+<Layout title={title} description={description} canonicalPath="/ai-chatbot-for-foretag" structuredData={structuredData}>
+  <ServicePageTemplate
+    badge="AI chatbot för företag"
+    title="AI chatbot för företag som gör mer än att svara"
+    description="Vi bygger AI-chatbots för svenska företag som vill automatisera första linjen, kvalificera fler dialoger och koppla chatten till CRM, kalender och interna system."
+    stats={[
+      { label: "Primär use case", value: "Kundservice, leads och bokning" },
+      { label: "Målgrupp", value: "Små till medelstora företag" },
+      { label: "Konvertering", value: "Prata med AI direkt" },
+    ]}
+    blocks={[
+      {
+        title: "Varför företag söker AI chatbot idag",
+        body: "De flesta företag letar inte efter ännu en widget. De letar efter ett sätt att svara snabbare, fånga fler leads och minska manuellt arbete utan att bygga ett helt nytt support- eller säljsystem.",
+        bullets: [
+          "Svara på vanliga frågor dygnet runt på svenska",
+          "Samla in rätt information innan människa tar över",
+          "Skicka kvalificerade leads till rätt person direkt",
+        ],
+      },
+      {
+        title: "Därför bygger vi agenten åt er",
+        body: "Det som gör skillnad är inte bara modellen. Det är hur agenten sätts upp, vilken data den får använda, vilka system den kopplas till och hur dialogen styrs mot ett tydligt affärsmål.",
+        bullets: [
+          "Vi anpassar agenten till er verksamhet och tonalitet",
+          "Vi kopplar den till era befintliga arbetsflöden",
+          "Vi fokuserar på kundservice, leadkvalificering och mötesbokning",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Vad är skillnaden mellan er AI chatbot och en vanlig chatbot?",
+        answer: "En vanlig chatbot stannar ofta vid FAQ-svar. Vår lösning byggs som en agent med tydligt syfte, exempelvis kundservice, kvalificering eller bokning, och kan kopplas till era system.",
+      },
+      {
+        question: "Passar det här små och medelstora företag?",
+        answer: "Ja. Det är där vi ser tydligast nytta eftersom ni ofta vill automatisera utan att bygga ett stort internt AI-team.",
+      },
+      {
+        question: "Kan agenten kopplas till våra system?",
+        answer: "Ja. Integrationer är en central del av upplägget. Vi bygger agenten så att den kan arbeta med CRM, kalender, inbox eller andra system ni redan använder.",
+      },
+      {
+        question: "Måste vi skriva prompts och flöden själva?",
+        answer: "Nej. Ni köper inte bara ett verktyg. Vi bygger lösningen åt er och anpassar den efter verksamheten.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-agent-kundservice", title: "AI agent för kundservice" },
+      { href: "/ai-leadkvalificering", title: "AI för leadkvalificering" },
+      { href: "/integrationer", title: "Integrationer" },
+    ]}
+  />
+</Layout>

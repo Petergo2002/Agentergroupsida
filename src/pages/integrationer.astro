@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI agent med integrationer | AgenterGroup";
+const description =
+  "Koppla AI-agenten till CRM, kalender, inbox och interna system så att den kan agera i riktiga arbetsflöden.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/integrationer`,
+    inLanguage: "sv-SE",
+  },
+];
+---
+
+<Layout title={title} description={description} canonicalPath="/integrationer" structuredData={structuredData}>
+  <ServicePageTemplate
+    badge="Integrationer"
+    title="AI agent med integrationer i era befintliga system"
+    description="Det som skiljer en enkel chatbot från en faktisk agent är förmågan att arbeta tillsammans med era verktyg. Vi kopplar agenten till systemen ni redan använder."
+    stats={[
+      { label: "Typiska system", value: "CRM, kalender, inbox" },
+      { label: "Nytta", value: "Mindre manuellt dubbelarbete" },
+      { label: "Differentiering", value: "Agenten gör mer än att svara" },
+    ]}
+    blocks={[
+      {
+        title: "Varför integrationer är avgörande",
+        body: "Om agenten inte kan använda rätt data eller starta rätt nästa steg stannar värdet ofta vid att ge svar. Integrationer gör att agenten blir användbar i riktiga processer.",
+        bullets: [
+          "Hämta och skriva data där arbetet redan sker",
+          "Koppla dialogen till kundresan",
+          "Bygga flöden för support, sälj och bokning",
+        ],
+      },
+      {
+        title: "Hur vi jobbar med integrationer",
+        body: "Vi börjar inte med att koppla allt. Vi börjar med det som skapar affärsvärde snabbast och bygger sedan vidare från det som redan fungerar hos er.",
+        bullets: [
+          "Identifiera kritiska system först",
+          "Bygg rätt use case innan fler kopplingar läggs till",
+          "Se till att agenten passar ert faktiska arbetssätt",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Vilka system kan ni koppla till?",
+        answer: "Det beror på ert stack, men CRM, kalendrar, inboxar och kunskapskällor är vanliga utgångspunkter.",
+      },
+      {
+        question: "Måste allt integreras från dag ett?",
+        answer: "Nej. Det är ofta bättre att börja med de kopplingar som ger tydlig nytta snabbast.",
+      },
+      {
+        question: "Varför är integrationer viktiga för SEO-messaging?",
+        answer: "För att många företag söker efter mer än en chatbot. De söker efter något som går att använda i riktiga processer och det behöver förklaras tydligt.",
+      },
+      {
+        question: "Kan ni bygga agenten runt våra system?",
+        answer: "Ja. Det är en central del av ert erbjudande och en viktig del av det som ska kommuniceras på sajten.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-chatbot-for-foretag", title: "AI chatbot för företag" },
+      { href: "/ai-leadkvalificering", title: "AI leadkvalificering" },
+      { href: "/ai-motesbokning", title: "AI mötesbokning" },
+    ]}
+  />
+</Layout>

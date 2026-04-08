@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI agent för kundservice | AgenterGroup";
+const description =
+  "Automatisera kundservice med en AI agent på svenska som svarar snabbare, avlastar teamet och kopplas till era system.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-agent-kundservice`,
+    inLanguage: "sv-SE",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI agent för kundservice",
+    provider: { "@type": "Organization", name: "AgenterGroup", url: SITE_URL },
+    areaServed: "SE",
+    availableLanguage: "sv-SE",
+    description,
+  },
+];
+---
+
+<Layout title={title} description={description} canonicalPath="/ai-agent-kundservice" structuredData={structuredData}>
+  <ServicePageTemplate
+    badge="AI agent kundservice"
+    title="AI agent för kundservice på svenska"
+    description="Ge kunderna snabba svar, minska trycket på supporten och få bättre kontroll över inkommande frågor med en AI agent som byggs för ert arbetssätt."
+    stats={[
+      { label: "Typiska frågor", value: "FAQ, status, processer" },
+      { label: "Tillgänglighet", value: "Dygnet runt" },
+      { label: "Språk", value: "Svenska först" },
+    ]}
+    blocks={[
+      {
+        title: "Vad agenten tar hand om",
+        body: "En stor del av kundservice består av återkommande frågor. Agenten kan svara på det som är standardiserbart och slussa vidare det som kräver mänsklig bedömning.",
+        bullets: [
+          "Svar på vanliga frågor och policies",
+          "Insamling av kontext innan ärendet skickas vidare",
+          "Styrning till rätt kanal eller rätt person",
+        ],
+      },
+      {
+        title: "Vad ni vinner på det",
+        body: "När agenten tar första linjen kan supportteamet fokusera på mer komplexa ärenden. Det höjer både svarstakt och upplevd service utan att ni behöver skala teamet lika snabbt.",
+        bullets: [
+          "Kortare väntetid för kunden",
+          "Mindre repetitivt arbete internt",
+          "Tydligare överblick över återkommande ärenden",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Kan agenten lämna över till människa?",
+        answer: "Ja. Vi bygger flöden där agenten tar första steget och sedan eskalerar vidare när frågan kräver mänsklig hantering.",
+      },
+      {
+        question: "Kan den använda vårt material och våra svar?",
+        answer: "Ja. Vi kan träna lösningen på ert innehåll och sätta upp guardrails för hur svaren ska formuleras.",
+      },
+      {
+        question: "Fungerar detta för svenska kunder?",
+        answer: "Ja. Strategin här är svensk först, vilket innebär att copy, frågor och sökbeteende utgår från svenska företag och svenska användare.",
+      },
+      {
+        question: "Måste vi ändra hela vårt supportsystem?",
+        answer: "Nej. Målet är att koppla agenten till det ni redan använder, inte att tvinga in er i ett helt nytt verktyg.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-chatbot-for-foretag", title: "AI chatbot för företag" },
+      { href: "/ai-motesbokning", title: "AI för mötesbokning" },
+      { href: "/sa-fungerar-det", title: "Så fungerar det" },
+    ]}
+  />
+</Layout>

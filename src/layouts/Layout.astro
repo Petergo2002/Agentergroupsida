@@ -1,0 +1,206 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_DESCRIPTION, SITE_NAME } from '../data/site';
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonicalPath?: string;
+	structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { 
+	title = "AI chatbot för företag i Sverige | AgenterGroup",
+	description = SITE_DESCRIPTION,
+	canonicalPath = "/",
+	structuredData = []
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
+const logoUrl = `${siteUrl}/2.svgfavicon.svg`;
+const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
+const allStructuredData = [
+	{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		name: SITE_NAME,
+		url: siteUrl,
+		logo: logoUrl,
+		email: "info@agentergroup.com",
+		contactPoint: [
+			{
+				"@type": "ContactPoint",
+				email: "info@agentergroup.com",
+				contactType: "sales",
+				availableLanguage: ["sv-SE"],
+			},
+		],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: SITE_NAME,
+		url: siteUrl,
+		inLanguage: "sv-SE",
+	},
+	...pageStructuredData,
+].filter(Boolean);
+---
+
+<!doctype html>
+<html lang="sv">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/2.svgfavicon.svg" />
+		<link rel="shortcut icon" type="image/svg+xml" href="/2.svgfavicon.svg" />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#0A0A0A" />
+		
+		<!-- SEO -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="sv_SE" />
+		<meta property="og:image" content={logoUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={logoUrl} />
+		
+		<!-- Fonts: Instrument Sans -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+		
+		<!-- AgenterGroup Widget -->
+		<script is:inline>
+			window.AG_WIDGET_API_URL = "https://dashboard.agentergroup.com";
+			window.openAgenter = () => {
+				if (window.AgenterWidget) {
+					window.AgenterWidget.open();
+				} else {
+					const bubble = document.querySelector('.ag-widget-bubble');
+					if (bubble) bubble.click();
+				}
+			};
+		</script>
+		<script src="https://widget.agentergroup.com/loader.js" data-widget="wgt_25be27bca2764d3eee"></script>
+		{allStructuredData.length > 0 && (
+			<script type="application/ld+json" set:html={JSON.stringify(allStructuredData)} />
+		)}
+	</head>
+	<body class="bg-[#050505] text-white selection:bg-brand-orange/30 selection:text-white font-['Instrument_Sans',sans-serif] antialiased">
+		<div class="noise-overlay"></div>
+		<div class="fixed inset-0 bg-[#020202] -z-[20]"></div>
+		<div class="fixed inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.02)_0%,_transparent_50%)] -z-[19]"></div>
+		
+		<Navbar />
+		<main class="relative z-10">
+			<slot />
+		</main>
+		<Footer />
+		<script is:inline>
+			const clampSceneValue = (value, min = 0, max = 1) =>
+				Math.min(max, Math.max(min, value));
+
+			const desktopSceneQuery = window.matchMedia("(min-width: 1024px)");
+			const reducedSceneQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+			let sceneTicking = false;
+			let scrollScenes = [];
+
+			const scenesEnabled = () =>
+				desktopSceneQuery.matches && !reducedSceneQuery.matches;
+
+			const collectScenes = () => {
+				scrollScenes = Array.from(document.querySelectorAll("[data-scroll-scene]"));
+				scrollScenes.forEach((scene, index) => {
+					scene.style.setProperty("--scene-index", String(index));
+				});
+			};
+
+			const updateScenes = () => {
+				sceneTicking = false;
+
+				const desktopMode = scenesEnabled();
+				const viewportHeight = window.innerHeight;
+				document.documentElement.classList.toggle("has-scroll-scenes", desktopMode);
+
+				scrollScenes.forEach((scene) => {
+					const rect = scene.getBoundingClientRect();
+					const stickyScene = desktopMode && scene.dataset.sceneMode === "sticky";
+					const start = viewportHeight * (stickyScene ? 0.9 : 0.86);
+					const end = -rect.height * (stickyScene ? 0.34 : 0.14);
+					const progress = clampSceneValue((start - rect.top) / (start - end));
+					const enter = clampSceneValue(progress / 0.42);
+					const exit = clampSceneValue((progress - 0.38) / 0.62);
+					const centerOffset =
+						Math.abs(viewportHeight * 0.52 - (rect.top + rect.height * 0.5)) /
+						(viewportHeight * 0.78);
+					const focus = clampSceneValue(1 - centerOffset);
+
+					scene.style.setProperty("--scene-progress", progress.toFixed(4));
+					scene.style.setProperty("--scene-enter", enter.toFixed(4));
+					scene.style.setProperty("--scene-exit", exit.toFixed(4));
+					scene.style.setProperty("--scene-focus", focus.toFixed(4));
+
+					scene.classList.toggle(
+						"is-active",
+						desktopMode && rect.top < viewportHeight * 0.58 && rect.bottom > viewportHeight * 0.42
+					);
+					scene.classList.toggle("is-past", progress > 0.96);
+					scene.classList.toggle("is-before", progress < 0.08);
+				});
+			};
+
+			const requestSceneTick = () => {
+				if (sceneTicking) return;
+				sceneTicking = true;
+				window.requestAnimationFrame(updateScenes);
+			};
+
+			const refreshScenes = () => {
+				collectScenes();
+				requestSceneTick();
+			};
+
+			window.addEventListener("scroll", requestSceneTick, { passive: true });
+			window.addEventListener("resize", refreshScenes);
+			window.addEventListener("load", refreshScenes);
+			desktopSceneQuery.addEventListener("change", refreshScenes);
+			reducedSceneQuery.addEventListener("change", refreshScenes);
+			document.addEventListener("astro:page-load", refreshScenes);
+
+			collectScenes();
+			requestSceneTick();
+		</script>
+		
+		<style is:global>
+			:root {
+				--accent: 255, 92, 0;
+				--scene-nav-offset: 5.75rem;
+			}
+			html {
+				font-family: 'Instrument Sans', sans-serif;
+				background-color: #050505;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				font-weight: 500;
+				letter-spacing: -0.04em;
+			}
+      p {
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+		</style>
+	</body>
+</html>

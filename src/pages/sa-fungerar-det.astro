@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "Så fungerar det | AgenterGroup";
+const description =
+  "Se hur vi bygger AI-agenten åt er, kopplar den till era system och sätter upp rätt use case för kundservice, leads eller mötesbokning.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/sa-fungerar-det`,
+    inLanguage: "sv-SE",
+  },
+];
+---
+
+<Layout title={title} description={description} canonicalPath="/sa-fungerar-det" structuredData={structuredData}>
+  <ServicePageTemplate
+    badge="Så fungerar det"
+    title="Så bygger vi agenten åt er"
+    description="Ni behöver inte bygga allt själva. Vi sätter upp agenten, kopplar den till relevanta system och formar flödet efter ert mål: kundservice, leadkvalificering eller mötesbokning."
+    stats={[
+      { label: "Steg 1", value: "Välj rätt use case" },
+      { label: "Steg 2", value: "Koppla rätt system" },
+      { label: "Steg 3", value: "Starta och förbättra" },
+    ]}
+    blocks={[
+      {
+        title: "Vi börjar med rätt affärsproblem",
+        body: "I stället för att börja med teknik börjar vi med vilket problem agenten ska lösa. Det ger tydligare copy, bättre implementation och starkare SEO-sidor.",
+        bullets: [
+          "Kundservice",
+          "Leadkvalificering",
+          "Mötesbokning",
+        ],
+      },
+      {
+        title: "Sen bygger vi lösningen runt er verklighet",
+        body: "När use caset är tydligt sätter vi upp agenten med rätt ton, rätt information och rätt kopplingar till de system som redan används i verksamheten.",
+        bullets: [
+          "Anpassad tonalitet och logik",
+          "Integrationer där de gör mest nytta",
+          "Iteration utifrån faktisk användning",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Hur snabbt kan man komma igång?",
+        answer: "Det beror på use case och integrationer, men målet är alltid att komma till verkligt värde snabbt i stället för att fastna i ett långt tekniskt projekt.",
+      },
+      {
+        question: "Måste vi ha färdiga processer innan ni börjar?",
+        answer: "Nej. Många gånger hjälper själva implementationen till att tydliggöra vad som behöver standardiseras först.",
+      },
+      {
+        question: "Bygger ni en generisk lösning?",
+        answer: "Nej. Det centrala budskapet här är att ni bygger agenten åt kunden och kopplar den till kundens system.",
+      },
+      {
+        question: "Varför ska den här sidan finnas för SEO?",
+        answer: "För att många beslutsfattare söker efter hur lösningen fungerar, inte bara efter produktord. Sidan bygger förtroende och hjälper både ranking och konvertering.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-chatbot-for-foretag", title: "AI chatbot för företag" },
+      { href: "/integrationer", title: "Integrationer" },
+      { href: "/ai-agent-kundservice", title: "AI agent för kundservice" },
+    ]}
+  />
+</Layout>
