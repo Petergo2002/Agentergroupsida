@@ -54,7 +54,7 @@ const allStructuredData = [
 <html lang="sv">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
 		<link rel="icon" type="image/svg+xml" href="/2.svgfavicon.svg" />
 		<link rel="shortcut icon" type="image/svg+xml" href="/2.svgfavicon.svg" />
 		<link rel="canonical" href={canonicalUrl} />
@@ -83,6 +83,18 @@ const allStructuredData = [
 		
 		<!-- AgenterGroup Widget -->
 		<script is:inline>
+			const viewportMeta = document.querySelector('meta[name="viewport"]');
+			const baseViewport =
+				"width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content";
+			const isTouchAppleDevice =
+				/iPhone|iPad|iPod/.test(navigator.userAgent) ||
+				(navigator.userAgent.includes("Mac") && navigator.maxTouchPoints > 1);
+
+			if (viewportMeta && isTouchAppleDevice) {
+				viewportMeta.setAttribute("content", `${baseViewport}, maximum-scale=1`);
+			}
+		</script>
+		<script is:inline>
 			window.AG_WIDGET_API_URL = "https://dashboard.agentergroup.com";
 			window.openAgenter = () => {
 				if (window.AgenterWidget) {
@@ -104,7 +116,7 @@ const allStructuredData = [
 		<div class="fixed inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.02)_0%,_transparent_50%)] -z-[19]"></div>
 		
 		<Navbar />
-		<main class="relative z-10">
+		<main class="relative z-10 w-full overflow-x-clip">
 			<slot />
 		</main>
 		<Footer />
@@ -192,6 +204,34 @@ const allStructuredData = [
 			html {
 				font-family: 'Instrument Sans', sans-serif;
 				background-color: #050505;
+				width: 100%;
+				max-width: 100%;
+				overflow-x: hidden;
+				overflow-x: clip;
+				overscroll-behavior-x: none;
+			}
+			body {
+				width: 100%;
+				max-width: 100%;
+				min-height: 100svh;
+				overflow-x: hidden;
+				overflow-x: clip;
+			}
+			main,
+			section,
+			nav,
+			footer {
+				width: 100%;
+				max-width: 100%;
+				min-width: 0;
+			}
+			img,
+			svg,
+			video,
+			canvas,
+			iframe {
+				display: block;
+				max-width: 100%;
 			}
 			h1, h2, h3, h4, h5, h6 {
 				font-weight: 500;
