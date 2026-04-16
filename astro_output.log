@@ -1,0 +1,21 @@
+
+> agentergrouphemisda@0.0.1 dev
+> astro dev
+
+▶ Astro collects anonymous usage data.
+  This information helps us improve Astro.
+  Run "astro telemetry disable" to opt-out.
+  https://astro.build/telemetry
+
+[vite] connected.
+02:37:43 [types] Generated 1ms
+02:37:43 [WARN] [content] Content config not loaded
+ astro  v6.1.3 ready in 1834 ms
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+02:37:43 watching for file changes...
+02:38:28 [200] /blog/ai-agenter-kundservice-leadkvalificering 92ms
+02:38:34 [200] /blog/ai-agenter-kundservice-leadkvalificering 7ms
+02:41:46 [200] /blog/ai-agenter-kundservice-leadkvalificering 53ms
+02:41:47 [vite] ✨ new dependencies optimized: astro/runtime/client/dev-toolbar/entrypoint.js
+02:41:47 [vite] ✨ optimized dependencies changed. reloading
