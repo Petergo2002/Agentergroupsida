@@ -7,7 +7,7 @@ export const PRIMARY_CTA_LABEL = "Prata med AI direkt";
 
 export const primaryNavLinks = [
   { href: "/", label: "Hem" },
-  { href: "/#om-oss", label: "Om oss" },
+  { href: "/blogg", label: "Blogg" },
 ] as const;
 
 export const pageNavLinks = [
@@ -24,6 +24,7 @@ export const mainNavLinks = [
   { href: "/ai-chatbot-for-foretag", label: "AI Chatbot" },
   { href: "/integrationer", label: "Integrationer" },
   { href: "/sa-fungerar-det", label: "Så fungerar det" },
+  { href: "/blogg", label: "Blogg" },
 ] as const;
 
 export const footerNavLinks = [
@@ -82,4 +83,5 @@ export const sitemapPaths = [
   "/ai-motesbokning",
   "/integrationer",
   "/sa-fungerar-det",
+  "/blogg",
 ] as const;

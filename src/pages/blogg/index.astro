@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const title = "Blogg | AgenterGroup - Insikter om AI & Automation";
+const description = "Läs de senaste nyheterna och insikterna om hur AI-agenter och automation transformerar svenska företag.";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `https://agentergroup.com/blogg`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": posts.map((post, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://agentergroup.com/blogg/${post.id}`
+    }))
+  }
+};
+---
+
+<Layout title={title} description={description} canonicalPath="/blogg" structuredData={structuredData}>
+  <section
+    class="scroll-scene relative pt-32 pb-18 sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-28"
+    data-scroll-scene
+    data-scene-kind="hero"
+    data-scene-mode="soft"
+  >
+    <div class="scene-divider" data-scene-divider></div>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(circle_at_top,_rgba(255,100,0,0.08),_transparent_70%)]" data-scene-backdrop></div>
+    
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10" data-scene-stage>
+      <!-- Section Header -->
+      <div class="mb-14 text-left sm:mb-16 lg:mb-20" data-scene-content>
+        <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
+          Insikter & Nyheter
+        </div>
+        <h1 class="mb-6 max-w-[15ch] text-[clamp(2.75rem,11vw,5.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-8">
+          Vår <span class="text-white/20">Blogg</span>
+        </h1>
+        <p class="max-w-xl text-sm font-medium leading-relaxed text-white/30 sm:text-lg lg:max-w-2xl lg:text-xl">
+          Vi delar med oss av våra tankar kring AI-agenter, automation och hur framtidens digitala arbetskraft byggs.
+        </p>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-6" data-scene-visual>
+        {posts.map((post, index) => (
+          <BlogCard post={post} index={index} />
+        ))}
+      </div>
+
+      {posts.length === 0 && (
+        <div class="flex flex-col items-center justify-center py-20 text-center glass-outer" data-scene-content>
+          <div class="glass-inner p-12 w-full">
+            <p class="text-white/30">Just nu finns inga inlägg. Kom tillbaka snart!</p>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Newsletter / CTA Section could go here -->
+</Layout>

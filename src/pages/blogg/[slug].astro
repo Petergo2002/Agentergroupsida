@@ -1,0 +1,204 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.pubDate.toLocaleDateString('sv-SE', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": post.data.heroImage || "https://agentergroup.com/Logotransparant.svg",
+  "datePublished": post.data.pubDate.toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": "AgenterGroup",
+    "url": "https://agentergroup.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AgenterGroup",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://agentergroup.com/Logotransparant.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://agentergroup.com/blogg/${post.id}`
+  }
+};
+---
+
+<Layout 
+  title={`${post.data.title} | AgenterGroup`} 
+  description={post.data.description}
+  canonicalPath={`/blogg/${post.id}`}
+  structuredData={structuredData}
+>
+  <article 
+    class="scroll-scene relative overflow-hidden pt-32 pb-18 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-28"
+    data-scroll-scene
+    data-scene-kind="hero"
+    data-scene-mode="soft"
+  >
+    <!-- Background Decor -->
+    <div class="scene-divider" data-scene-divider></div>
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[600px] bg-[radial-gradient(circle_at_top,_rgba(255,92,0,0.08),_transparent_70%)]" data-scene-backdrop></div>
+    
+    <div class="mx-auto w-full max-w-4xl px-4 sm:px-8 lg:px-10" data-scene-stage>
+      <!-- Header -->
+      <div class="mb-12" data-scene-content>
+        <a href="/blogg" class="group mb-8 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/30 transition-colors hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-1"><path d="m15 18-6-6 6-6"/></svg>
+          Tillbaka till bloggen
+        </a>
+        
+        <div class="mb-6 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-orange/60">
+          <span>{post.data.author}</span>
+          <span class="h-1 w-1 rounded-full bg-white/10"></span>
+          <span class="text-white/20">{formattedDate}</span>
+        </div>
+        
+        <h1 class="mb-8 text-[clamp(2.5rem,8vw,4.5rem)] font-medium leading-[1] tracking-[-0.05em] text-white/92">
+          {post.data.title}
+        </h1>
+        
+        <p class="text-lg font-medium leading-relaxed text-white/40 sm:text-xl lg:text-2xl">
+          {post.data.description}
+        </p>
+      </div>
+
+      <!-- Hero Image -->
+      {post.data.heroImage && (
+        <div class="glass-outer mb-16 overflow-hidden" data-scene-visual>
+          <div class="glass-inner aspect-[21/9] overflow-hidden">
+            <img 
+              src={post.data.heroImage} 
+              alt={post.data.title} 
+              class="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      )}
+
+      <!-- Content -->
+      <div class="prose prose-invert prose-orange max-w-none 
+        prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-white/90
+        prose-p:text-white/50 prose-p:leading-relaxed prose-p:text-lg
+        prose-li:text-white/50
+        prose-strong:text-white/80 prose-strong:font-semibold
+        prose-blockquote:border-brand-orange prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-8 prose-blockquote:rounded-r-2xl prose-blockquote:italic
+        prose-img:rounded-3xl prose-img:border prose-img:border-white/10"
+        data-scene-content
+      >
+        <Content />
+      </div>
+
+      <!-- Footer / CTA -->
+      <div class="mt-20 border-t border-white/5 pt-12">
+        <div class="glass-outer">
+          <div class="glass-inner p-8 text-center sm:p-12">
+            <h3 class="mb-6 text-2xl font-medium tracking-tight text-white/90 sm:text-3xl">Vill du veta hur AI kan hjälpa ditt företag?</h3>
+            <p class="mb-10 mx-auto max-w-xl text-white/40">Vi bygger skräddarsydda AI-agenter som pratar flytande svenska och automatiserar era mest tidskrävande processer.</p>
+            <button
+              type="button"
+              onclick="window.openAgenter()"
+              class="group relative inline-flex items-center justify-between gap-6 overflow-hidden rounded-full bg-white py-2 pl-8 pr-2 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]"
+            >
+              Boka en demo
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-black/5 transition-transform duration-700 group-hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  /* Base Prose Styles for Blog Content */
+  .prose {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+  .prose h2 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 2.25rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+  }
+  .prose h3 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+  }
+  .prose p {
+    margin-bottom: 1.75rem;
+  }
+  .prose strong {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+  }
+  .prose blockquote {
+    border-left: 4px solid #FF5C00;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    border-radius: 0 1rem 1rem 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .prose ul, .prose ol {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+  .prose li {
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+  }
+  .prose a {
+    color: #FF5C00;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity 0.2s;
+  }
+  .prose a:hover {
+    opacity: 0.8;
+  }
+  .prose img {
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 3rem 0;
+  }
+</style>
