@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ServicePageTemplate from "../components/ServicePageTemplate.astro";
-import { SITE_URL } from "../data/site";
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
 
 const title = "AI chatbot för företag | AgenterGroup";
 const description =
@@ -32,8 +32,8 @@ const structuredData = [
 ];
 ---
 
-<Layout title={title} description={description} canonicalPath="/ai-chatbot-for-foretag" structuredData={structuredData}>
-  <ServicePageTemplate
+<Layout lang="sv" title={title} description={description} canonicalPath="/ai-chatbot-for-foretag" structuredData={structuredData}>
+  <ServicePageTemplate lang="sv"
     badge="AI chatbot för företag"
     title="AI chatbot för företag som gör mer än att svara"
     description="Vi bygger AI-chatbots för svenska företag som vill automatisera första linjen, kvalificera fler dialoger och koppla chatten till CRM, kalender och interna system."

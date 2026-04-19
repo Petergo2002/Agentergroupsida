@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI Agent Integrations | AgenterGroup";
+const description =
+  "Connect your AI agent to CRM, calendar, inbox, and internal systems so it can act within real workflows and drive results.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/integrations`,
+    inLanguage: "en-US",
+  },
+];
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/integrations" structuredData={structuredData}>
+  <ServicePageTemplate lang="en"
+    badge="Integrations"
+    title="AI Agent with Integrations into Your Existing Systems"
+    description="What distinguishes a simple chatbot from an actual agent is the ability to work alongside your tools. We connect the agent to the systems you already use."
+    stats={[
+      { label: "Typical Systems", value: "CRM, calendar, inbox" },
+      { label: "Benefit", value: "Less manual double-work" },
+      { label: "Differentiation", value: "Agent does more than answer" },
+    ]}
+    blocks={[
+      {
+        title: "Why Integrations are Critical",
+        body: "If the agent cannot use the right data or initiate the correct next step, its value is often limited to providing answers. Integrations make the agent useful in real processes.",
+        bullets: [
+          "Fetch and write data where work already happens",
+          "Connect the dialog to the customer journey",
+          "Build flows for support, sales, and booking",
+        ],
+      },
+      {
+        title: "How We Work with Integrations",
+        body: "We don't start by connecting everything. We begin with what creates business value fastest and then build further based on what already works for you.",
+        bullets: [
+          "Identify critical systems first",
+          "Build the right use case before adding more connections",
+          "Ensure the agent fits your actual workflow",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Which systems can you connect to?",
+        answer: "It depends on your stack, but CRM, calendars, inboxes, and knowledge sources are common starting points.",
+      },
+      {
+        question: "Does everything have to be integrated from day one?",
+        answer: "No. It's often better to start with the connections that provide clear benefit fastest.",
+      },
+      {
+        question: "Why are integrations so important?",
+        answer: "So that the agent can do more than just answer. When connected to the right systems, it can retrieve information, update data, and drive the process forward.",
+      },
+      {
+        question: "Can you build the agent around our systems?",
+        answer: "Yes. We build the solution around the systems you already work in so that the agent fits your business in practice.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-chatbot-for-business", title: "AI Chatbot for Business" },
+      { href: "/ai-lead-qualification", title: "AI Lead Qualification" },
+      { href: "/ai-meeting-booking", title: "AI Meeting Booking" },
+    ]}
+  />
+</Layout>

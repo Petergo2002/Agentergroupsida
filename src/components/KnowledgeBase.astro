@@ -1,5 +1,52 @@
 ---
-// KnowledgeBase.astro
+interface Props {
+  lang?: 'en' | 'sv';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    badge: "Knowledge Base",
+    title: "Train your agent on",
+    titleSuffix: "your own content.",
+    description: "Upload documents, price lists, and guides. Your agent learns everything about your company in seconds and responds with personality and precision.",
+    sourceLabel: "Source",
+    processingLabel: "Processing Engine",
+    processingStatus: "Analysis completed. Agents now have full context about your products.",
+    features: [
+      ["RAG Precision", "Exact answers based on data"],
+      ["Lead Scoring", "Qualifies leads automatically"],
+      ["Secure Data", "Full GDPR compliance"],
+      ["Multimodal", "Handle audio, text, and images"]
+    ],
+    sources: [
+      ["📄", "Product_Specs_2026.pdf", "92% analyzed"],
+      ["📊", "Price_List_Global.xlsx", "Ready"],
+      ["🌐", "https://help.agentergroup.com", "Syncing..."]
+    ]
+  },
+  sv: {
+    badge: "Knowledge Base",
+    title: "Träna din agent på",
+    titleSuffix: "ditt eget innehåll.",
+    description: "Ladda upp dokument, prislistor och guider. Din agent lär sig allt om ditt företag på sekunder och svarar med personlighet och precision.",
+    sourceLabel: "Källa",
+    processingLabel: "Processing Engine",
+    processingStatus: "Analys slutförd. Agenter har nu full kontext om era produkter.",
+    features: [
+      ["RAG-precision", "Exakta svar baserat på data"],
+      ["Lead-scoring", "Kvalificerar leads automatiskt"],
+      ["Säker data", "Full GDPR-efterlevnad"],
+      ["Multimodalt", "Hantera ljud, text och bild"]
+    ],
+    sources: [
+      ["📄", "Produktspecifikation_2026.pdf", "92% analyserad"],
+      ["📊", "Prislista_Global.xlsx", "Klar"],
+      ["🌐", "https://help.agentergroup.com", "Synkning..."]
+    ]
+  }
+}[lang];
 ---
 <section
   id="kunskapsbank"
@@ -12,13 +59,13 @@
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10" data-scene-stage>
     <div data-scene-content>
       <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
-        Knowledge Base
+        {content.badge}
       </div>
       <h2 class="mb-6 max-w-[12ch] text-[clamp(2.75rem,11vw,5.125rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-8">
-        Träna din agent på <br class="hidden sm:block" /> <span class="text-white/20">ditt eget innehåll.</span>
+        {content.title} <br class="hidden sm:block" /> <span class="text-white/20">{content.titleSuffix}</span>
       </h2>
       <p class="mb-10 max-w-xl text-sm font-medium leading-relaxed text-white/30 sm:text-lg lg:mb-12 lg:max-w-2xl lg:text-xl">
-        Ladda upp dokument, prislistor och guider. Din agent lär sig allt om ditt företag på sekunder och svarar med personlighet och precision.
+        {content.description}
       </p>
     </div>
 
@@ -30,15 +77,11 @@
         <div class="glass-outer">
           <div class="glass-inner p-6 sm:p-8 lg:p-10">
             <div class="space-y-4 sm:space-y-5 lg:space-y-6">
-            {[
-              ["📄", "Produktspecifikation_2026.pdf", "92% analyserad"],
-              ["📊", "Prislista_Global.xlsx", "Klar"],
-              ["🌐", "https://help.agentergroup.com", "Synkning..."]
-            ].map(([icon, name, status], idx) => (
+            {content.sources.map(([icon, name, status], idx) => (
               <div class={`flex items-start gap-3 rounded-lg border border-white/[0.03] bg-white/[0.01] p-4 sm:items-center sm:gap-5 sm:p-5 lg:gap-6 lg:p-6 ${idx > 0 ? 'opacity-40' : ''}`}>
                 <div class="pt-0.5 text-xl sm:pt-0">{icon}</div>
                 <div class="min-w-0 flex-1">
-                  <p class="mb-1 text-[9px] font-bold uppercase tracking-[0.3em] text-white/10">Källa</p>
+                  <p class="mb-1 text-[9px] font-bold uppercase tracking-[0.3em] text-white/10">{content.sourceLabel}</p>
                   <p class="break-all text-xs font-medium text-white/60">{name}</p>
                   {idx === 0 && (
                     <div class="mt-4 h-[2px] w-full overflow-hidden rounded-full bg-white/[0.03]">
@@ -53,9 +96,9 @@
             <div class="mt-8 rounded-lg border border-brand-orange/10 bg-brand-orange/[0.02] p-6 sm:mt-10 sm:p-7 lg:mt-12 lg:p-8">
                <div class="mb-4 flex items-center gap-2">
                   <div class="h-1.5 w-1.5 rounded-full bg-brand-orange animate-pulse"></div>
-                  <p class="text-[8px] font-bold uppercase tracking-[0.4em] text-brand-orange/40">Processing Engine</p>
+                  <p class="text-[8px] font-bold uppercase tracking-[0.4em] text-brand-orange/40">{content.processingLabel}</p>
                </div>
-               <p class="text-xs font-bold italic leading-relaxed tracking-tight text-white/50">"Analys slutförd. Agenter har nu full kontext om era produkter."</p>
+               <p class="text-xs font-bold italic leading-relaxed tracking-tight text-white/50">"{content.processingStatus}"</p>
             </div>
           </div>
         </div>
@@ -64,12 +107,7 @@
 
       <div class="lg:col-span-7">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:gap-12">
-          {[
-            ["RAG-precision", "Exakta svar baserat på data"],
-            ["Lead-scoring", "Kvalificerar leads automatiskt"],
-            ["Säker data", "Full GDPR-efterlevnad"],
-            ["Multimodalt", "Hantera ljud, text och bild"]
-          ].map(([title, desc]) => (
+          {content.features.map(([title, desc]) => (
             <div class="group flex flex-col gap-4">
               <div class="flex items-center gap-4">
                 <div class="h-[1px] w-4 bg-white/10 transition-all duration-700 group-hover:w-8 group-hover:bg-brand-orange"></div>

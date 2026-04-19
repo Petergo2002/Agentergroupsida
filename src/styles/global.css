@@ -1,5 +1,5 @@
-@plugin "@tailwindcss/typography";
 @import "tailwindcss";
+@plugin "../../node_modules/@tailwindcss/typography";
 
 @theme {
   --color-brand-orange: #FF5C00;

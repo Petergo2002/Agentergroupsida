@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI Meeting Booking | AgenterGroup";
+const description =
+  "Automate your meeting booking with AI. Let the agent book meetings directly in your calendar after the dialog has been qualified.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-meeting-booking`,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI Meeting Booking",
+    provider: { "@type": "Organization", name: "AgenterGroup", url: SITE_URL },
+    areaServed: "Global",
+    availableLanguage: "en-US",
+    description,
+  },
+];
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/ai-meeting-booking" structuredData={structuredData}>
+  <ServicePageTemplate lang="en"
+    badge="AI Meeting Booking"
+    title="AI for Meeting Booking Without the Back-and-Forth"
+    description="When a dialog is correctly qualified, it shouldn't get stuck in an inbox. Our AI agent can go all the way to a booked meeting by connecting to your calendar and internal processes."
+    stats={[
+      { label: "Primary Effect", value: "Faster path to booked meetings" },
+      { label: "Connection", value: "Calendar and processes" },
+      { label: "Result", value: "Less friction in sales efforts" },
+    ]}
+    blocks={[
+      {
+        title: "From Interest to Booking",
+        body: "Many leads lose momentum between initial contact and actual booking. The agent helps maintain pace by qualifying, suggesting next steps, and booking when the lead is ready.",
+        bullets: [
+          "Qualify first, book later",
+          "Avoid unnecessary manual follow-ups",
+          "Reduce drop-offs between dialog and meeting",
+        ],
+      },
+      {
+        title: "When the Use Case Works Best",
+        body: "AI meeting booking is particularly effective when you have regular incoming inquiries, clear meeting types, and a need for rapid response.",
+        bullets: [
+          "Inbound dialogs from the website",
+          "Sales flows where speed is a deciding factor",
+          "Teams that want to focus on calls rather than coordination",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Can the agent book directly in our calendar?",
+        answer: "Yes, by connecting the solution to your calendar and defining the logic for how and when bookings should occur.",
+      },
+      {
+        question: "Does the lead have to be qualified first?",
+        answer: "Usually, yes. This ensures that only meetings meeting your criteria and worth your time are added to the calendar.",
+      },
+      {
+        question: "Can we control what type of meetings are booked?",
+        answer: "Yes. We can establish different rules for various teams, meeting types, or customer segments.",
+      },
+      {
+        question: "Can this be combined with lead qualification?",
+        answer: "Absolutely. It's one of the most powerful combinations, as booking becomes a seamless next step once a lead is qualified.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-lead-qualification", title: "AI Lead Qualification" },
+      { href: "/ai-customer-service-agent", title: "AI Agent for Customer Service" },
+      { href: "/how-it-works", title: "How It Works" },
+    ]}
+  />
+</Layout>

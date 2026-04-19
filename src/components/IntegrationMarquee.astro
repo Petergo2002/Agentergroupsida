@@ -1,6 +1,25 @@
 ---
 import { integrations } from "../data/integrations";
 
+interface Props {
+  lang?: 'en' | 'sv';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    badge: "Integrations",
+    title: "Connect to hundreds of tools.",
+    description: "Calendar, inbox, CRM, and the rest of your stack in the same agent flow. Build on top of the tools your team already uses."
+  },
+  sv: {
+    badge: "Integrations",
+    title: "Anslut till hundratals verktyg.",
+    description: "Kalender, inkorg, CRM och resten av din stack i samma agentflöde. Bygg ovanpå verktygen teamet redan använder."
+  }
+}[lang];
+
 const tracks = [integrations, integrations];
 ---
 
@@ -17,11 +36,11 @@ const tracks = [integrations, integrations];
     <div class="mx-auto mb-12 w-full max-w-7xl px-6 text-center sm:mb-14 sm:px-8 lg:px-10">
       <div data-scene-content>
         <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/40 sm:mb-6">
-          Integrations
+          {content.badge}
         </div>
-        <h2 class="text-3xl font-extrabold tracking-tighter sm:text-4xl lg:text-5xl">Anslut till hundratals verktyg.</h2>
+        <h2 class="text-3xl font-extrabold tracking-tighter sm:text-4xl lg:text-5xl">{content.title}</h2>
         <p class="mx-auto mt-5 max-w-2xl text-sm font-medium leading-relaxed text-white/34 sm:mt-6 sm:text-base lg:text-lg">
-          Kalender, inkorg, CRM och resten av din stack i samma agentflöde. Bygg ovanpå verktygen teamet redan använder.
+          {content.description}
         </p>
       </div>
     </div>

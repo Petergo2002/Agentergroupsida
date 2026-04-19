@@ -7,24 +7,43 @@ interface LinkCard {
 
 interface Props {
   cards: readonly LinkCard[];
+  lang?: 'en' | 'sv';
 }
 
-const { cards } = Astro.props as Props;
+const { cards, lang = 'en' } = Astro.props as Props;
+
+const content = {
+  en: {
+    badge: "Explore the pages",
+    title: "Explore the right",
+    titleSuffix: "solution first.",
+    description: "Here are the most important pages for companies seeking AI chatbots, AI agents, customer service automation, lead qualification, or meeting booking.",
+    cardLabel: "Page",
+    readMore: "Read more"
+  },
+  sv: {
+    badge: "Utforska sidorna",
+    title: "Utforska rätt",
+    titleSuffix: "lösning först.",
+    description: "Här är de viktigaste sidorna för företag som söker AI chatbot, AI agent, kundserviceautomation, leadkvalificering eller mötesbokning på svenska.",
+    cardLabel: "Sida",
+    readMore: "Läs mer"
+  }
+}[lang];
 ---
 
 <section class="relative border-t border-white/[0.03] py-18 sm:py-24 lg:py-28">
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10">
     <div class="mb-12 max-w-3xl sm:mb-14 lg:mb-16">
       <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">
-        Utforska sidorna
+        {content.badge}
       </div>
       <h2 class="mb-5 max-w-[12ch] text-[clamp(2.75rem,11vw,5.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90">
-        Utforska rätt <br class="hidden sm:block" />
-        <span class="text-white/20">lösning först.</span>
+        {content.title} <br class="hidden sm:block" />
+        <span class="text-white/20">{content.titleSuffix}</span>
       </h2>
       <p class="max-w-2xl text-sm font-medium leading-relaxed text-white/35 sm:text-lg">
-        Här är de viktigaste sidorna för företag som söker AI chatbot, AI agent, kundserviceautomation,
-        leadkvalificering eller mötesbokning på svenska.
+        {content.description}
       </p>
     </div>
 
@@ -37,7 +56,7 @@ const { cards } = Astro.props as Props;
           <div class="glass-inner flex h-full flex-col justify-between gap-8 p-8 sm:p-10">
             <div>
               <p class="mb-4 text-[9px] font-bold uppercase tracking-[0.34em] text-brand-orange/60">
-                Sida
+                {content.cardLabel}
               </p>
               <h3 class="mb-4 text-2xl font-medium tracking-[-0.04em] text-white/88">
                 {card.title}
@@ -47,7 +66,7 @@ const { cards } = Astro.props as Props;
               </p>
             </div>
             <span class="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/55 transition-colors duration-300 group-hover:text-white">
-              Läs mer
+              {content.readMore}
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />

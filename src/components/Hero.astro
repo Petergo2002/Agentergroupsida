@@ -1,7 +1,34 @@
 ---
 import DashboardPreview from './DashboardPreview.astro';
+import { SITE_CONTENT } from '../data/site';
 
-const secondaryCtaHref = '/ai-chatbot-for-foretag';
+interface Props {
+  lang?: 'en' | 'sv';
+}
+
+const { lang = 'en' } = Astro.props;
+const isSv = lang === 'sv';
+
+const content = {
+  en: {
+    badge: "Built for businesses",
+    title: "AI Chatbots for",
+    titleSuffix: "growing companies.",
+    subtitle: "We build AI agents and AI chatbots for customer service, lead qualification, and meeting booking. The agent connects to your systems and is set up for you.",
+    ctaPrimary: "Talk to our AI",
+    ctaSecondary: "Read more",
+    secondaryHref: "/ai-chatbot-for-business"
+  },
+  sv: {
+    badge: "Byggt för svenska företag",
+    title: "AI chatbot för",
+    titleSuffix: "företag i Sverige.",
+    subtitle: "Vi bygger AI-agenter och AI-chatbots för kundservice, leadkvalificering och mötesbokning. Agenten kopplas till era system och sätts upp åt er.",
+    ctaPrimary: "Prata med vår AI",
+    ctaSecondary: "Läs mer",
+    secondaryHref: "/sv/ai-chatbot-for-foretag"
+  }
+}[lang];
 ---
 
 <section
@@ -17,17 +44,17 @@ const secondaryCtaHref = '/ai-chatbot-for-foretag';
         <!-- Badge -->
         <div class="mb-8 inline-flex max-w-full items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/30 sm:mb-10 sm:text-[9px] sm:tracking-[0.4em]">
           <span class="flex h-1.5 w-1.5 rounded-full bg-brand-orange shadow-[0_0_12px_rgba(255,92,0,0.4)] animate-pulse"></span>
-          <span>Byggt för svenska företag</span>
+          <span>{content.badge}</span>
         </div>
 
         <!-- Title -->
         <h1 class="mb-7 max-w-[11ch] text-[clamp(3.2rem,15vw,6.25rem)] font-medium leading-[0.9] tracking-[-0.06em] text-white/90 sm:mb-8 lg:mb-10">
-          AI chatbot för <br class="hidden sm:block" /> <span class="text-white/20">företag i Sverige.</span>
+          {content.title} <br class="hidden sm:block" /> <span class="text-white/20">{content.titleSuffix}</span>
         </h1>
 
         <!-- Subtitle -->
         <p class="mb-10 max-w-xl text-sm font-medium leading-relaxed text-white/40 sm:text-lg lg:mb-12 lg:max-w-2xl lg:text-xl">
-          Vi bygger AI-agenter och AI-chatbots för kundservice, leadkvalificering och mötesbokning. Agenten kopplas till era system och sätts upp åt er.
+          {content.subtitle}
         </p>
 
         <!-- CTAs -->
@@ -38,14 +65,14 @@ const secondaryCtaHref = '/ai-chatbot-for-foretag';
             class="group relative w-full overflow-hidden rounded-full bg-white py-2 pl-6 pr-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black shadow-[0_30px_60px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:w-auto sm:pl-8 sm:text-[10px] sm:tracking-[0.2em]"
           >
             <span class="relative z-10 flex items-center justify-between gap-6">
-              Prata med vår AI
+              {content.ctaPrimary}
               <div class="flex h-10 w-10 items-center justify-center rounded-full bg-black/5 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 group-hover:translate-x-1 group-hover:-translate-y-[1px]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </div>
             </span>
           </button>
-          <a href={secondaryCtaHref} class="w-full rounded-full border border-white/10 bg-transparent px-6 py-4 text-center text-[9px] font-bold uppercase tracking-[0.16em] text-white/40 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white/5 hover:text-white active:scale-[0.98] sm:w-auto sm:px-8 sm:py-5 sm:text-[10px] sm:tracking-[0.2em]">
-            Läs mer
+          <a href={content.secondaryHref} class="w-full rounded-full border border-white/10 bg-transparent px-6 py-4 text-center text-[9px] font-bold uppercase tracking-[0.16em] text-white/40 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white/5 hover:text-white active:scale-[0.98] sm:w-auto sm:px-8 sm:py-5 sm:text-[10px] sm:tracking-[0.2em]">
+            {content.ctaSecondary}
           </a>
         </div>
       </div>

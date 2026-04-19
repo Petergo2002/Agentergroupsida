@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ServicePageTemplate from "../components/ServicePageTemplate.astro";
-import { SITE_URL } from "../data/site";
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
 
 const title = "AI leadkvalificering | AgenterGroup";
 const description =
@@ -28,8 +28,8 @@ const structuredData = [
 ];
 ---
 
-<Layout title={title} description={description} canonicalPath="/ai-leadkvalificering" structuredData={structuredData}>
-  <ServicePageTemplate
+<Layout lang="sv" title={title} description={description} canonicalPath="/ai-leadkvalificering" structuredData={structuredData}>
+  <ServicePageTemplate lang="sv"
     badge="AI leadkvalificering"
     title="AI för leadkvalificering som minskar brus"
     description="Få bättre kontroll över inkommande dialoger. Agenten ställer rätt frågor, fångar rätt data och hjälper säljteamet att fokusera på leads som faktiskt är värda att följa upp."

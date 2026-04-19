@@ -9,13 +9,15 @@ interface Props {
 	description?: string;
 	canonicalPath?: string;
 	structuredData?: Record<string, unknown> | Record<string, unknown>[];
+	lang?: 'en' | 'sv';
 }
 
 const { 
 	title = "AI chatbot för företag i Sverige | AgenterGroup",
 	description = SITE_DESCRIPTION,
 	canonicalPath = "/",
-	structuredData = []
+	structuredData = [],
+	lang = 'en'
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
@@ -35,7 +37,7 @@ const allStructuredData = [
 				"@type": "ContactPoint",
 				email: "info@agentergroup.com",
 				contactType: "sales",
-				availableLanguage: ["sv-SE"],
+				availableLanguage: ["sv-SE", "en-US"],
 			},
 		],
 	},
@@ -44,14 +46,14 @@ const allStructuredData = [
 		"@type": "WebSite",
 		name: SITE_NAME,
 		url: siteUrl,
-		inLanguage: "sv-SE",
+		inLanguage: lang === 'sv' ? "sv-SE" : "en-US",
 	},
 	...pageStructuredData,
 ].filter(Boolean);
 ---
 
 <!doctype html>
-<html lang="sv">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
@@ -69,7 +71,7 @@ const allStructuredData = [
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
-		<meta property="og:locale" content="sv_SE" />
+		<meta property="og:locale" content={lang === 'sv' ? "sv_SE" : "en_US"} />
 		<meta property="og:image" content={logoUrl} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
@@ -115,11 +117,11 @@ const allStructuredData = [
 		<div class="fixed inset-0 bg-[#020202] -z-[20]"></div>
 		<div class="fixed inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.02)_0%,_transparent_50%)] -z-[19]"></div>
 		
-		<Navbar />
+		<Navbar lang={lang} />
 		<main class="relative z-10 w-full overflow-x-clip">
 			<slot />
 		</main>
-		<Footer />
+		<Footer lang={lang} />
 		<script is:inline>
 			const clampSceneValue = (value, min = 0, max = 1) =>
 				Math.min(max, Math.max(min, value));

@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ServicePageTemplate from "../components/ServicePageTemplate.astro";
-import { SITE_URL } from "../data/site";
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
 
 const title = "AI agent med integrationer | AgenterGroup";
 const description =
@@ -19,8 +19,8 @@ const structuredData = [
 ];
 ---
 
-<Layout title={title} description={description} canonicalPath="/integrationer" structuredData={structuredData}>
-  <ServicePageTemplate
+<Layout lang="sv" title={title} description={description} canonicalPath="/integrationer" structuredData={structuredData}>
+  <ServicePageTemplate lang="sv"
     badge="Integrationer"
     title="AI agent med integrationer i era befintliga system"
     description="Det som skiljer en enkel chatbot från en faktisk agent är förmågan att arbeta tillsammans med era verktyg. Vi kopplar agenten till systemen ni redan använder."

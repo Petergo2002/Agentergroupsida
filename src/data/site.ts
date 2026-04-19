@@ -1,40 +1,77 @@
 export const SITE_URL = "https://agentergroup.com";
 export const SITE_NAME = "AgenterGroup";
-export const SITE_DESCRIPTION =
-  "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.";
 
-export const PRIMARY_CTA_LABEL = "Prata med AI direkt";
+export const SITE_CONTENT = {
+  en: {
+    description: "We build AI agents and AI chatbots for companies in customer service, lead qualification, and meeting booking.",
+    primaryCta: "Talk to AI directly",
+    bookMeeting: "Book meeting",
+    demo: "Demo",
+    pagesTitle: "Pages",
+    aiWidgetLabel: "Talk to our AI",
+    footer: {
+      whoWeAre: "Who are we?",
+      description: "We build intelligent AI systems that automate customer conversations, lead management, and meeting bookings. We redefine how modern companies operate in the digital era.",
+      contactUs: "Contact Us",
+      explorePlatform: "Explore the Platform",
+      locationTitle: "Location",
+      address: "Borås, Sweden"
+    }
+  },
+  sv: {
+    description: "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
+    primaryCta: "Prata med AI direkt",
+    bookMeeting: "Boka möte",
+    demo: "Demo",
+    pagesTitle: "Sidor",
+    aiWidgetLabel: "Prata med vår AI",
+    footer: {
+      whoWeAre: "Vilka är vi?",
+      description: "Vi bygger intelligenta AI-system som automatiserar kundkonversationer, leadhantering och mötesbokning. Vi omdefinierar hur moderna företag opererar i den digitala eran.",
+      contactUs: "Kontakta Oss",
+      explorePlatform: "Utforska Plattformen",
+      locationTitle: "Location",
+      address: "Borås, Sverige"
+    }
+  }
+} as const;
 
-export const primaryNavLinks = [
-  { href: "/", label: "Hem" },
-  { href: "/blogg", label: "Blogg" },
-] as const;
+export const SITE_DESCRIPTION = SITE_CONTENT.en.description;
+export const PRIMARY_CTA_LABEL = SITE_CONTENT.en.primaryCta;
 
-export const pageNavLinks = [
-  { href: "/ai-chatbot-for-foretag", label: "AI chatbot för företag" },
-  { href: "/ai-agent-kundservice", label: "AI agent kundservice" },
-  { href: "/ai-leadkvalificering", label: "AI leadkvalificering" },
-  { href: "/ai-motesbokning", label: "AI mötesbokning" },
-  { href: "/integrationer", label: "Integrationer" },
-  { href: "/sa-fungerar-det", label: "Så fungerar det" },
-] as const;
+export const getNavLinks = (lang: 'en' | 'sv') => {
+  const isSv = lang === 'sv';
+  const prefix = isSv ? '/sv' : '';
+  
+  return {
+    primary: [
+      { href: `${prefix}/`, label: isSv ? "Hem" : "Home" },
+      { href: `/blog`, label: "Blog" },
+    ],
+    pages: [
+      { href: `${prefix}${isSv ? "/ai-chatbot-for-foretag" : "/ai-chatbot-for-business"}`, label: isSv ? "AI chatbot för företag" : "AI Chatbot for Business" },
+      { href: `${prefix}${isSv ? "/ai-agent-kundservice" : "/ai-customer-service-agent"}`, label: isSv ? "AI agent kundservice" : "AI Customer Service Agent" },
+      { href: `${prefix}${isSv ? "/ai-leadkvalificering" : "/ai-lead-qualification"}`, label: isSv ? "AI leadkvalificering" : "AI Lead Qualification" },
+      { href: `${prefix}${isSv ? "/ai-motesbokning" : "/ai-meeting-booking"}`, label: isSv ? "AI mötesbokning" : "AI Meeting Booking" },
+      { href: `${prefix}${isSv ? "/integrationer" : "/integrations"}`, label: isSv ? "Integrationer" : "Integrations" },
+      { href: `${prefix}${isSv ? "/sa-fungerar-det" : "/how-it-works"}`, label: isSv ? "Så fungerar det" : "How it works" },
+    ],
+    footer: [
+      { href: `${prefix}${isSv ? "/ai-chatbot-for-foretag" : "/ai-chatbot-for-business"}`, label: isSv ? "AI chatbot för företag" : "AI Chatbot for Business" },
+      { href: `${prefix}${isSv ? "/ai-agent-kundservice" : "/ai-customer-service-agent"}`, label: isSv ? "AI agent kundservice" : "AI Customer Service Agent" },
+      { href: `${prefix}${isSv ? "/ai-leadkvalificering" : "/ai-lead-qualification"}`, label: isSv ? "AI leadkvalificering" : "AI Lead Qualification" },
+      { href: `${prefix}${isSv ? "/ai-motesbokning" : "/ai-meeting-booking"}`, label: isSv ? "AI mötesbokning" : "AI Meeting Booking" },
+      { href: `${prefix}${isSv ? "/integrationer" : "/integrations"}`, label: isSv ? "Integrationer" : "Integrations" },
+      { href: `${prefix}${isSv ? "/sa-fungerar-det" : "/how-it-works"}`, label: isSv ? "Så fungerar det" : "How it works" },
+    ]
+  };
+};
 
-export const mainNavLinks = [
-  { href: "/", label: "Hem" },
-  { href: "/ai-chatbot-for-foretag", label: "AI Chatbot" },
-  { href: "/integrationer", label: "Integrationer" },
-  { href: "/sa-fungerar-det", label: "Så fungerar det" },
-  { href: "/blogg", label: "Blogg" },
-] as const;
-
-export const footerNavLinks = [
-  { href: "/ai-chatbot-for-foretag", label: "AI chatbot för företag" },
-  { href: "/ai-agent-kundservice", label: "AI agent kundservice" },
-  { href: "/ai-leadkvalificering", label: "AI leadkvalificering" },
-  { href: "/ai-motesbokning", label: "AI mötesbokning" },
-  { href: "/integrationer", label: "Integrationer" },
-  { href: "/sa-fungerar-det", label: "Så fungerar det" },
-] as const;
+// Legacy exports for backward compatibility during migration
+export const primaryNavLinks = getNavLinks('sv').primary;
+export const pageNavLinks = getNavLinks('sv').pages;
+export const mainNavLinks = getNavLinks('sv').pages;
+export const footerNavLinks = getNavLinks('sv').footer;
 
 export const serviceLinkCards = [
   {
@@ -77,11 +114,18 @@ export const serviceLinkCards = [
 
 export const sitemapPaths = [
   "/",
-  "/ai-chatbot-for-foretag",
-  "/ai-agent-kundservice",
-  "/ai-leadkvalificering",
-  "/ai-motesbokning",
-  "/integrationer",
-  "/sa-fungerar-det",
-  "/blogg",
+  "/sv/",
+  "/ai-chatbot-for-business",
+  "/sv/ai-chatbot-for-foretag",
+  "/ai-customer-service-agent",
+  "/sv/ai-agent-kundservice",
+  "/ai-lead-qualification",
+  "/sv/ai-leadkvalificering",
+  "/ai-meeting-booking",
+  "/sv/ai-motesbokning",
+  "/integrations",
+  "/sv/integrationer",
+  "/how-it-works",
+  "/sv/sa-fungerar-det",
+  "/blog",
 ] as const;

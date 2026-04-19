@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ServicePageTemplate from "../components/ServicePageTemplate.astro";
-import { SITE_URL } from "../data/site";
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
 
 const title = "AI agent för kundservice | AgenterGroup";
 const description =
@@ -28,8 +28,8 @@ const structuredData = [
 ];
 ---
 
-<Layout title={title} description={description} canonicalPath="/ai-agent-kundservice" structuredData={structuredData}>
-  <ServicePageTemplate
+<Layout lang="sv" title={title} description={description} canonicalPath="/ai-agent-kundservice" structuredData={structuredData}>
+  <ServicePageTemplate lang="sv"
     badge="AI agent kundservice"
     title="AI agent för kundservice på svenska"
     description="Ge kunderna snabba svar, minska trycket på supporten och få bättre kontroll över inkommande frågor med en AI agent som byggs för ert arbetssätt."

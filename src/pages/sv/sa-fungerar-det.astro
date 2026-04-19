@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ServicePageTemplate from "../components/ServicePageTemplate.astro";
-import { SITE_URL } from "../data/site";
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
 
 const title = "Så fungerar det | AgenterGroup";
 const description =
@@ -19,8 +19,8 @@ const structuredData = [
 ];
 ---
 
-<Layout title={title} description={description} canonicalPath="/sa-fungerar-det" structuredData={structuredData}>
-  <ServicePageTemplate
+<Layout lang="sv" title={title} description={description} canonicalPath="/sa-fungerar-det" structuredData={structuredData}>
+  <ServicePageTemplate lang="sv"
     badge="Så fungerar det"
     title="Så bygger vi agenten åt er"
     description="Ni behöver inte bygga allt själva. Vi sätter upp agenten, kopplar den till relevanta system och formar flödet efter ert mål: kundservice, leadkvalificering eller mötesbokning."

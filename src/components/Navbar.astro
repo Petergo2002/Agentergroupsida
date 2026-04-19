@@ -1,20 +1,58 @@
 ---
-import { pageNavLinks, primaryNavLinks } from "../data/site";
+import { getNavLinks, SITE_CONTENT } from "../data/site";
+
+interface Props {
+  lang?: 'en' | 'sv';
+}
+
+const { lang = 'en' } = Astro.props;
+const content = lang === 'sv' ? SITE_CONTENT.sv : SITE_CONTENT.en;
+const navLinks = getNavLinks(lang);
 
 const currentPath = Astro.url.pathname;
 const currentHash = Astro.url.hash;
 
 const isActiveLink = (href: string) => {
-  if (href === "/") return currentPath === "/";
-  if (href.startsWith("/#")) return currentPath === "/" && currentHash === href.slice(1);
+  if (href === "/" || href === "/sv/") return currentPath === href;
+  if (href.includes("/#")) {
+    const [path, hash] = href.split("/#");
+    const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+    const normalizedPath = path === "" ? "/" : path;
+    return (currentPath === normalizedPath || normalizedCurrentPath === normalizedPath) && currentHash === `#${hash}`;
+  }
   return currentPath === href;
 };
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.03] bg-black/60 backdrop-blur-xl transition-all duration-500" data-navbar-surface>
+  <!-- Language Switcher Bar -->
+  <div class="border-b border-white/[0.03] bg-white/[0.02]">
+    <div class="mx-auto flex h-8 w-full max-w-7xl items-center justify-end gap-4 px-4 sm:px-8 lg:px-10">
+      <a 
+        href="/" 
+        class:list={[
+          "text-[9px] font-bold uppercase tracking-[0.2em] transition-colors",
+          lang === 'en' ? "text-white" : "text-white/30 hover:text-white"
+        ]}
+      >
+        EN
+      </a>
+      <div class="h-2 w-px bg-white/10"></div>
+      <a 
+        href="/sv/" 
+        class:list={[
+          "text-[9px] font-bold uppercase tracking-[0.2em] transition-colors",
+          lang === 'sv' ? "text-white" : "text-white/30 hover:text-white"
+        ]}
+      >
+        SV
+      </a>
+    </div>
+  </div>
+
   <div class="mx-auto flex h-18 w-full max-w-7xl min-w-0 items-center justify-between gap-2 px-4 sm:h-20 sm:gap-3 sm:px-8 lg:px-10">
     <!-- Logo -->
-    <a href="/" class="group flex min-w-0 shrink items-center">
+    <a href={lang === 'sv' ? "/sv/" : "/"} class="group flex min-w-0 shrink items-center">
       <img
         src="/Logotransparant.svg"
         alt="Agenter Group logotyp"
@@ -24,7 +62,7 @@ const isActiveLink = (href: string) => {
 
     <!-- Desktop Links -->
     <div class="hidden items-center gap-8 lg:flex xl:gap-12">
-      {primaryNavLinks.map((link) => (
+      {navLinks.primary.map((link) => (
         <a
           href={link.href}
           class:list={[
@@ -43,7 +81,7 @@ const isActiveLink = (href: string) => {
           aria-expanded="false"
           class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 transition-all hover:text-white"
         >
-          <span>Sidor</span>
+          <span>{content.pagesTitle}</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-px group-hover:rotate-180">
             <path d="m6 9 6 6 6-6"></path>
           </svg>
@@ -51,7 +89,7 @@ const isActiveLink = (href: string) => {
 
         <div class="pointer-events-none absolute left-1/2 top-full z-20 w-[19rem] -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
           <div class="rounded-[1.75rem] border border-white/10 bg-black/95 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-            {pageNavLinks.map((link) => (
+            {navLinks.pages.map((link) => (
               <a
                 href={link.href}
                 class:list={[
@@ -95,8 +133,8 @@ const isActiveLink = (href: string) => {
         class="group relative overflow-hidden rounded-full bg-white px-3 py-3 text-[9px] font-bold uppercase tracking-[0.12em] text-black shadow-[0_15px_35px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:px-6 sm:text-[10px] sm:tracking-[0.2em] lg:px-8"
       >
         <span class="relative z-10 flex items-center justify-between gap-3">
-          <span class="hidden sm:inline">Boka möte</span>
-          <span class="sm:hidden">Demo</span>
+          <span class="hidden sm:inline">{content.bookMeeting}</span>
+          <span class="sm:hidden">{content.demo}</span>
           <div class="flex items-center justify-center rounded-full bg-black/5 p-1 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 group-hover:translate-x-1 group-hover:-translate-y-[1px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
@@ -112,17 +150,17 @@ const isActiveLink = (href: string) => {
     class="border-t border-white/[0.05] bg-black/90 backdrop-blur-2xl lg:hidden"
   >
     <div class="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 sm:px-8">
-      {primaryNavLinks.map((link) => (
+      {navLinks.primary.map((link) => (
         <a href={link.href} class="rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 transition-colors duration-300 hover:text-white">
           {link.label}
         </a>
       ))}
       <div class="rounded-[1.5rem] border border-white/[0.06] bg-white/[0.03] p-2">
         <div class="px-3 pb-2 pt-1 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
-          Sidor
+          {content.pagesTitle}
         </div>
         <div class="flex flex-col gap-1">
-          {pageNavLinks.map((link) => (
+          {navLinks.pages.map((link) => (
             <a href={link.href} class="rounded-2xl px-3 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white/70 transition-colors duration-300 hover:bg-white/[0.04] hover:text-white">
               {link.label}
             </a>
@@ -134,7 +172,7 @@ const isActiveLink = (href: string) => {
         onclick="window.openAgenter()"
         class="mt-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-black transition-transform duration-300 active:scale-[0.98]"
       >
-        Prata med vår AI
+        {content.aiWidgetLabel}
       </button>
     </div>
   </div>

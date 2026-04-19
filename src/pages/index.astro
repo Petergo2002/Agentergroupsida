@@ -6,98 +6,120 @@ import IntegrationMarquee from '../components/IntegrationMarquee.astro';
 import KnowledgeBase from '../components/KnowledgeBase.astro';
 import Pricing from '../components/Pricing.astro';
 import UseCaseGrid from '../components/UseCaseGrid.astro';
-import { serviceLinkCards, SITE_URL } from '../data/site';
+import { SITE_URL } from '../data/site';
 
 const whatIsAgentItems = [
   {
-    title: "Kundservice dygnet runt",
-    description: "Svara på vanliga frågor direkt, på svenska, utan att belasta teamet med samma ärenden om och om igen.",
+    title: "24/7 Customer Service",
+    description: "Answer common questions instantly, without burdening your team with the same issues over and over again.",
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
   },
   {
-    title: "Leadkvalificering",
-    description: "Samla rätt information, filtrera bort låg kvalitet och skicka rätt lead vidare till sälj direkt.",
+    title: "Lead Qualification",
+    description: "Collect the right information, filter out low quality, and send the right lead to sales directly.",
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>'
   },
   {
-    title: "Automatisk mötesbokning",
-    description: "Koppla kalendern och låt agenten boka möten direkt utan manuell koordinering och onödiga tapp.",
+    title: "Automatic Meeting Booking",
+    description: "Connect your calendar and let the agent book meetings directly without manual coordination.",
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>'
   }
 ];
 
 const platformFeatures = [
   {
-    title: "Byggt för ert varumärke",
-    description: "Vi sätter upp agenten åt er och anpassar tonalitet, flöden och svar efter hur ni faktiskt arbetar.",
+    title: "Built for your brand",
+    description: "We set up the agent for you and adapt tonality, flows, and answers to how you actually work.",
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>'
   },
   {
-    title: "Integrationer som gör skillnad",
-    description: "Koppla agenten till CRM, kalender, inkorg och andra system så att den inte bara pratar, utan agerar.",
+    title: "Integrations that matter",
+    description: "Connect the agent to CRM, calendar, inbox, and other systems so it doesn't just talk, but acts.",
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.826a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>'
   },
   {
-    title: "Transparens i varje dialog",
-    description: "Se vad agenten gör, vad den fångar upp och hur dialogerna påverkar support, sälj och bokningar.",
+    title: "Transparency in every dialog",
+    description: "See what the agent does, what it captures, and how the dialogs affect support, sales, and bookings.",
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>'
   }
+];
+
+const serviceCardsEn = [
+  {
+    href: "/ai-chatbot-for-business",
+    title: "AI Chatbot for Business",
+    description: "For companies that want to automate the first contact, respond faster, and take more qualified dialogs.",
+  },
+  {
+    href: "/ai-customer-service-agent",
+    title: "AI Agent for Customer Service",
+    description: "Handle common questions, relieve support, and provide answers 24/7.",
+  },
+  {
+    href: "/ai-lead-qualification",
+    title: "AI for Lead Qualification",
+    description: "Filter leads, collect the right data, and send the right deal to the right person directly.",
+  },
+  {
+    href: "/ai-meeting-booking",
+    title: "AI for Meeting Booking",
+    description: "Let the agent book meetings in the calendar without manual follow-up and unnecessary friction.",
+  },
+  {
+    href: "/integrations",
+    title: "Integrations",
+    description: "Connect the agent to CRM, calendar, inbox, and internal systems so it can do the job for real.",
+  },
+  {
+    href: "/how-it-works",
+    title: "How it works",
+    description: "See how we build, train, and implement the agent for you step by step.",
+  },
 ];
 
 const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "AI chatbot för företag i Sverige",
+    name: "AI Chatbot for Business | AgenterGroup",
     description:
-      "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
+      "We build AI agents and AI chatbots for companies in customer service, lead qualification, and meeting booking.",
     url: `${SITE_URL}/`,
-    inLanguage: "sv-SE",
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "AI chatbot för företag",
-    provider: {
-      "@type": "Organization",
-      name: "AgenterGroup",
-      url: SITE_URL,
-    },
-    areaServed: "SE",
-    availableLanguage: "sv-SE",
-    description:
-      "AI-agent och AI-chatbot för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
+    inLanguage: "en-US",
   },
 ];
 ---
 
 <Layout
-  title="AI chatbot för företag i Sverige | AgenterGroup"
-  description="Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning."
+  lang="en"
+  title="AI Chatbot for Business | AgenterGroup"
+  description="We build AI agents and AI chatbots for companies in customer service, lead qualification, and meeting booking."
   canonicalPath="/"
   structuredData={structuredData}
 >
-    <Hero />
+    <Hero lang="en" />
 
-    <UseCaseGrid cards={serviceLinkCards} />
+    <UseCaseGrid lang="en" cards={serviceCardsEn} />
     
     <FeatureGrid 
-      id="funktioner"
-      title="Tre use cases som säljer"
-      subtitle="Byggda för svenska företag som vill använda AI chatbot och AI agents för faktiska arbetsflöden."
+      lang="en"
+      id="features"
+      title="Three use cases that sell"
+      subtitle="Built for companies that want to use AI chatbots and AI agents for actual workflows."
       items={whatIsAgentItems}
     />
 
     <FeatureGrid 
-      id="plattform"
-      title="Agenten kopplas till systemen"
-      subtitle="Det är här skillnaden ligger mellan en enkel chatbot och en agent som kan göra jobbet på riktigt."
+      lang="en"
+      id="platform"
+      title="The agent connects to your systems"
+      subtitle="This is where the difference lies between a simple chatbot and an agent that can do the job for real."
       items={platformFeatures}
     />
 
-    <IntegrationMarquee />
+    <IntegrationMarquee lang="en" />
 
-    <KnowledgeBase />
+    <KnowledgeBase lang="en" />
 
-    <Pricing />
+    <Pricing lang="en" />
 </Layout>

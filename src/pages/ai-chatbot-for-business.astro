@@ -1,0 +1,89 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI Chatbot for Business | AgenterGroup";
+const description =
+  "We build AI chatbots for companies that want to automate customer service, qualify leads, and book meetings with connection to existing systems.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-chatbot-for-business`,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI Chatbot for Business",
+    provider: {
+      "@type": "Organization",
+      name: "AgenterGroup",
+      url: SITE_URL,
+    },
+    areaServed: "Global",
+    availableLanguage: "en-US",
+    description,
+  },
+];
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/ai-chatbot-for-business" structuredData={structuredData}>
+  <ServicePageTemplate lang="en"
+    badge="AI Chatbot for Business"
+    title="AI Chatbot for Business that does more than answer"
+    description="We build AI chatbots for companies that want to automate the front line, qualify more dialogs, and connect the chat to CRM, calendar, and internal systems."
+    stats={[
+      { label: "Primary Use Case", value: "Customer service, leads, and booking" },
+      { label: "Target Group", value: "Small to medium businesses" },
+      { label: "Conversion", value: "Talk to AI directly" },
+    ]}
+    blocks={[
+      {
+        title: "Why companies seek AI chatbots today",
+        body: "Most companies aren't looking for just another widget. They're looking for a way to respond faster, capture more leads, and reduce manual work without building an entirely new support or sales system.",
+        bullets: [
+          "Answer common questions 24/7",
+          "Collect the right information before a human takes over",
+          "Send qualified leads to the right person directly",
+        ],
+      },
+      {
+        title: "Why we build the agent for you",
+        body: "What makes the difference is not just the model. It's how the agent is set up, what data it's allowed to use, which systems it's connected to, and how the dialog is steered toward a clear business goal.",
+        bullets: [
+          "We adapt the agent to your business and tonality",
+          "We connect it to your existing workflows",
+          "We focus on customer service, lead qualification, and meeting booking",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "What is the difference between your AI chatbot and a regular chatbot?",
+        answer: "A regular chatbot often stops at FAQ answers. Our solution is built as an agent with a clear purpose, such as customer service, qualification, or booking, and can be connected to your systems.",
+      },
+      {
+        question: "Is this suitable for small and medium-sized businesses?",
+        answer: "Yes. That's where we see the clearest benefit because you often want to automate without building a large internal AI team.",
+      },
+      {
+        question: "Can the agent be connected to our systems?",
+        answer: "Yes. Integrations are a central part of the setup. We build the agent so it can work with CRM, calendar, inbox, or other systems you already use.",
+      },
+      {
+        question: "Do we have to write prompts and flows ourselves?",
+        answer: "No. You're not just buying a tool. We build the solution for you and adapt it to your business.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-customer-service-agent", title: "AI Agent for Customer Service" },
+      { href: "/ai-lead-qualification", title: "AI for Lead Qualification" },
+      { href: "/integrations", title: "Integrations" },
+    ]}
+  />
+</Layout>

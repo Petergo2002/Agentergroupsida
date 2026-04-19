@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI Agent for Customer Service | AgenterGroup";
+const description =
+  "Automate your customer service with an AI agent that responds faster, offloads your team, and connects directly to your existing systems.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-customer-service-agent`,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI Agent for Customer Service",
+    provider: { "@type": "Organization", name: "AgenterGroup", url: SITE_URL },
+    areaServed: "Global",
+    availableLanguage: "en-US",
+    description,
+  },
+];
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/ai-customer-service-agent" structuredData={structuredData}>
+  <ServicePageTemplate lang="en"
+    badge="AI Customer Service Agent"
+    title="AI Agent for Customer Service"
+    description="Give your customers fast answers, reduce support pressure, and gain better control over incoming inquiries with an AI agent built for your specific workflow."
+    stats={[
+      { label: "Typical Queries", value: "FAQ, status, processes" },
+      { label: "Availability", value: "24/7" },
+      { label: "Language", value: "Multilingual Support" },
+    ]}
+    blocks={[
+      {
+        title: "What the Agent Handles",
+        body: "A large part of customer service consists of recurring questions. The agent can handle everything that is standardizable and forward cases that require human judgment.",
+        bullets: [
+          "Answers to common questions and policies",
+          "Context collection before a case is forwarded",
+          "Routing to the right channel or person",
+        ],
+      },
+      {
+        title: "What You Gain",
+        body: "When the agent handles the first line, your support team can focus on more complex cases. This increases both response speed and perceived service quality without needing to scale the team as quickly.",
+        bullets: [
+          "Shorter wait times for customers",
+          "Less repetitive work for your team",
+          "Clearer overview of recurring issues",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Can the agent hand over to a human?",
+        answer: "Yes. We build flows where the agent takes the first step and then escalates the conversation when it requires human handling.",
+      },
+      {
+        question: "Can it use our own material and answers?",
+        answer: "Yes. We can train the solution on your specific content and implement guardrails for how answers should be formulated.",
+      },
+      {
+        question: "Does it support multiple languages?",
+        answer: "Yes. While we often start with a primary language, our agents are built to handle multiple languages while maintaining high accuracy and local nuances.",
+      },
+      {
+        question: "Do we have to change our entire support system?",
+        answer: "No. The goal is to connect the agent to the tools you already use, not to force you into a completely new system.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-chatbot-for-business", title: "AI Chatbot for Business" },
+      { href: "/ai-meeting-booking", title: "AI for Meeting Booking" },
+      { href: "/how-it-works", title: "How It Works" },
+    ]}
+  />
+</Layout>

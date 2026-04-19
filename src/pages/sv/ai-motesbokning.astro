@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ServicePageTemplate from "../components/ServicePageTemplate.astro";
-import { SITE_URL } from "../data/site";
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
 
 const title = "AI mötesbokning | AgenterGroup";
 const description =
@@ -28,8 +28,8 @@ const structuredData = [
 ];
 ---
 
-<Layout title={title} description={description} canonicalPath="/ai-motesbokning" structuredData={structuredData}>
-  <ServicePageTemplate
+<Layout lang="sv" title={title} description={description} canonicalPath="/ai-motesbokning" structuredData={structuredData}>
+  <ServicePageTemplate lang="sv"
     badge="AI mötesbokning"
     title="AI för mötesbokning utan manuell ping pong"
     description="När en dialog är rätt kvalificerad ska den inte fastna i inboxen. Vår AI agent kan gå hela vägen till bokat möte genom att kopplas till kalender och interna processer."

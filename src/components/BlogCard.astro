@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { post, index } = Astro.props;
-const formattedDate = post.data.pubDate.toLocaleDateString('sv-SE', {
+const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -23,7 +23,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString('sv-SE', {
 ---
 
 <a
-  href={`/blogg/${post.id}`}
+  href={`/blog/${post.id}`}
   class="group relative glass-outer transition-all duration-1000 md:col-span-1 lg:col-span-2 block"
   data-scene-card
   style={`--card-index:${index};`}
@@ -71,7 +71,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString('sv-SE', {
       </p>
       
       <div class="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-orange/60 group-hover:text-brand-orange transition-colors duration-500">
-        Läs mer
+        Read more
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </div>
     </div>

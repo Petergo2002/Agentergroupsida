@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "How It Works | AgenterGroup";
+const description =
+  "See how we build the AI agent for you, connect it to your systems, and set up the right use case for customer service, leads, or meeting booking.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/how-it-works`,
+    inLanguage: "en-US",
+  },
+];
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/how-it-works" structuredData={structuredData}>
+  <ServicePageTemplate lang="en"
+    badge="How It Works"
+    title="How We Build the Agent for You"
+    description="You don't have to build everything yourself. We set up the agent, connect it to relevant systems, and shape the flow according to your goals: customer service, lead qualification, or meeting booking."
+    stats={[
+      { label: "Step 1", value: "Choose the right use case" },
+      { label: "Step 2", value: "Connect the right systems" },
+      { label: "Step 3", value: "Launch and improve" },
+    ]}
+    blocks={[
+      {
+        title: "We Start with the Right Business Problem",
+        body: "Instead of starting with technology, we begin with the problem the agent is meant to solve. This makes the solution clearer, faster to implement, and easier to use in daily operations.",
+        bullets: [
+          "Customer Service",
+          "Lead Qualification",
+          "Meeting Booking",
+        ],
+      },
+      {
+        title: "Then We Build the Solution Around Your Reality",
+        body: "Once the use case is clear, we set up the agent with the right tone, the right information, and the right connections to the systems already used in your business.",
+        bullets: [
+          "Custom tonality and logic",
+          "Integrations where they provide the most value",
+          "Iteration based on actual usage",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "How fast can we get started?",
+        answer: "It depends on the use case and integrations, but the goal is always to reach real value quickly instead of getting stuck in a long technical project.",
+      },
+      {
+        question: "Do we need to have finished processes before you start?",
+        answer: "No. Often, the implementation itself helps clarify which parts of your process should be standardized first.",
+      },
+      {
+        question: "Do you build a generic solution?",
+        answer: "No. We build the agent specifically for your use case, your way of working, and the systems you already use.",
+      },
+      {
+        question: "What do we get as a customer after launch?",
+        answer: "You receive a solution that can be monitored, improved, and expanded. Our goal isn't just a quick launch, but creating an agent that delivers long-term value.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-chatbot-for-business", title: "AI Chatbot for Business" },
+      { href: "/integrations", title: "Integrations" },
+      { href: "/ai-customer-service-agent", title: "AI Agent for Customer Service" },
+    ]}
+  />
+</Layout>

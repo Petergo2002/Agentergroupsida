@@ -10,10 +10,24 @@ interface Props {
   items: FeatureItem[];
   title: string;
   subtitle: string;
+  lang?: 'en' | 'sv';
 }
 
-const { id, items, title, subtitle } = Astro.props as Props;
-const sceneKind = id === "plattform" ? "feature-followup" : "feature-intro";
+const { id, items, title, subtitle, lang = 'en' } = Astro.props as Props;
+const sceneKind = id === "platform" || id === "plattform" ? "feature-followup" : "feature-intro";
+
+const content = {
+  en: {
+    features: "Features",
+    platform: "Platform"
+  },
+  sv: {
+    features: "Funktioner",
+    platform: "Plattform"
+  }
+}[lang];
+
+const badgeLabel = (id === "platform" || id === "plattform") ? content.platform : content.features;
 ---
 
 <section
@@ -29,7 +43,7 @@ const sceneKind = id === "plattform" ? "feature-followup" : "feature-intro";
     <!-- Section Header -->
     <div class="mb-14 text-left sm:mb-16 lg:mb-20" data-scene-content>
       <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
-        {id === "plattform" ? "Plattform" : "Funktioner"}
+        {badgeLabel}
       </div>
       <h2 class="mb-6 max-w-[12ch] text-[clamp(2.75rem,11vw,5.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-8">
         {title.split(' ').slice(0, -1).join(' ')} <br class="hidden sm:block" />

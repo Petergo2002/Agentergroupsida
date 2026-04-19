@@ -1,5 +1,42 @@
 ---
-// Pricing.astro (Now Contact & Tailored Solutions)
+interface Props {
+  lang?: 'en' | 'sv';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    badge: "Our Solutions",
+    title: "Tailored for",
+    titleSuffix: "your success.",
+    description: "We don't believe in 'one size fits all'. Every business has unique needs, and our AI architects build your solution from the ground up.",
+    cardTitle: "Ready to automate?",
+    cardTitleOrange: "Book a meeting with our AI.",
+    features: [
+      "Customized onboarding plans",
+      "Integration with existing systems",
+      "Full adaptation of AI personality",
+      "Highest security standards"
+    ],
+    cta: "Start automating now"
+  },
+  sv: {
+    badge: "Våra lösningar",
+    title: "Skräddarsytt för",
+    titleSuffix: "din framgång.",
+    description: "Vi tror inte på 'one size fits all'. Varje verksamhet har unika behov, och våra AI-arkitekter bygger din lösning från grunden.",
+    cardTitle: "Redo att automatisera?",
+    cardTitleOrange: "Boka ett möte med vår AI.",
+    features: [
+      "Skräddarsydda onboarding-planer",
+      "Integration med befintliga system",
+      "Fullständig anpassning av AI-personlighet",
+      "Högsta säkerhetsstandarder"
+    ],
+    cta: "Börja automatisera nu"
+  }
+}[lang];
 ---
 
 <section
@@ -16,13 +53,13 @@
     <!-- Header -->
     <div class="mb-16 text-left sm:mb-20 lg:mb-24" data-scene-content>
       <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
-        Våra lösningar
+        {content.badge}
       </div>
       <h2 class="mb-8 max-w-[12ch] text-[clamp(3rem,12vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-10">
-        Skräddarsytt för <br class="hidden sm:block" /> <span class="text-white/20">din framgång.</span>
+        {content.title} <br class="hidden sm:block" /> <span class="text-white/20">{content.titleSuffix}</span>
       </h2>
       <p class="max-w-xl text-sm font-medium leading-relaxed text-white/40 sm:text-lg lg:max-w-2xl lg:text-xl">
-        Vi tror inte på "one size fits all". Varje verksamhet har unika behov, och våra AI-arkitekter bygger din lösning från grunden.
+        {content.description}
       </p>
     </div>
 
@@ -33,16 +70,11 @@
           <!-- Left: Value Prop -->
           <div class="relative z-10 max-w-xl text-left">
             <h3 class="mb-6 text-2xl font-medium tracking-tight text-white/90 sm:text-4xl lg:mb-8">
-              Redo att automatisera? <br class="hidden sm:block" />
-              <span class="text-brand-orange">Boka ett möte med vår AI.</span>
+              {content.cardTitle} <br class="hidden sm:block" />
+              <span class="text-brand-orange">{content.cardTitleOrange}</span>
             </h3>
             <ul class="mb-10 space-y-4 sm:mb-12">
-              {[
-                "Skräddarsydda onboarding-planer",
-                "Integration med befintliga system",
-                "Fullständig anpassning av AI-personlighet",
-                "Högsta säkerhetsstandarder"
-              ].map((item) => (
+              {content.features.map((item) => (
                 <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-white/30">
                   <div class="h-1 w-1 rounded-full bg-brand-orange/40"></div>
                   {item}
@@ -59,7 +91,7 @@
               class="group relative w-full overflow-hidden rounded-full bg-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.18em] text-black shadow-[0_40px_80px_rgba(255,255,255,0.08)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98] sm:px-10 sm:py-6 sm:text-[11px] sm:tracking-[0.25em] lg:w-[320px]"
             >
               <span class="relative z-10 flex items-center justify-center gap-4">
-                  Börja automatisera nu
+                  {content.cta}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-700 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </span>
             </button>

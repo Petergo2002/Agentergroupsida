@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "AI Lead Qualification | AgenterGroup";
+const description =
+  "Use AI for lead qualification to gather the right information, filter out noise, and forward high-quality leads directly to your sales team.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/ai-lead-qualification`,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "AI Lead Qualification",
+    provider: { "@type": "Organization", name: "AgenterGroup", url: SITE_URL },
+    areaServed: "Global",
+    availableLanguage: "en-US",
+    description,
+  },
+];
+---
+
+<Layout lang="en" title={title} description={description} canonicalPath="/ai-lead-qualification" structuredData={structuredData}>
+  <ServicePageTemplate lang="en"
+    badge="AI Lead Qualification"
+    title="AI for Lead Qualification that Reduces Noise"
+    description="Gain better control over incoming dialogs. The agent asks the right questions, captures necessary data, and helps your sales team focus on leads that are actually worth following up on."
+    stats={[
+      { label: "Goal", value: "Fewer low-quality leads" },
+      { label: "Input", value: "Forms, chat, and dialog" },
+      { label: "Output", value: "Better routing to sales" },
+    ]}
+    blocks={[
+      {
+        title: "How AI Lead Qualification Works",
+        body: "The agent captures the conversation early, asks relevant follow-up questions, and assesses whether the person matches your offering before they are forwarded to sales or booking.",
+        bullets: [
+          "Collect needs, size, timing, and contact data",
+          "Filter out irrelevant inquiries",
+          "Forward qualified leads directly",
+        ],
+      },
+      {
+        title: "Why It Matters for SMBs",
+        body: "When the sales team is small, every misprioritized contact is expensive. Better qualification allows you to work faster and spend time on conversations with a higher probability of closing.",
+        bullets: [
+          "Increased focus in sales efforts",
+          "Less manual sorting and filtering",
+          "Faster path from interest to meeting",
+        ],
+      },
+    ]}
+    faqs={[
+      {
+        question: "Can the agent be adapted to our sales process?",
+        answer: "Yes. We build the questions and logic based on how you qualify leads today and what defines a 'good' lead for your business.",
+      },
+      {
+        question: "Can it send leads to our CRM?",
+        answer: "Yes. The core of our solution is that it connects to the systems you already use, ensuring a seamless data flow.",
+      },
+      {
+        question: "Does this work for complex services?",
+        answer: "Yes, often even better. Complex services require specific information early on, which the agent can systematically collect and verify.",
+      },
+      {
+        question: "Can the agent book a meeting after qualification?",
+        answer: "Yes. Once a lead matches the right criteria, booking a meeting is a natural and automated next step.",
+      },
+    ]}
+    relatedLinks={[
+      { href: "/ai-meeting-booking", title: "AI for Meeting Booking" },
+      { href: "/ai-chatbot-for-business", title: "AI Chatbot for Business" },
+      { href: "/integrations", title: "Integrations" },
+    ]}
+  />
+</Layout>

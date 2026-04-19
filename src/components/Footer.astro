@@ -1,5 +1,13 @@
 ---
-import { footerNavLinks } from "../data/site";
+import { getNavLinks, SITE_CONTENT } from "../data/site";
+
+interface Props {
+  lang?: 'en' | 'sv';
+}
+
+const { lang = 'en' } = Astro.props;
+const content = lang === 'sv' ? SITE_CONTENT.sv : SITE_CONTENT.en;
+const navLinks = getNavLinks(lang);
 ---
 
 <footer id="om-oss" class="relative border-t border-white/[0.03] py-16 sm:py-20 lg:py-24">
@@ -12,30 +20,30 @@ import { footerNavLinks } from "../data/site";
           class="h-10 w-10 shrink-0 object-contain"
         />
       </div>
-      <h3 class="mb-4 text-xl font-medium tracking-tight text-white/80">Vilka är vi?</h3>
+      <h3 class="mb-4 text-xl font-medium tracking-tight text-white/80">{content.footer.whoWeAre}</h3>
       <p class="mb-8 max-w-md text-base font-medium leading-relaxed tracking-tight text-white/40 sm:mb-10 sm:text-lg">
-        Vi bygger intelligenta AI-system som automatiserar kundkonversationer, leadhantering och mötesbokning. Vi omdefinierar hur moderna företag opererar i den digitala eran.
+        {content.footer.description}
       </p>
       <div class="flex flex-wrap gap-4 sm:gap-6">
-        <a href="mailto:info@agentergroup.com" class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">Kontakta Oss</a>
-        <a href="/ai-chatbot-for-foretag" class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">Utforska Plattformen</a>
+        <a href="mailto:info@agentergroup.com" class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.contactUs}</a>
+        <a href={lang === 'sv' ? "/sv/ai-chatbot-for-foretag" : "/ai-chatbot-for-business"} class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.explorePlatform}</a>
       </div>
     </div>
 
     <div class="md:col-span-6 lg:col-span-3 lg:pl-8">
       <h4 class="mb-6 text-[9px] font-bold uppercase tracking-[0.5em] text-white/10 sm:mb-8">Navigation</h4>
       <ul class="space-y-4 text-[11px] font-bold uppercase tracking-[0.1em] text-white/20 sm:space-y-5">
-        {footerNavLinks.map((link) => (
+        {navLinks.footer.map((link) => (
           <li><a href={link.href} class="hover:text-brand-orange transition-all duration-500">{link.label}</a></li>
         ))}
       </ul>
     </div>
 
     <div class="md:col-span-6 lg:col-span-3">
-      <h4 class="mb-6 text-[9px] font-bold uppercase tracking-[0.5em] text-white/10 sm:mb-8">Location</h4>
+      <h4 class="mb-6 text-[9px] font-bold uppercase tracking-[0.5em] text-white/10 sm:mb-8">{content.footer.locationTitle}</h4>
       <ul class="space-y-4 text-[11px] font-bold uppercase tracking-[0.1em] text-white/20 sm:space-y-5">
         <li><a href="mailto:info@agentergroup.com" class="hover:text-white transition-all">info@agentergroup.com</a></li>
-        <li class="text-white/10">Borås, Sverige</li>
+        <li class="text-white/10">{content.footer.address}</li>
         <li class="text-white/10">Europe / Stockholm</li>
       </ul>
     </div>

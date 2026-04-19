@@ -28,9 +28,33 @@ interface Props {
   blocks: Block[];
   faqs: FAQ[];
   relatedLinks: RelatedLink[];
+  lang?: 'en' | 'sv';
 }
 
-const { badge, title, description, stats, blocks, faqs, relatedLinks } = Astro.props as Props;
+const { badge, title, description, stats, blocks, faqs, relatedLinks, lang = 'en' } = Astro.props as Props;
+
+const content = {
+  en: {
+    cta: "Talk to AI directly",
+    home: "To home page",
+    faqBadge: "Common Questions",
+    faqTitle: "What",
+    faqTitleSuffix: "customers want to know.",
+    relatedBadge: "Related Pages",
+    relatedTitle: "Continue to",
+    relatedTitleSuffix: "the next step."
+  },
+  sv: {
+    cta: "Prata med AI direkt",
+    home: "Till startsidan",
+    faqBadge: "Vanliga frågor",
+    faqTitle: "Det här vill",
+    faqTitleSuffix: "kunder veta.",
+    relatedBadge: "Relaterade sidor",
+    relatedTitle: "Fortsätt till",
+    relatedTitleSuffix: "nästa steg."
+  }
+}[lang];
 ---
 
 <section class="relative overflow-hidden pt-32 pb-18 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-28">
@@ -52,7 +76,7 @@ const { badge, title, description, stats, blocks, faqs, relatedLinks } = Astro.p
           class="group relative w-full overflow-hidden rounded-full bg-white py-2 pl-6 pr-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:w-auto sm:pl-8 sm:text-[10px] sm:tracking-[0.2em]"
         >
           <span class="relative z-10 flex items-center justify-between gap-6">
-            Prata med AI direkt
+            {content.cta}
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-black/5">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14" />
@@ -62,10 +86,10 @@ const { badge, title, description, stats, blocks, faqs, relatedLinks } = Astro.p
           </span>
         </button>
         <a
-          href="/"
+          href={lang === 'sv' ? "/sv/" : "/"}
           class="w-full rounded-full border border-white/10 px-6 py-4 text-center text-[9px] font-bold uppercase tracking-[0.16em] text-white/45 transition-colors duration-300 hover:bg-white/5 hover:text-white sm:w-auto sm:px-8 sm:text-[10px] sm:tracking-[0.2em]"
         >
-          Till startsidan
+          {content.home}
         </a>
       </div>
     </div>
@@ -114,10 +138,10 @@ const { badge, title, description, stats, blocks, faqs, relatedLinks } = Astro.p
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10">
     <div class="mb-12 max-w-3xl">
       <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">
-        Vanliga frågor
+        {content.faqBadge}
       </div>
       <h2 class="text-[clamp(2.5rem,10vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.05em] text-white/92">
-        Det här vill <span class="text-white/20">kunder veta.</span>
+        {content.faqTitle} <span class="text-white/20">{content.faqTitleSuffix}</span>
       </h2>
     </div>
     <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -141,10 +165,10 @@ const { badge, title, description, stats, blocks, faqs, relatedLinks } = Astro.p
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10">
     <div class="mb-10 max-w-2xl">
       <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:text-[9px] sm:tracking-[0.4em]">
-        Relaterade sidor
+        {content.relatedBadge}
       </div>
       <h2 class="text-[clamp(2.4rem,9vw,4rem)] font-medium leading-[0.95] tracking-[-0.05em] text-white/92">
-        Fortsätt till <span class="text-white/20">nästa steg.</span>
+        {content.relatedTitle} <span class="text-white/20">{content.relatedTitleSuffix}</span>
       </h2>
     </div>
     <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
