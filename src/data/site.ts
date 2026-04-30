@@ -1,11 +1,12 @@
 export const SITE_URL = "https://agentergroup.com";
 export const SITE_NAME = "AgenterGroup";
+export const DASHBOARD_LOGIN_URL = "https://dashboard.agentergroup.com/login";
 
 export const SITE_CONTENT = {
   en: {
     description: "We build AI agents and AI chatbots for companies in customer service, lead qualification, and meeting booking.",
     primaryCta: "Talk to AI directly",
-    bookMeeting: "Book meeting",
+    login: "Login",
     demo: "Demo",
     pagesTitle: "Pages",
     aiWidgetLabel: "Talk to our AI",
@@ -21,7 +22,7 @@ export const SITE_CONTENT = {
   sv: {
     description: "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
     primaryCta: "Prata med AI direkt",
-    bookMeeting: "Boka möte",
+    login: "Logga in",
     demo: "Demo",
     pagesTitle: "Sidor",
     aiWidgetLabel: "Prata med vår AI",

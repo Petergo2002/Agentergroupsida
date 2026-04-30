@@ -1,5 +1,5 @@
 ---
-import { getNavLinks, SITE_CONTENT } from "../data/site";
+import { DASHBOARD_LOGIN_URL, getNavLinks, SITE_CONTENT } from "../data/site";
 
 interface Props {
   lang?: 'en' | 'sv';
@@ -127,19 +127,17 @@ const isActiveLink = (href: string) => {
           <path d="M4 17h16"></path>
         </svg>
       </button>
-      <button 
-        type="button"
-        onclick="window.openAgenter()"
+      <a
+        href={DASHBOARD_LOGIN_URL}
         class="group relative overflow-hidden rounded-full bg-white px-3 py-3 text-[9px] font-bold uppercase tracking-[0.12em] text-black shadow-[0_15px_35px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:px-6 sm:text-[10px] sm:tracking-[0.2em] lg:px-8"
       >
         <span class="relative z-10 flex items-center justify-between gap-3">
-          <span class="hidden sm:inline">{content.bookMeeting}</span>
-          <span class="sm:hidden">{content.demo}</span>
+          <span>{content.login}</span>
           <div class="flex items-center justify-center rounded-full bg-black/5 p-1 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 group-hover:translate-x-1 group-hover:-translate-y-[1px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
         </span>
-      </button>
+      </a>
     </div>
   </div>
 
@@ -167,13 +165,12 @@ const isActiveLink = (href: string) => {
           ))}
         </div>
       </div>
-      <button
-        type="button"
-        onclick="window.openAgenter()"
+      <a
+        href={DASHBOARD_LOGIN_URL}
         class="mt-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-black transition-transform duration-300 active:scale-[0.98]"
       >
-        {content.aiWidgetLabel}
-      </button>
+        {content.login}
+      </a>
     </div>
   </div>
 </nav>

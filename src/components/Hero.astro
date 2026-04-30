@@ -1,21 +1,20 @@
 ---
 import DashboardPreview from './DashboardPreview.astro';
-import { SITE_CONTENT } from '../data/site';
+import { DASHBOARD_LOGIN_URL } from '../data/site';
 
 interface Props {
   lang?: 'en' | 'sv';
 }
 
 const { lang = 'en' } = Astro.props;
-const isSv = lang === 'sv';
 
 const content = {
   en: {
     badge: "Built for businesses",
     title: "AI Chatbots for",
     titleSuffix: "growing companies.",
-    subtitle: "We build AI agents and AI chatbots for customer service, lead qualification, and meeting booking. The agent connects to your systems and is set up for you.",
-    ctaPrimary: "Talk to our AI",
+    subtitle: "Try the platform for free, then scale into AI agents for customer service, lead qualification, and meeting booking when you are ready.",
+    ctaPrimary: "Try free",
     ctaSecondary: "Read more",
     secondaryHref: "/ai-chatbot-for-business"
   },
@@ -23,8 +22,8 @@ const content = {
     badge: "Byggt för svenska företag",
     title: "AI chatbot för",
     titleSuffix: "företag i Sverige.",
-    subtitle: "Vi bygger AI-agenter och AI-chatbots för kundservice, leadkvalificering och mötesbokning. Agenten kopplas till era system och sätts upp åt er.",
-    ctaPrimary: "Prata med vår AI",
+    subtitle: "Testa plattformen gratis och skala sedan upp med AI-agenter för kundservice, leadkvalificering och mötesbokning när ni är redo.",
+    ctaPrimary: "Testa gratis",
     ctaSecondary: "Läs mer",
     secondaryHref: "/sv/ai-chatbot-for-foretag"
   }
@@ -59,9 +58,8 @@ const content = {
 
         <!-- CTAs -->
         <div class="mb-14 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center lg:mb-16">
-          <button 
-            type="button"
-            onclick="window.openAgenter()"
+          <a
+            href={DASHBOARD_LOGIN_URL}
             class="group relative w-full overflow-hidden rounded-full bg-white py-2 pl-6 pr-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black shadow-[0_30px_60px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:w-auto sm:pl-8 sm:text-[10px] sm:tracking-[0.2em]"
           >
             <span class="relative z-10 flex items-center justify-between gap-6">
@@ -70,7 +68,7 @@ const content = {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </div>
             </span>
-          </button>
+          </a>
           <a href={content.secondaryHref} class="w-full rounded-full border border-white/10 bg-transparent px-6 py-4 text-center text-[9px] font-bold uppercase tracking-[0.16em] text-white/40 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-white/5 hover:text-white active:scale-[0.98] sm:w-auto sm:px-8 sm:py-5 sm:text-[10px] sm:tracking-[0.2em]">
             {content.ctaSecondary}
           </a>

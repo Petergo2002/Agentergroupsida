@@ -1,46 +1,133 @@
 ---
+import { DASHBOARD_LOGIN_URL } from "../data/site";
+
 interface Props {
   lang?: 'en' | 'sv';
 }
 
 const { lang = 'en' } = Astro.props;
+const isSv = lang === 'sv';
 
 const content = {
   en: {
-    badge: "Our Solutions",
-    title: "Tailored for",
-    titleSuffix: "your success.",
-    description: "We don't believe in 'one size fits all'. Every business has unique needs, and our AI architects build your solution from the ground up.",
-    cardTitle: "Ready to automate?",
-    cardTitleOrange: "Book a meeting with our AI.",
-    features: [
-      "Customized onboarding plans",
-      "Integration with existing systems",
-      "Full adaptation of AI personality",
-      "Highest security standards"
+    badge: "Pricing",
+    title: "Start free.",
+    titleSuffix: "Upgrade when it works.",
+    description: "Choose the plan that matches your current volume. Start with the free workspace, test the widget on your site, and scale when the dialogs become part of your workflow.",
+    highlightLabel: "Best for scale",
+    monthly: "/mo",
+    included: "Included",
+    plans: [
+      {
+        name: "Free",
+        description: "Basic features for individuals",
+        price: "$0",
+        cta: "Try free",
+        features: [
+          "1 workspace",
+          "1 widget",
+          "50 messages per month",
+          "1 active agent",
+          "10 MB Knowledge Base storage",
+          "Community support",
+        ],
+      },
+      {
+        name: "Starter",
+        description: "Enhanced features for growing businesses",
+        price: "$30",
+        cta: "Start Starter",
+        features: [
+          "1 workspace",
+          "Up to 3 widgets",
+          "500 messages per month",
+          "Up to 3 agents",
+          "25 MB Knowledge Base storage",
+          "Full integrations",
+          "Priority support",
+        ],
+      },
+      {
+        name: "Premium",
+        description: "Advanced features for high volume",
+        price: "$110",
+        cta: "Start Premium",
+        highlighted: true,
+        features: [
+          "Up to 5 workspaces",
+          "Up to 6 widgets",
+          "4000 messages per month",
+          "Unlimited agents",
+          "50 MB Knowledge Base storage",
+          "Full integrations",
+          "Remove widget branding",
+          "Dedicated support",
+        ],
+      },
     ],
-    cta: "Start automating now"
   },
   sv: {
-    badge: "Våra lösningar",
-    title: "Skräddarsytt för",
-    titleSuffix: "din framgång.",
-    description: "Vi tror inte på 'one size fits all'. Varje verksamhet har unika behov, och våra AI-arkitekter bygger din lösning från grunden.",
-    cardTitle: "Redo att automatisera?",
-    cardTitleOrange: "Boka ett möte med vår AI.",
-    features: [
-      "Skräddarsydda onboarding-planer",
-      "Integration med befintliga system",
-      "Fullständig anpassning av AI-personlighet",
-      "Högsta säkerhetsstandarder"
+    badge: "Priser",
+    title: "Börja gratis.",
+    titleSuffix: "Uppgradera när det fungerar.",
+    description: "Välj planen som matchar er volym just nu. Starta med en gratis workspace, testa widgeten på riktigt och skala upp när dialogerna börjar bli en del av flödet.",
+    highlightLabel: "Bäst för skala",
+    monthly: "/mån",
+    included: "Ingår",
+    plans: [
+      {
+        name: "Free",
+        description: "Grundläggande funktioner för enskilda användare",
+        price: "$0",
+        cta: "Testa gratis",
+        features: [
+          "1 workspace",
+          "1 widget",
+          "50 meddelanden per månad",
+          "1 aktiv agent",
+          "10 MB Knowledge Base-lagring",
+          "Community-support",
+        ],
+      },
+      {
+        name: "Starter",
+        description: "Utökade funktioner för växande företag",
+        price: "$30",
+        cta: "Starta Starter",
+        features: [
+          "1 workspace",
+          "Upp till 3 widgets",
+          "500 meddelanden per månad",
+          "Upp till 3 agenter",
+          "25 MB Knowledge Base-lagring",
+          "Fulla integrationer",
+          "Prioriterad support",
+        ],
+      },
+      {
+        name: "Premium",
+        description: "Avancerade funktioner för hög volym",
+        price: "$110",
+        cta: "Starta Premium",
+        highlighted: true,
+        features: [
+          "Upp till 5 workspaces",
+          "Upp till 6 widgets",
+          "4000 meddelanden per månad",
+          "Obegränsat antal agenter",
+          "50 MB Knowledge Base-lagring",
+          "Fulla integrationer",
+          "Ta bort widget-branding",
+          "Dedikerad support",
+        ],
+      },
     ],
-    cta: "Börja automatisera nu"
   }
 }[lang];
 ---
 
 <section
-  id="prissattning"
+  id={isSv ? "prissattning" : "pricing"}
   class="scroll-scene relative border-t border-white/[0.03] py-20 sm:py-32 lg:py-40"
   data-scroll-scene
   data-scene-kind="pricing"
@@ -51,57 +138,95 @@ const content = {
   
   <div class="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10" data-scene-stage>
     <!-- Header -->
-    <div class="mb-16 text-left sm:mb-20 lg:mb-24" data-scene-content>
+    <div class="mb-12 grid gap-8 text-left sm:mb-16 lg:mb-20 lg:grid-cols-[minmax(0,0.95fr)_minmax(20rem,0.65fr)] lg:items-end" data-scene-content>
+      <div>
       <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.28em] text-white/20 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
         {content.badge}
       </div>
-      <h2 class="mb-8 max-w-[12ch] text-[clamp(3rem,12vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90 lg:mb-10">
-        {content.title} <br class="hidden sm:block" /> <span class="text-white/20">{content.titleSuffix}</span>
+      <h2 class="max-w-[13ch] text-[clamp(3rem,12vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.05em] text-white/90">
+        {content.title} <span class="text-white/20">{content.titleSuffix}</span>
       </h2>
+      </div>
       <p class="max-w-xl text-sm font-medium leading-relaxed text-white/40 sm:text-lg lg:max-w-2xl lg:text-xl">
         {content.description}
       </p>
     </div>
 
-    <!-- Contact Card -->
-    <div class="relative mx-auto w-full" data-scene-visual>
-      <div class="glass-outer group overflow-hidden transition-all duration-700 hover:shadow-[0_64px_128px_-12px_rgba(0,0,0,0.5)]">
-        <div class="glass-inner relative flex flex-col items-start justify-between gap-10 overflow-hidden p-7 sm:p-12 lg:flex-row lg:items-center lg:gap-12 lg:p-20">
-          <!-- Left: Value Prop -->
-          <div class="relative z-10 max-w-xl text-left">
-            <h3 class="mb-6 text-2xl font-medium tracking-tight text-white/90 sm:text-4xl lg:mb-8">
-              {content.cardTitle} <br class="hidden sm:block" />
-              <span class="text-brand-orange">{content.cardTitleOrange}</span>
+    <!-- Plans -->
+    <div class="grid gap-4 md:grid-cols-3 lg:gap-5" data-scene-visual>
+      {content.plans.map((plan) => (
+        <article
+          class:list={[
+            "group relative flex min-h-[35rem] flex-col overflow-hidden rounded-[1.75rem] border p-6 transition-all duration-700 sm:p-8 lg:p-9",
+            plan.highlighted
+              ? "border-brand-orange/80 bg-[linear-gradient(180deg,rgba(255,92,0,0.12),rgba(255,255,255,0.045))] shadow-[0_40px_120px_rgba(255,92,0,0.12)]"
+              : "border-white/[0.08] bg-white/[0.035] shadow-[0_30px_80px_rgba(0,0,0,0.22)]",
+          ]}
+        >
+          {plan.highlighted && (
+            <div class="absolute right-5 top-5 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.24em] text-brand-orange sm:text-[9px]">
+              {content.highlightLabel}
+            </div>
+          )}
+
+          <div class="mb-8 pr-12">
+            <h3 class="mb-3 text-2xl font-semibold tracking-tight text-white/90 sm:text-3xl">
+              {plan.name}
             </h3>
-            <ul class="mb-10 space-y-4 sm:mb-12">
-              {content.features.map((item) => (
-                <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-white/30">
-                  <div class="h-1 w-1 rounded-full bg-brand-orange/40"></div>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <p class="min-h-[3rem] text-sm font-medium leading-relaxed text-white/40 sm:text-base">
+              {plan.description}
+            </p>
           </div>
 
-          <!-- Right: Action -->
-          <div class="relative z-10 w-full max-w-sm lg:w-auto lg:max-w-none">
-            <button 
-              type="button"
-              onclick="window.openAgenter()"
-              class="group relative w-full overflow-hidden rounded-full bg-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.18em] text-black shadow-[0_40px_80px_rgba(255,255,255,0.08)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98] sm:px-10 sm:py-6 sm:text-[11px] sm:tracking-[0.25em] lg:w-[320px]"
-            >
-              <span class="relative z-10 flex items-center justify-center gap-4">
-                  {content.cta}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-700 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </span>
-            </button>
-
+          <div class="mb-8 flex items-end gap-2">
+            <span class="text-5xl font-semibold tracking-[-0.06em] text-white sm:text-6xl">
+              {plan.price}
+            </span>
+            <span class="pb-2 text-sm font-semibold text-white/35 sm:text-base">
+              {content.monthly}
+            </span>
           </div>
 
-          <!-- Decorative element inside the card -->
-          <div class="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-brand-orange/5 blur-[120px] transition-all duration-700 group-hover:bg-brand-orange/10 group-hover:blur-[140px]"></div>
-        </div>
-      </div>
+          <div class="mb-5 text-[9px] font-bold uppercase tracking-[0.26em] text-white/20">
+            {content.included}
+          </div>
+
+          <ul class="flex flex-1 flex-col gap-4">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3 text-sm font-semibold leading-relaxed text-white/50 sm:text-[15px]">
+                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-orange/70 text-brand-orange">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m7 12 3 3 7-7"></path>
+                  </svg>
+                </span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={DASHBOARD_LOGIN_URL}
+            class:list={[
+              "mt-10 inline-flex h-14 w-full items-center justify-center rounded-full px-5 text-center text-[10px] font-bold uppercase tracking-[0.18em] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]",
+              plan.highlighted
+                ? "bg-white text-black shadow-[0_30px_70px_rgba(255,255,255,0.08)] hover:scale-[1.02]"
+                : "border border-white/10 bg-white/[0.06] text-white/55 hover:bg-white hover:text-black",
+            ]}
+          >
+            <span class="flex items-center justify-center gap-3">
+              {plan.cta}
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-700 group-hover:translate-x-1">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-5 rounded-[1.5rem] border border-white/[0.06] bg-white/[0.03] px-5 py-4 text-center text-[10px] font-bold uppercase tracking-[0.22em] text-white/25 sm:text-[11px]" data-scene-content>
+      {isSv ? "Ingen bindning på gratisplanen. Uppgradera när ni behöver mer volym." : "No commitment on the free plan. Upgrade when you need more volume."}
     </div>
   </div>
 </section>
