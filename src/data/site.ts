@@ -40,30 +40,21 @@ export const SITE_CONTENT = {
 export const SITE_DESCRIPTION = SITE_CONTENT.en.description;
 export const PRIMARY_CTA_LABEL = SITE_CONTENT.en.primaryCta;
 
-export const getNavLinks = (lang: 'en' | 'sv') => {
+export const getNavLinks = (lang: 'en' | 'sv' = 'en') => {
   const isSv = lang === 'sv';
   const prefix = isSv ? '/sv' : '';
-  
+
   return {
     primary: [
       { href: `${prefix}/`, label: isSv ? "Hem" : "Home" },
-      { href: `/blog`, label: "Blog" },
+      { href: isSv ? "/sv/blogg" : "/blog", label: isSv ? "Blogg" : "Blog" },
+      { href: isSv ? "/sv/hemsida-med-ai-chatbot" : "/websites-with-ai-chatbot", label: isSv ? "Hemsida" : "Website" },
     ],
-    pages: [
-      { href: `${prefix}${isSv ? "/ai-chatbot-for-foretag" : "/ai-chatbot-for-business"}`, label: isSv ? "AI chatbot för företag" : "AI Chatbot for Business" },
-      { href: `${prefix}${isSv ? "/ai-agent-kundservice" : "/ai-customer-service-agent"}`, label: isSv ? "AI agent kundservice" : "AI Customer Service Agent" },
-      { href: `${prefix}${isSv ? "/ai-leadkvalificering" : "/ai-lead-qualification"}`, label: isSv ? "AI leadkvalificering" : "AI Lead Qualification" },
-      { href: `${prefix}${isSv ? "/ai-motesbokning" : "/ai-meeting-booking"}`, label: isSv ? "AI mötesbokning" : "AI Meeting Booking" },
-      { href: `${prefix}${isSv ? "/integrationer" : "/integrations"}`, label: isSv ? "Integrationer" : "Integrations" },
-      { href: `${prefix}${isSv ? "/sa-fungerar-det" : "/how-it-works"}`, label: isSv ? "Så fungerar det" : "How it works" },
-    ],
+    pages: [],
     footer: [
-      { href: `${prefix}${isSv ? "/ai-chatbot-for-foretag" : "/ai-chatbot-for-business"}`, label: isSv ? "AI chatbot för företag" : "AI Chatbot for Business" },
-      { href: `${prefix}${isSv ? "/ai-agent-kundservice" : "/ai-customer-service-agent"}`, label: isSv ? "AI agent kundservice" : "AI Customer Service Agent" },
-      { href: `${prefix}${isSv ? "/ai-leadkvalificering" : "/ai-lead-qualification"}`, label: isSv ? "AI leadkvalificering" : "AI Lead Qualification" },
-      { href: `${prefix}${isSv ? "/ai-motesbokning" : "/ai-meeting-booking"}`, label: isSv ? "AI mötesbokning" : "AI Meeting Booking" },
-      { href: `${prefix}${isSv ? "/integrationer" : "/integrations"}`, label: isSv ? "Integrationer" : "Integrations" },
-      { href: `${prefix}${isSv ? "/sa-fungerar-det" : "/how-it-works"}`, label: isSv ? "Så fungerar det" : "How it works" },
+      { href: `${prefix}/`, label: isSv ? "Hem" : "Home" },
+      { href: isSv ? "/sv/blogg" : "/blog", label: isSv ? "Blogg" : "Blog" },
+      { href: isSv ? "/sv/hemsida-med-ai-chatbot" : "/websites-with-ai-chatbot", label: isSv ? "Hemsida med AI chatbot" : "Website with AI Chatbot" },
     ]
   };
 };
@@ -76,57 +67,18 @@ export const footerNavLinks = getNavLinks('sv').footer;
 
 export const serviceLinkCards = [
   {
-    href: "/ai-chatbot-for-foretag",
-    title: "AI chatbot för företag",
+    href: "/sv/hemsida-med-ai-chatbot",
+    title: "Hemsida med AI chatbot",
     description:
-      "För företag som vill automatisera första kontakten, svara snabbare och ta fler kvalificerade dialoger.",
-  },
-  {
-    href: "/ai-agent-kundservice",
-    title: "AI agent för kundservice",
-    description:
-      "Hantera vanliga frågor, avlasta supporten och ge svar dygnet runt på svenska.",
-  },
-  {
-    href: "/ai-leadkvalificering",
-    title: "AI för leadkvalificering",
-    description:
-      "Filtrera leads, samla rätt data och skicka rätt affär till rätt person direkt.",
-  },
-  {
-    href: "/ai-motesbokning",
-    title: "AI för mötesbokning",
-    description:
-      "Låt agenten boka möten i kalendern utan manuell uppföljning och onödig friktion.",
-  },
-  {
-    href: "/integrationer",
-    title: "Integrationer",
-    description:
-      "Koppla agenten till CRM, kalender, inbox och interna system så att den kan göra jobbet på riktigt.",
-  },
-  {
-    href: "/sa-fungerar-det",
-    title: "Så fungerar det",
-    description:
-      "Se hur vi bygger, tränar och implementerar agenten åt er steg för steg.",
+      "En säljande hemsida där erbjudande, AI-chatt, lead capture och bokningsflöde arbetar tillsammans.",
   },
 ] as const;
 
 export const sitemapPaths = [
   "/",
   "/sv/",
-  "/ai-chatbot-for-business",
-  "/sv/ai-chatbot-for-foretag",
-  "/ai-customer-service-agent",
-  "/sv/ai-agent-kundservice",
-  "/ai-lead-qualification",
-  "/sv/ai-leadkvalificering",
-  "/ai-meeting-booking",
-  "/sv/ai-motesbokning",
-  "/integrations",
-  "/sv/integrationer",
-  "/how-it-works",
-  "/sv/sa-fungerar-det",
+  "/websites-with-ai-chatbot",
+  "/sv/hemsida-med-ai-chatbot",
   "/blog",
+  "/sv/blogg",
 ] as const;

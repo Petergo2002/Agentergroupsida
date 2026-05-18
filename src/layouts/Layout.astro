@@ -8,6 +8,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	canonicalPath?: string;
+	alternateLinks?: Array<{ href: string; hreflang: string }>;
 	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 	lang?: 'en' | 'sv';
 }
@@ -16,12 +17,17 @@ const {
 	title = "AI chatbot för företag i Sverige | AgenterGroup",
 	description = SITE_DESCRIPTION,
 	canonicalPath = "/",
+	alternateLinks = [],
 	structuredData = [],
 	lang = 'en'
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
+const normalizedAlternateLinks = alternateLinks.map((link) => ({
+	...link,
+	href: link.href.startsWith("http") ? link.href : `${siteUrl}${link.href}`,
+}));
 const logoUrl = `${siteUrl}/2.svgfavicon.svg`;
 const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
 const allStructuredData = [
@@ -60,6 +66,9 @@ const allStructuredData = [
 		<link rel="icon" type="image/svg+xml" href="/2.svgfavicon.svg" />
 		<link rel="shortcut icon" type="image/svg+xml" href="/2.svgfavicon.svg" />
 		<link rel="canonical" href={canonicalUrl} />
+		{normalizedAlternateLinks.map((link) => (
+			<link rel="alternate" hreflang={link.hreflang} href={link.href} />
+		))}
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#0A0A0A" />
 		

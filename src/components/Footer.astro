@@ -8,6 +8,7 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const content = lang === 'sv' ? SITE_CONTENT.sv : SITE_CONTENT.en;
 const navLinks = getNavLinks(lang);
+const websiteHref = lang === 'sv' ? "/sv/hemsida-med-ai-chatbot" : "/websites-with-ai-chatbot";
 ---
 
 <footer id="om-oss" class="relative border-t border-white/[0.03] py-16 sm:py-20 lg:py-24">
@@ -26,7 +27,7 @@ const navLinks = getNavLinks(lang);
       </p>
       <div class="flex flex-wrap gap-4 sm:gap-6">
         <a href="mailto:info@agentergroup.com" class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.contactUs}</a>
-        <a href={lang === 'sv' ? "/sv/ai-chatbot-for-foretag" : "/ai-chatbot-for-business"} class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.explorePlatform}</a>
+        <a href={websiteHref} class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.explorePlatform}</a>
       </div>
     </div>
 

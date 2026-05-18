@@ -11,6 +11,15 @@ const navLinks = getNavLinks(lang);
 
 const currentPath = Astro.url.pathname;
 const currentHash = Astro.url.hash;
+const languagePairs: Record<string, { en: string; sv: string }> = {
+  "/": { en: "/", sv: "/sv/" },
+  "/sv/": { en: "/", sv: "/sv/" },
+  "/websites-with-ai-chatbot": { en: "/websites-with-ai-chatbot", sv: "/sv/hemsida-med-ai-chatbot" },
+  "/sv/hemsida-med-ai-chatbot": { en: "/websites-with-ai-chatbot", sv: "/sv/hemsida-med-ai-chatbot" },
+  "/blog": { en: "/blog", sv: "/sv/blogg" },
+  "/sv/blogg": { en: "/blog", sv: "/sv/blogg" },
+};
+const languageLinks = languagePairs[currentPath] ?? { en: "/", sv: "/sv/" };
 
 const isActiveLink = (href: string) => {
   if (href === "/" || href === "/sv/") return currentPath === href;
@@ -25,11 +34,10 @@ const isActiveLink = (href: string) => {
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.03] bg-black/60 backdrop-blur-xl transition-all duration-500" data-navbar-surface>
-  <!-- Language Switcher Bar -->
   <div class="border-b border-white/[0.03] bg-white/[0.02]">
     <div class="mx-auto flex h-8 w-full max-w-7xl items-center justify-end gap-4 px-4 sm:px-8 lg:px-10">
-      <a 
-        href="/" 
+      <a
+        href={languageLinks.en}
         class:list={[
           "text-[9px] font-bold uppercase tracking-[0.2em] transition-colors",
           lang === 'en' ? "text-white" : "text-white/30 hover:text-white"
@@ -38,8 +46,8 @@ const isActiveLink = (href: string) => {
         EN
       </a>
       <div class="h-2 w-px bg-white/10"></div>
-      <a 
-        href="/sv/" 
+      <a
+        href={languageLinks.sv}
         class:list={[
           "text-[9px] font-bold uppercase tracking-[0.2em] transition-colors",
           lang === 'sv' ? "text-white" : "text-white/30 hover:text-white"
@@ -73,49 +81,13 @@ const isActiveLink = (href: string) => {
           {link.label}
         </a>
       ))}
-
-      <div class="group relative">
-        <button
-          type="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-          class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 transition-all hover:text-white"
-        >
-          <span>{content.pagesTitle}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-y-px group-hover:rotate-180">
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </button>
-
-        <div class="pointer-events-none absolute left-1/2 top-full z-20 w-[19rem] -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-          <div class="rounded-[1.75rem] border border-white/10 bg-black/95 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-            {navLinks.pages.map((link) => (
-              <a
-                href={link.href}
-                class:list={[
-                  "flex items-center justify-between rounded-2xl px-4 py-3 text-[11px] font-bold uppercase tracking-[0.14em] transition-all",
-                  isActiveLink(link.href)
-                    ? "bg-white/[0.08] text-white"
-                    : "text-white/60 hover:bg-white/[0.04] hover:text-white",
-                ]}
-              >
-                <span>{link.label}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="opacity-50">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- CTA -->
     <div class="flex shrink-0 items-center gap-1.5 sm:gap-3">
       <button
         type="button"
-        aria-label="Öppna meny"
+        aria-label={lang === 'sv' ? "Öppna meny" : "Open menu"}
         aria-expanded="false"
         aria-controls="mobile-nav-panel"
         data-mobile-nav-toggle
@@ -153,18 +125,6 @@ const isActiveLink = (href: string) => {
           {link.label}
         </a>
       ))}
-      <div class="rounded-[1.5rem] border border-white/[0.06] bg-white/[0.03] p-2">
-        <div class="px-3 pb-2 pt-1 text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
-          {content.pagesTitle}
-        </div>
-        <div class="flex flex-col gap-1">
-          {navLinks.pages.map((link) => (
-            <a href={link.href} class="rounded-2xl px-3 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-white/70 transition-colors duration-300 hover:bg-white/[0.04] hover:text-white">
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
       <a
         href={DASHBOARD_LOGIN_URL}
         class="mt-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-black transition-transform duration-300 active:scale-[0.98]"

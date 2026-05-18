@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServicePageTemplate from "../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../data/site";
+
+const title = "Websites with AI Chatbot | AgenterGroup";
+const description =
+  "We build websites that work together with an AI chat widget to answer visitors, capture leads, and book meetings.";
+
+const faqs = [
+  {
+    question: "Is this a website project or an AI chatbot project?",
+    answer:
+      "It is both. We build the website and the AI chat widget as one conversion system, so the page structure, copy, lead capture, and chat flow work together from the start.",
+  },
+  {
+    question: "Can you rebuild an existing website instead of starting over?",
+    answer:
+      "Yes. If the existing website has a strong foundation, we can keep what works and rebuild the parts that block trust, clarity, leads, or bookings.",
+  },
+  {
+    question: "What does the chat widget do on the website?",
+    answer:
+      "The widget can answer common questions, qualify visitors, collect contact details, route leads, and move qualified prospects toward a booked meeting.",
+  },
+  {
+    question: "Do we need to manage the AI setup ourselves?",
+    answer:
+      "No. AgenterGroup handles the setup, website structure, chat flow, and business logic so the system is ready to use.",
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/websites-with-ai-chatbot`,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Websites with AI Chatbot",
+    provider: {
+      "@type": "Organization",
+      name: "AgenterGroup",
+      url: SITE_URL,
+    },
+    areaServed: "Global",
+    availableLanguage: "en-US",
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  canonicalPath="/websites-with-ai-chatbot"
+  alternateLinks={[
+    { hreflang: "en", href: "/websites-with-ai-chatbot" },
+    { hreflang: "sv", href: "/sv/hemsida-med-ai-chatbot" },
+    { hreflang: "x-default", href: "/websites-with-ai-chatbot" },
+  ]}
+  structuredData={structuredData}
+>
+  <ServicePageTemplate
+    lang="en"
+    badge="Website + AI Chat Widget"
+    title="Websites that sell with the chat widget"
+    description="We build websites that work hand in hand with the AgenterGroup chat widget, so visitors can understand the offer, ask questions, qualify themselves, and book the next step."
+    secondaryHref="/"
+    secondaryLabel="Back home"
+    stats={[
+      { label: "Primary Goal", value: "More qualified leads" },
+      { label: "Built Around", value: "Website, copy, and AI chat" },
+      { label: "Best For", value: "Service and B2B companies" },
+    ]}
+    blocks={[
+      {
+        title: "A website and widget as one system",
+        body: "A good website should not leave every visitor at a static contact form. We structure the page and the AI chat flow together, so the visitor gets answers while your business captures the right context.",
+        bullets: [
+          "Clear service pages that explain the offer quickly",
+          "AI chat flows that answer questions and qualify intent",
+          "Calls to action that move visitors toward contact or booking",
+        ],
+      },
+      {
+        title: "Why a normal website is not enough",
+        body: "Many websites look acceptable but lose buyers because the next step is unclear. The chat widget gives visitors a direct way to ask, compare, and act without waiting for a manual reply.",
+        bullets: [
+          "Replace passive forms with active conversations",
+          "Capture questions that would otherwise disappear",
+          "Guide high-intent visitors while they are still on the page",
+        ],
+      },
+      {
+        title: "What AgenterGroup builds",
+        body: "We handle the website structure, messaging, AI widget setup, lead capture, and booking path so the site works as a sales asset, not just a digital brochure.",
+        bullets: [
+          "Landing and service pages matched to your offer",
+          "Chatbot setup for FAQs, qualification, and handover",
+          "Booking and lead flows connected to your sales process",
+        ],
+      },
+      {
+        title: "Who this is for",
+        body: "This is built for companies that sell through trust, explanation, and timing. If prospects need answers before they contact you, the website and chat widget should work together.",
+        bullets: [
+          "Local service companies and consultants",
+          "B2B teams that want better lead quality",
+          "Companies replacing slow forms and manual follow-up",
+        ],
+      },
+    ]}
+    faqs={faqs}
+    relatedLinks={[
+      { href: "/", title: "Home" },
+      { href: "/blog", title: "Blog" },
+    ]}
+  />
+</Layout>

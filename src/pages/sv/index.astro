@@ -6,7 +6,7 @@ import IntegrationMarquee from '../../components/IntegrationMarquee.astro';
 import KnowledgeBase from '../../components/KnowledgeBase.astro';
 import Pricing from '../../components/Pricing.astro';
 import UseCaseGrid from '../../components/UseCaseGrid.astro';
-import { serviceLinkCards, SITE_URL } from '../../data/site';
+import { SITE_URL } from '../../data/site';
 
 const whatIsAgentItems = [
   {
@@ -44,29 +44,23 @@ const platformFeatures = [
   }
 ];
 
+const serviceCardsSv = [
+  {
+    href: "/sv/hemsida-med-ai-chatbot",
+    title: "Hemsida med AI chatbot",
+    description: "För företag som vill ha en hemsida där erbjudande, AI-chatt, lead capture och bokning arbetar tillsammans.",
+  },
+];
+
 const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "AI chatbot för företag i Sverige",
+    name: "AI chatbot för företag i Sverige | AgenterGroup",
     description:
       "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
-    url: `${SITE_URL}/`,
+    url: `${SITE_URL}/sv/`,
     inLanguage: "sv-SE",
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "AI chatbot för företag",
-    provider: {
-      "@type": "Organization",
-      name: "AgenterGroup",
-      url: SITE_URL,
-    },
-    areaServed: "SE",
-    availableLanguage: "sv-SE",
-    description:
-      "AI-agent och AI-chatbot för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
   },
 ];
 ---
@@ -76,11 +70,16 @@ const structuredData = [
   title="AI chatbot för företag i Sverige | AgenterGroup"
   description="Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning."
   canonicalPath="/sv/"
+  alternateLinks={[
+    { hreflang: "en", href: "/" },
+    { hreflang: "sv", href: "/sv/" },
+    { hreflang: "x-default", href: "/" },
+  ]}
   structuredData={structuredData}
 >
     <Hero lang="sv" />
 
-    <UseCaseGrid lang="sv" cards={serviceLinkCards} />
+    <UseCaseGrid lang="sv" cards={serviceCardsSv} />
     
     <FeatureGrid 
       lang="sv"

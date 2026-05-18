@@ -12,10 +12,12 @@ interface Props {
     };
   };
   index: number;
+  lang?: 'en' | 'sv';
 }
 
-const { post, index } = Astro.props;
-const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+const { post, index, lang = 'en' } = Astro.props;
+const readMore = lang === 'sv' ? "Läs mer" : "Read more";
+const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'sv' ? 'sv-SE' : 'en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -71,7 +73,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
       </p>
       
       <div class="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-orange/60 group-hover:text-brand-orange transition-colors duration-500">
-        Read more
+        {readMore}
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </div>
     </div>
