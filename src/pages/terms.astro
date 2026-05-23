@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_NAME } from '../data/site';
+
+const title = `Terms of Service | ${SITE_NAME}`;
+const description = 'Basic terms for using the AgenterGroup website and contacting AgenterGroup about AI automation services.';
+---
+
+<Layout
+  lang="en"
+  title={title}
+  description={description}
+  canonicalPath="/terms"
+  alternateLinks={[
+    { hreflang: 'en', href: '/terms' },
+    { hreflang: 'x-default', href: '/terms' },
+  ]}
+>
+  <section class="bg-[#050505] px-6 pb-24 pt-32 text-white sm:pt-40">
+    <div class="mx-auto max-w-3xl">
+      <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.24em] text-white/28">Legal</p>
+      <h1 class="text-[clamp(2.6rem,8vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.05em] text-white/92">
+        Terms of Service
+      </h1>
+      <div class="mt-10 space-y-8 text-sm font-medium leading-relaxed text-white/55 sm:text-base">
+        <p>
+          By using this website or contacting AgenterGroup, you agree to use the site lawfully and not interfere with its security, availability, or normal operation.
+        </p>
+        <section>
+          <h2 class="mb-3 text-2xl font-medium text-white/88">Website Content</h2>
+          <p>
+            Website content is provided for general information about AgenterGroup services. It is not a binding offer unless confirmed in a written agreement.
+          </p>
+        </section>
+        <section>
+          <h2 class="mb-3 text-2xl font-medium text-white/88">Services</h2>
+          <p>
+            Project scope, pricing, timelines, data handling, and support terms are defined in the applicable customer agreement or order confirmation.
+          </p>
+        </section>
+        <section>
+          <h2 class="mb-3 text-2xl font-medium text-white/88">Contact</h2>
+          <p>
+            For questions about these terms, contact <a class="text-brand-orange hover:text-orange-400" href="mailto:hello@agentergroup.com">hello@agentergroup.com</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>

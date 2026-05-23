@@ -1,0 +1,124 @@
+---
+interface Props {
+  lang?: 'en' | 'sv';
+}
+const { lang = 'en' } = Astro.props;
+
+const copy = {
+  badge: lang === 'sv' ? 'Hör av dig' : 'Get In Touch',
+  title: lang === 'sv' ? 'Har du några frågor?' : 'Have any questions?',
+  subtitle: lang === 'sv' 
+    ? 'Prata med vår AI-agent för att få svar direkt. Vi är tillgängliga dygnet runt för att hjälpa dig.' 
+    : 'Chat with our AI agent to get answers instantly. We are available 24/7 to help you.',
+  ctaButton: lang === 'sv' ? 'STARTA CHATT' : 'START CHAT',
+  emailLabel: lang === 'sv' ? 'E-post:' : 'Email:',
+  emailValue: 'info@agentergroup.com',
+  officeLabel: lang === 'sv' ? 'Huvudkontor:' : 'Headquarters:',
+  officeValue: 'Borås, Sweden',
+};
+---
+
+<section 
+  id="contact" 
+  class="relative overflow-hidden bg-white py-24 px-6 md:py-32 lg:py-40 border-t border-slate-100"
+>
+  <!-- Ambient background glows -->
+  <div class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,_rgba(223,80,7,0.02),_transparent_70%)] blur-3xl"></div>
+
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <!-- Badge -->
+    <div class="reveal-wrapper mb-6 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[8px] font-bold uppercase tracking-[0.28em] text-slate-400 sm:mb-8 sm:text-[9px] sm:tracking-[0.4em]">
+      <span class="h-1.5 w-1.5 rounded-full bg-brand-orange animate-pulse"></span>
+      {copy.badge}
+    </div>
+    
+    <!-- Title -->
+    <h2 class="reveal-wrapper text-[clamp(2.25rem,6vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.04em] text-slate-900 mb-8 max-w-[20ch] mx-auto" style="transition-delay: 100ms;">
+      {copy.title}
+    </h2>
+    
+    <!-- Subtitle -->
+    <p class="reveal-wrapper text-base md:text-lg font-medium leading-relaxed text-slate-500 mb-12 max-w-xl mx-auto" style="transition-delay: 200ms;">
+      {copy.subtitle}
+    </p>
+
+    <!-- Prominent Live Chat Call to Action Button -->
+    <div class="reveal-wrapper mb-16" style="transition-delay: 300ms;">
+      <button 
+        type="button"
+        onclick="window.openAgenter()"
+        class="inline-flex items-center justify-between gap-6 rounded-full bg-slate-900 pl-8 pr-2 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-brand-orange hover:shadow-[0_20px_40px_rgba(223,80,7,0.3)] hover:scale-[1.02] active:scale-[0.98] shadow-md group cursor-pointer"
+      >
+        <span>{copy.ctaButton}</span>
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-transform duration-500 group-hover:scale-110 text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+    <!-- Centered Metadata Details -->
+    <div class="reveal-wrapper flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-sm font-medium text-slate-400 border-t border-slate-100 pt-10 max-w-xl mx-auto" style="transition-delay: 400ms;">
+      <a 
+        href={`mailto:${copy.emailValue}`}
+        class="flex items-center gap-2 hover:text-brand-orange transition-colors duration-300 group"
+      >
+        <span class="text-slate-300 group-hover:text-brand-orange transition-colors duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+        </span>
+        <span class="text-slate-400 group-hover:text-slate-600 font-bold mr-1">{copy.emailLabel}</span>
+        <span class="text-slate-600 group-hover:text-brand-orange font-semibold">{copy.emailValue}</span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <span class="text-slate-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </span>
+        <span class="font-bold mr-1">{copy.officeLabel}</span>
+        <span class="text-slate-600 font-semibold">{copy.officeValue}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Reveal Animations matching index animations */
+  .reveal-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-wrapper.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  function initContactAnimations() {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('#contact .reveal-wrapper').forEach((el) => {
+      revealObserver.observe(el);
+    });
+  }
+
+  // Run immediately for initial load
+  initContactAnimations();
+  // Support for Astro View Transitions if enabled
+  document.addEventListener('astro:page-load', initContactAnimations);
+</script>

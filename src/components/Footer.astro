@@ -1,58 +1,56 @@
 ---
-import { getNavLinks, SITE_CONTENT } from "../data/site";
+import { SITE_NAME } from '../data/site';
 
 interface Props {
   lang?: 'en' | 'sv';
 }
-
 const { lang = 'en' } = Astro.props;
-const content = lang === 'sv' ? SITE_CONTENT.sv : SITE_CONTENT.en;
-const navLinks = getNavLinks(lang);
-const websiteHref = lang === 'sv' ? "/sv/hemsida-med-ai-chatbot" : "/websites-with-ai-chatbot";
+
+const copy = {
+  rights: lang === 'sv' ? 'Alla rättigheter förbehållna.' : 'All rights reserved.',
+  company: 'AgenterGroup',
+  address: 'Borås, Sweden',
+  tagline: lang === 'sv' ? 'Bygger nästa generations AI-agenter och automationer för framåtblickande företag.' : 'Building next-generation AI agents and automations for forward-thinking businesses.',
+  links: [
+    { name: lang === 'sv' ? 'Sekretesspolicy' : 'Privacy Policy', href: '/privacy' },
+    { name: lang === 'sv' ? 'Användarvillkor' : 'Terms of Service', href: '/terms' },
+    { name: lang === 'sv' ? 'Kontakta oss' : 'Contact Us', href: 'mailto:info@agentergroup.com' }
+  ]
+};
 ---
 
-<footer id="om-oss" class="relative border-t border-white/[0.03] py-16 sm:py-20 lg:py-24">
-  <div class="mx-auto mb-14 grid w-full max-w-7xl grid-cols-1 gap-10 px-6 sm:mb-16 sm:gap-12 sm:px-8 md:grid-cols-12 lg:gap-12 lg:px-10">
-    <div class="md:col-span-12 lg:col-span-6">
-      <div class="group mb-8 flex items-center gap-3 sm:mb-10 sm:gap-4">
-        <img
-          src="/2.svgfavicon.svg"
-          alt="Agenter Group logotyp"
-          class="h-10 w-10 shrink-0 object-contain"
-        />
+<footer id="contact" class="relative overflow-hidden bg-[#0C0C0C] border-t border-white/10 py-16 px-6">
+  <div class="glow-dark-top-right"></div>
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-12 relative z-10">
+    
+    <div class="flex flex-col items-center md:items-start gap-4">
+      <div class="flex items-center">
+        <img src="/Logotransparant.svg" alt="Agentergroup Logo" class="h-[116px] md:h-[148px] w-auto transition-transform duration-300 ease-out hover:scale-105" />
       </div>
-      <h3 class="mb-4 text-xl font-medium tracking-tight text-white/80">{content.footer.whoWeAre}</h3>
-      <p class="mb-8 max-w-md text-base font-medium leading-relaxed tracking-tight text-white/40 sm:mb-10 sm:text-lg">
-        {content.footer.description}
+      <p class="text-slate-400 text-sm mt-1 text-center md:text-left max-w-[280px] leading-relaxed">
+        {copy.tagline}
       </p>
-      <div class="flex flex-wrap gap-4 sm:gap-6">
-        <a href="mailto:info@agentergroup.com" class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.contactUs}</a>
-        <a href={websiteHref} class="text-[9px] font-bold text-white/40 hover:text-white transition-all uppercase tracking-[0.4em] border-b border-white/5 pb-2">{content.footer.explorePlatform}</a>
+      <div class="flex items-center gap-2 text-slate-400 text-sm mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span class="font-medium">{copy.address}</span>
       </div>
     </div>
 
-    <div class="md:col-span-6 lg:col-span-3 lg:pl-8">
-      <h4 class="mb-6 text-[9px] font-bold uppercase tracking-[0.5em] text-white/10 sm:mb-8">Navigation</h4>
-      <ul class="space-y-4 text-[11px] font-bold uppercase tracking-[0.1em] text-white/20 sm:space-y-5">
-        {navLinks.footer.map((link) => (
-          <li><a href={link.href} class="hover:text-brand-orange transition-all duration-500">{link.label}</a></li>
+    <div class="flex flex-col items-center md:items-end justify-between h-full gap-8 md:pt-2">
+      <div class="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4">
+        {copy.links.map(link => (
+          <a href={link.href} class="text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+            {link.name}
+          </a>
         ))}
-      </ul>
+      </div>
+      <p class="text-slate-500 text-sm text-center md:text-right mt-4 md:mt-8">
+        &copy; {new Date().getFullYear()} {SITE_NAME}. {copy.rights}
+      </p>
     </div>
 
-    <div class="md:col-span-6 lg:col-span-3">
-      <h4 class="mb-6 text-[9px] font-bold uppercase tracking-[0.5em] text-white/10 sm:mb-8">{content.footer.locationTitle}</h4>
-      <ul class="space-y-4 text-[11px] font-bold uppercase tracking-[0.1em] text-white/20 sm:space-y-5">
-        <li><a href="mailto:info@agentergroup.com" class="hover:text-white transition-all">info@agentergroup.com</a></li>
-        <li class="text-white/10">{content.footer.address}</li>
-        <li class="text-white/10">Europe / Stockholm</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-white/[0.03] px-6 pt-8 text-[9px] font-bold uppercase tracking-[0.5em] text-white/10 sm:px-8 lg:px-10">
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-      <span>© 2026 Agenter Group</span>
-    </div>
   </div>
 </footer>

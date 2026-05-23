@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
   );
 
   const blogUrls = posts.map(
-    (post) => `<url><loc>${SITE_URL}/blog/${post.id}</loc></url>`
+    (post) => `<url><loc>${SITE_URL}/sv/blogg/${post.id}</loc></url>`
   );
 
   const urls = [...staticUrls, ...blogUrls].join("");

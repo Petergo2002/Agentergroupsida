@@ -1,0 +1,123 @@
+---
+interface Props {
+  lang?: 'en' | 'sv';
+}
+const { lang = 'en' } = Astro.props;
+
+const copy = {
+  badge: lang === 'sv' ? 'Effektivisera er kundtjänst med 30%' : 'Optimize Operations by 30%',
+  title: lang === 'sv' ? 'Automatisera Kundtjänsten med ' : 'Streamline Operations with an ',
+  titleHighlight: lang === 'sv' ? 'AI Chatbot' : 'AI Agent',
+  description: lang === 'sv' 
+    ? 'Hantera kundfrågor, kvalificera leads och boka möten – allt från en smart och intuitiv plattform.'
+    : 'Manage customer service, qualify leads, and book meetings—all from one intuitive and powerful platform.',
+  getStarted: lang === 'sv' ? 'Kom igång' : 'Get Started',
+  getDemo: lang === 'sv' ? 'Boka en demo' : 'Get a Demo',
+  worksWith: lang === 'sv' ? 'Fungerar med dina favoritverktyg och 100+ integrationer' : 'Works with your favorite tools and 100+ integrations'
+};
+
+const integrations = [
+  { name: 'Gmail', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1280px-Gmail_icon_%282020%29.svg.png' },
+  { name: 'Slack', logoUrl: 'https://cdn.worldvectorlogo.com/logos/slack-2.svg' },
+  { name: 'HubSpot', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/HubSpot_Logo.svg/3840px-HubSpot_Logo.svg.png' },
+  { name: 'Google Calendar', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/960px-Google_Calendar_icon_%282020%29.svg.png' },
+  { name: 'Shopify', logoUrl: 'https://cdn.worldvectorlogo.com/logos/shopify.svg' },
+  { name: 'Outlook', logoUrl: 'https://cdn.worldvectorlogo.com/logos/microsoft-outlook-1.svg' },
+  { name: 'Google Ads', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Ads_logo.svg/500px-Google_Ads_logo.svg.png' },
+  { name: 'Cal.com', logoUrl: 'https://cal.com/logo.svg' },
+  { name: 'Google Drive', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/1280px-Google_Drive_icon_%282020%29.svg.png' },
+];
+---
+
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-32 px-6 overflow-hidden">
+  <!-- Ambient corner glows -->
+  <div class="glow-top-left"></div>
+  <div class="glow-bottom-right"></div>
+  <div class="edge-fade-to-dark"></div>
+  <div class="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+    
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-brand-orange text-sm font-semibold mb-8 animate-fade-up">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      {copy.badge}
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight max-w-4xl mb-6 animate-fade-up delay-100">
+      {copy.title}
+      <span class="text-brand-orange italic font-medium font-sans">{copy.titleHighlight}</span>
+    </h1>
+
+    <!-- Description -->
+    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mb-10 animate-fade-up delay-200">
+      {copy.description}
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-up delay-300">
+      <a href="https://dashboard.agentergroup.com/signup" class="w-full sm:w-auto px-8 py-4 bg-brand-orange hover:bg-orange-600 text-white rounded-full font-semibold text-lg transition-all shadow-lg shadow-brand-orange/25 hover:shadow-brand-orange/40 hover:-translate-y-0.5">
+        {copy.getStarted}
+      </a>
+      <button type="button" onclick="window.openAgenter()" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 rounded-full font-semibold text-lg transition-all hover:-translate-y-0.5">
+        {copy.getDemo}
+      </button>
+    </div>
+
+    <!-- Premium Single-Row Infinite Scroll Integrations -->
+    <div class="w-full max-w-6xl flex flex-col items-center animate-fade-up delay-400 mb-20 overflow-hidden relative" id="integrations-marquee">
+      <span class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">{copy.worksWith}</span>
+      
+      <!-- Fade edges -->
+      <div class="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+      
+      <div class="marquee-track flex w-max py-2" style="animation: marquee-left 30s linear infinite;">
+        <div class="flex items-center gap-4 md:gap-6 pr-4 md:pr-6 flex-shrink-0">
+          {integrations.map((item) => (
+            <div class="integration-pill flex-shrink-0 flex items-center gap-2.5 px-4 md:px-5 py-2 md:py-2.5 bg-white/80 backdrop-blur-sm border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] rounded-full hover:shadow-md hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+              <img src={item.logoUrl} alt={`${item.name} logo`} class="w-5 h-5 md:w-6 md:h-6 object-contain flex-shrink-0" loading="lazy"/>
+              <span class="font-semibold text-slate-700 text-xs md:text-sm whitespace-nowrap">{item.name}</span>
+            </div>
+          ))}
+        </div>
+        <div class="flex items-center gap-4 md:gap-6 pr-4 md:pr-6 flex-shrink-0" aria-hidden="true">
+          {integrations.map((item) => (
+            <div class="integration-pill flex-shrink-0 flex items-center gap-2.5 px-4 md:px-5 py-2 md:py-2.5 bg-white/80 backdrop-blur-sm border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)] rounded-full hover:shadow-md hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+              <img src={item.logoUrl} alt={`${item.name} logo`} class="w-5 h-5 md:w-6 md:h-6 object-contain flex-shrink-0" loading="lazy"/>
+              <span class="font-semibold text-slate-700 text-xs md:text-sm whitespace-nowrap">{item.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Image Mockup -->
+    <div class="w-full max-w-6xl relative animate-fade-up delay-500 group mx-auto">
+      <!-- Ambient warm branding glow behind the mockup -->
+      <div class="absolute -inset-4 bg-gradient-to-tr from-brand-orange/5 to-transparent rounded-[2.5rem] blur-3xl opacity-50 group-hover:opacity-85 transition-opacity duration-1000 pointer-events-none"></div>
+      
+      <!-- Mockup shell -->
+      <div class="relative rounded-t-2xl md:rounded-t-[2.5rem] border border-slate-200/50 bg-slate-50/20 backdrop-blur-sm overflow-hidden shadow-[0_30px_80px_rgba(15,23,42,0.04)] group-hover:shadow-[0_40px_100px_rgba(223,80,7,0.06)] group-hover:border-slate-300/60 transition-all duration-700">
+        <img 
+          src="/Screenshot 2026-05-23 at 16.19.06.png" 
+          alt="Agentergroup Dashboard" 
+          class="w-full h-auto object-cover"
+          style="mask-image: linear-gradient(to bottom, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Pause marquee on hover for better UX */
+  #integrations-marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Subtle glow on pill hover */
+  .integration-pill:hover {
+    box-shadow: 0 4px 12px rgba(223, 80, 7, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+</style>

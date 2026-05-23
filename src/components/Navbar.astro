@@ -1,191 +1,104 @@
 ---
-import { DASHBOARD_LOGIN_URL, getNavLinks, SITE_CONTENT } from "../data/site";
-
 interface Props {
   lang?: 'en' | 'sv';
 }
-
 const { lang = 'en' } = Astro.props;
-const content = lang === 'sv' ? SITE_CONTENT.sv : SITE_CONTENT.en;
-const navLinks = getNavLinks(lang);
 
-const currentPath = Astro.url.pathname;
-const currentHash = Astro.url.hash;
-const languagePairs: Record<string, { en: string; sv: string }> = {
-  "/": { en: "/", sv: "/sv/" },
-  "/sv/": { en: "/", sv: "/sv/" },
-  "/websites-with-ai-chatbot": { en: "/websites-with-ai-chatbot", sv: "/sv/hemsida-med-ai-chatbot" },
-  "/sv/hemsida-med-ai-chatbot": { en: "/websites-with-ai-chatbot", sv: "/sv/hemsida-med-ai-chatbot" },
-  "/blog": { en: "/blog", sv: "/sv/blogg" },
-  "/sv/blogg": { en: "/blog", sv: "/sv/blogg" },
-};
-const languageLinks = languagePairs[currentPath] ?? { en: "/", sv: "/sv/" };
+const homeHref = lang === 'sv' ? '/sv/' : '/';
+const navLinks = [
+  { name: lang === 'sv' ? 'Hem' : 'Home', href: homeHref },
+  { name: lang === 'sv' ? 'Funktioner' : 'Features', href: `${homeHref}#services` },
+  { name: lang === 'sv' ? 'Priser' : 'Pricing', href: `${homeHref}#pricing` },
+  { name: lang === 'sv' ? 'Kontakt' : 'Contact', href: `${homeHref}#contact` }
+];
 
-const isActiveLink = (href: string) => {
-  if (href === "/" || href === "/sv/") return currentPath === href;
-  if (href.includes("/#")) {
-    const [path, hash] = href.split("/#");
-    const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
-    const normalizedPath = path === "" ? "/" : path;
-    return (currentPath === normalizedPath || normalizedCurrentPath === normalizedPath) && currentHash === `#${hash}`;
-  }
-  return currentPath === href;
-};
+const loginText = lang === 'sv' ? 'Logga in' : 'Log in';
+const demoText = lang === 'sv' ? 'Boka en demo' : 'Book a Demo';
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.03] bg-black/60 backdrop-blur-xl transition-all duration-500" data-navbar-surface>
-  <div class="border-b border-white/[0.03] bg-white/[0.02]">
-    <div class="mx-auto flex h-8 w-full max-w-7xl items-center justify-end gap-4 px-4 sm:px-8 lg:px-10">
-      <a
-        href={languageLinks.en}
-        class:list={[
-          "text-[9px] font-bold uppercase tracking-[0.2em] transition-colors",
-          lang === 'en' ? "text-white" : "text-white/30 hover:text-white"
-        ]}
-      >
-        EN
-      </a>
-      <div class="h-2 w-px bg-white/10"></div>
-      <a
-        href={languageLinks.sv}
-        class:list={[
-          "text-[9px] font-bold uppercase tracking-[0.2em] transition-colors",
-          lang === 'sv' ? "text-white" : "text-white/30 hover:text-white"
-        ]}
-      >
-        SV
-      </a>
-    </div>
-  </div>
-
-  <div class="mx-auto flex h-18 w-full max-w-7xl min-w-0 items-center justify-between gap-2 px-4 sm:h-20 sm:gap-3 sm:px-8 lg:px-10">
+<header class="fixed top-0 inset-x-0 z-50 bg-[#0C0C0C]/95 backdrop-blur-md border-b border-white/10 h-16 md:h-20 flex items-center overflow-visible">
+  <div class="max-w-7xl w-full mx-auto px-6 flex items-center justify-between overflow-visible">
     <!-- Logo -->
-    <a href={lang === 'sv' ? "/sv/" : "/"} class="group flex min-w-0 shrink items-center">
-      <img
-        src="/Logotransparant.svg"
-        alt="Agenter Group logotyp"
-        class="h-12 w-auto max-w-[9.75rem] shrink object-contain transition-transform duration-700 group-hover:-translate-y-0.5 sm:h-15 sm:max-w-[12.5rem] sm:scale-[1.08] lg:h-20 lg:max-w-[18rem] lg:scale-[1.45]"
-      />
+    <a href={homeHref} class="flex items-center gap-2 group relative z-10 overflow-visible">
+      <img src="/Logotransparant.svg" alt="Agentergroup Logo" class="h-[116px] md:h-[148px] w-auto transition-transform duration-300 ease-out hover:scale-105" />
     </a>
 
-    <!-- Desktop Links -->
-    <div class="hidden items-center gap-8 lg:flex xl:gap-12">
-      {navLinks.primary.map((link) => (
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <a 
+          href={link.href} 
+          class="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+        >
+          {link.name}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Actions -->
+    <div class="hidden md:flex items-center gap-4">
+      <a href="https://dashboard.agentergroup.com/login" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+        {loginText}
+      </a>
+      <a
+        href={`${homeHref}#contact`}
+        class="text-sm font-semibold text-white bg-brand-orange hover:bg-orange-600 px-5 py-2.5 rounded-full transition-colors shadow-sm shadow-brand-orange/20 text-center"
+      >
+        {demoText}
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden p-2 text-slate-300 hover:text-white" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" data-mobile-menu-button>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0C0C0C] px-6 pb-6 md:hidden" data-mobile-menu>
+    <nav class="flex flex-col gap-1 py-4">
+      {navLinks.map((link) => (
         <a
           href={link.href}
-          class:list={[
-            "text-[10px] font-bold uppercase tracking-[0.3em] transition-all",
-            isActiveLink(link.href) ? "text-white" : "text-white/30 hover:text-white",
-          ]}
+          class="rounded-lg px-3 py-3 text-sm font-semibold text-slate-300 hover:bg-white/5 hover:text-white"
+          data-mobile-menu-link
         >
-          {link.label}
+          {link.name}
         </a>
       ))}
-    </div>
-
-    <!-- CTA -->
-    <div class="flex shrink-0 items-center gap-1.5 sm:gap-3">
-      <button
-        type="button"
-        aria-label={lang === 'sv' ? "Öppna meny" : "Open menu"}
-        aria-expanded="false"
-        aria-controls="mobile-nav-panel"
-        data-mobile-nav-toggle
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/70 transition-colors duration-300 hover:bg-white/[0.08] hover:text-white active:scale-[0.98] lg:hidden"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-          <path d="M4 7h16"></path>
-          <path d="M4 12h16"></path>
-          <path d="M4 17h16"></path>
-        </svg>
-      </button>
+    </nav>
+    <div class="flex flex-col gap-3">
+      <a href="https://dashboard.agentergroup.com/login" class="rounded-lg px-3 py-3 text-sm font-semibold text-slate-300 hover:bg-white/5 hover:text-white">
+        {loginText}
+      </a>
       <a
-        href={DASHBOARD_LOGIN_URL}
-        class="group relative overflow-hidden rounded-full bg-white px-3 py-3 text-[9px] font-bold uppercase tracking-[0.12em] text-black shadow-[0_15px_35px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:px-6 sm:text-[10px] sm:tracking-[0.2em] lg:px-8"
+        href={`${homeHref}#contact`}
+        class="rounded-full bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-orange-600 text-center font-bold"
       >
-        <span class="relative z-10 flex items-center justify-between gap-3">
-          <span>{content.login}</span>
-          <div class="flex items-center justify-center rounded-full bg-black/5 p-1 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105 group-hover:translate-x-1 group-hover:-translate-y-[1px]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </span>
+        {demoText}
       </a>
     </div>
   </div>
-
-  <div
-    id="mobile-nav-panel"
-    data-mobile-nav-panel
-    hidden
-    class="border-t border-white/[0.05] bg-black/90 backdrop-blur-2xl lg:hidden"
-  >
-    <div class="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 sm:px-8">
-      {navLinks.primary.map((link) => (
-        <a href={link.href} class="rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 transition-colors duration-300 hover:text-white">
-          {link.label}
-        </a>
-      ))}
-      <a
-        href={DASHBOARD_LOGIN_URL}
-        class="mt-1 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-black transition-transform duration-300 active:scale-[0.98]"
-      >
-        {content.login}
-      </a>
-    </div>
-  </div>
-</nav>
+</header>
 
 <script>
-  const navRoot = document.querySelector<HTMLElement>('[data-navbar-surface]');
-  const navSurface = document.querySelector<HTMLElement>('[data-navbar-surface]');
-  const mobileToggle = document.querySelector<HTMLButtonElement>('[data-mobile-nav-toggle]');
-  const mobilePanel = document.querySelector<HTMLElement>('[data-mobile-nav-panel]');
+  const menuButton = document.querySelector('[data-mobile-menu-button]');
+  const mobileMenu = document.querySelector('[data-mobile-menu]');
+  const menuLinks = document.querySelectorAll('[data-mobile-menu-link]');
 
-  const setMobileMenu = (open: boolean) => {
-    if (!mobileToggle || !mobilePanel) return;
-    mobileToggle.setAttribute('aria-expanded', String(open));
-    mobilePanel.hidden = !open;
-  };
+  function closeMobileMenu() {
+    mobileMenu?.classList.add('hidden');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }
 
-  const updateNavbarState = () => {
-    if (window.scrollY > 40) {
-      navSurface?.classList.add('bg-black/80', 'backdrop-blur-2xl');
-      navSurface?.classList.remove('bg-black/60');
-    } else {
-      navSurface?.classList.remove('bg-black/80', 'backdrop-blur-2xl');
-      navSurface?.classList.add('bg-black/60');
-    }
-  };
-
-  mobileToggle?.addEventListener('click', () => {
-    const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
-    setMobileMenu(!isOpen);
+  menuButton?.addEventListener('click', () => {
+    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    mobileMenu?.classList.toggle('hidden', isOpen);
+    menuButton.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  mobilePanel?.querySelectorAll('a, button').forEach((item) => {
-    item.addEventListener('click', () => setMobileMenu(false));
+  menuLinks.forEach((link) => {
+    link.addEventListener('click', closeMobileMenu);
   });
-
-  document.addEventListener('click', (event) => {
-    const target = event.target;
-    if (target instanceof Node && !navRoot?.contains(target)) {
-      setMobileMenu(false);
-    }
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      setMobileMenu(false);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1024) {
-      setMobileMenu(false);
-    }
-  });
-
-  window.addEventListener('scroll', updateNavbarState, { passive: true });
-  updateNavbarState();
-  setMobileMenu(false);
 </script>

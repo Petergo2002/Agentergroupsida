@@ -1,0 +1,116 @@
+---
+interface Props {
+  lang?: 'en' | 'sv';
+}
+const { lang = 'en' } = Astro.props;
+
+const copy = {
+  title: lang === 'sv' ? 'Flexibla Prisplaner' : 'Flexible Pricing Plans',
+  subtitle: lang === 'sv' ? 'Välj den plan som passar ditt företag bäst.' : 'Choose the perfect plan for your business.',
+  monthly: lang === 'sv' ? 'Månadsvis' : 'Monthly',
+  yearly: lang === 'sv' ? 'Årligen' : 'Yearly',
+  save: lang === 'sv' ? 'Spara 20%' : 'Save 20%',
+  getStarted: lang === 'sv' ? 'Kom igång' : 'Get Started',
+  contactUs: lang === 'sv' ? 'Kontakta oss' : 'Contact Us',
+  plans: [
+    {
+      name: lang === 'sv' ? 'Bas' : 'Basic',
+      description: lang === 'sv' ? 'För mindre företag.' : 'Simple tools for small teams.',
+      price: '$29',
+      features: lang === 'sv' ? [
+        'Upp till 1000 konversationer',
+        'Grundläggande anpassning',
+        'E-postsupport'
+      ] : [
+        'Up to 1,000 conversations',
+        'Basic customization',
+        'Email support'
+      ]
+    },
+    {
+      name: lang === 'sv' ? 'Pro' : 'Pro',
+      description: lang === 'sv' ? 'För växande företag.' : 'Automation for growing teams.',
+      price: '$69',
+      popular: true,
+      features: lang === 'sv' ? [
+        'Obegränsade konversationer',
+        'Avancerad AI-anpassning',
+        'CRM & Kalenderintegrationer',
+        'Prioriterad support'
+      ] : [
+        'Unlimited conversations',
+        'Advanced AI customization',
+        'CRM & Calendar integrations',
+        'Priority support'
+      ]
+    },
+    {
+      name: lang === 'sv' ? 'Enterprise' : 'Enterprise',
+      description: lang === 'sv' ? 'För stora organisationer.' : 'Full control for large orgs.',
+      price: '$129',
+      features: lang === 'sv' ? [
+        'Allt i Pro',
+        'Dedikerad Account Manager',
+        'Skräddarsydda integrationer',
+        'SLA 99.9% upptid'
+      ] : [
+        'Everything in Pro',
+        'Dedicated Account Manager',
+        'Custom integrations',
+        '99.9% Uptime SLA'
+      ]
+    }
+  ]
+};
+---
+
+<section id="pricing" class="py-24 px-6 bg-slate-50">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{copy.title}</h2>
+    <p class="text-lg text-slate-600 mb-10">{copy.subtitle}</p>
+    
+    <!-- Billing Toggle (Visual only) -->
+    <div class="inline-flex items-center bg-white p-1 rounded-full border border-slate-200 mb-16 shadow-sm">
+      <button class="px-6 py-2 rounded-full bg-slate-900 text-white text-sm font-semibold transition-colors">{copy.monthly}</button>
+      <button class="px-6 py-2 rounded-full text-slate-600 text-sm font-semibold hover:text-slate-900 transition-colors flex items-center gap-2">
+        {copy.yearly} <span class="text-xs bg-orange-100 text-brand-orange px-2 py-0.5 rounded-full">{copy.save}</span>
+      </button>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+      {copy.plans.map((plan) => (
+        <div class={`relative bg-white rounded-3xl p-8 border ${plan.popular ? 'border-brand-orange shadow-xl shadow-brand-orange/10 scale-105 z-10' : 'border-slate-200 shadow-sm'} flex flex-col`}>
+          {plan.popular && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-orange text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+              Most Popular
+            </div>
+          )}
+          
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+            <p class="text-slate-500 text-sm">{plan.description}</p>
+          </div>
+          
+          <div class="mb-8 flex items-baseline gap-1">
+            <span class="text-5xl font-bold text-slate-900">{plan.price}</span>
+            <span class="text-slate-500">/month</span>
+          </div>
+
+          <ul class="flex-1 space-y-4 mb-8">
+            {plan.features.map(f => (
+              <li class="flex items-start gap-3 text-slate-600 text-sm">
+                <svg class="w-5 h-5 text-brand-orange shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <a href={plan.popular ? "https://dashboard.agentergroup.com/signup" : "#contact"} class={`w-full text-center py-3 rounded-xl font-semibold transition-colors ${plan.popular ? 'bg-brand-orange text-white hover:bg-orange-600' : 'bg-slate-50 text-slate-900 hover:bg-slate-100 border border-slate-200'}`}>
+            {plan.popular ? copy.getStarted : copy.contactUs}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

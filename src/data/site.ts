@@ -47,14 +47,14 @@ export const getNavLinks = (lang: 'en' | 'sv' = 'en') => {
   return {
     primary: [
       { href: `${prefix}/`, label: isSv ? "Hem" : "Home" },
-      { href: isSv ? "/sv/blogg" : "/blog", label: isSv ? "Blogg" : "Blog" },
-      { href: isSv ? "/sv/hemsida-med-ai-chatbot" : "/websites-with-ai-chatbot", label: isSv ? "Hemsida" : "Website" },
+      { href: "/sv/blogg", label: isSv ? "Blogg" : "Blog" },
+      { href: "/sv/hemsida-med-ai-chatbot", label: isSv ? "Hemsida" : "Website" },
     ],
     pages: [],
     footer: [
       { href: `${prefix}/`, label: isSv ? "Hem" : "Home" },
-      { href: isSv ? "/sv/blogg" : "/blog", label: isSv ? "Blogg" : "Blog" },
-      { href: isSv ? "/sv/hemsida-med-ai-chatbot" : "/websites-with-ai-chatbot", label: isSv ? "Hemsida med AI chatbot" : "Website with AI Chatbot" },
+      { href: "/sv/blogg", label: isSv ? "Blogg" : "Blog" },
+      { href: "/sv/hemsida-med-ai-chatbot", label: isSv ? "Hemsida med AI chatbot" : "Website with AI Chatbot" },
     ]
   };
 };
@@ -77,8 +77,8 @@ export const serviceLinkCards = [
 export const sitemapPaths = [
   "/",
   "/sv/",
-  "/websites-with-ai-chatbot",
   "/sv/hemsida-med-ai-chatbot",
-  "/blog",
   "/sv/blogg",
+  "/privacy",
+  "/terms",
 ] as const;

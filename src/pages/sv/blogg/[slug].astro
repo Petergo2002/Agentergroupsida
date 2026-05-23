@@ -1,0 +1,98 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import { SITE_URL, SITE_NAME } from '../../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+const title = `${post.data.title} | ${SITE_NAME}`;
+const description = post.data.description;
+const canonicalPath = `/sv/blogg/${post.id}`;
+const formattedDate = post.data.pubDate.toLocaleDateString('sv-SE', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: post.data.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
+  mainEntityOfPage: `${SITE_URL}${canonicalPath}`,
+};
+---
+
+<Layout
+  lang="sv"
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  alternateLinks={[
+    { hreflang: 'sv', href: canonicalPath },
+    { hreflang: 'x-default', href: canonicalPath },
+  ]}
+  structuredData={structuredData}
+>
+  <article class="bg-[#050505] text-white">
+    <header class="relative overflow-hidden border-b border-white/[0.06] px-6 pb-16 pt-32 sm:pt-40 lg:pt-48">
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-[480px] bg-[radial-gradient(circle_at_top,_rgba(255,100,0,0.08),_transparent_70%)]"></div>
+      <div class="relative z-10 mx-auto max-w-4xl">
+        <a href="/sv/blogg" class="mb-8 inline-flex text-[10px] font-bold uppercase tracking-[0.22em] text-white/35 transition-colors hover:text-white">
+          Till bloggen
+        </a>
+        <div class="mb-5 flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white/25">
+          <span>{formattedDate}</span>
+          <span class="h-1 w-1 rounded-full bg-white/15"></span>
+          <span>{post.data.author}</span>
+        </div>
+        <h1 class="max-w-4xl text-[clamp(2.6rem,8vw,5rem)] font-medium leading-[0.95] tracking-[-0.05em] text-white/92">
+          {post.data.title}
+        </h1>
+        <p class="mt-7 max-w-2xl text-base font-medium leading-relaxed text-white/42 sm:text-lg">
+          {description}
+        </p>
+      </div>
+    </header>
+
+    {post.data.heroImage && (
+      <div class="mx-auto max-w-5xl px-6 py-10">
+        <img
+          src={post.data.heroImage}
+          alt={post.data.title}
+          class="aspect-[16/9] w-full rounded-3xl object-cover"
+        />
+      </div>
+    )}
+
+    <div class="mx-auto max-w-3xl px-6 pb-24">
+      <div class="prose prose-invert prose-orange max-w-none prose-headings:font-medium prose-headings:tracking-tight prose-p:text-white/58 prose-li:text-white/58 prose-a:text-brand-orange">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

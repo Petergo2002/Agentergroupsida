@@ -1,0 +1,130 @@
+---
+interface Props {
+  lang?: 'en' | 'sv';
+}
+const { lang = 'en' } = Astro.props;
+
+const stats = [
+  {
+    value: '+30%',
+    label: lang === 'sv' ? 'Ökad försäljning & leads' : 'More sales & leads'
+  },
+  {
+    value: '98%',
+    label: lang === 'sv' ? 'Kundnöjdhet (CSAT)' : 'Customer satisfaction rate'
+  },
+  {
+    value: '5M+',
+    label: lang === 'sv' ? 'Meddelanden hanterade månatligen' : 'Monthly messages handled'
+  },
+  {
+    value: '1000+',
+    label: lang === 'sv' ? 'Timmar sparade per kund' : 'Hours saved per client'
+  }
+];
+---
+
+<section class="relative overflow-hidden py-20 px-6 border-b border-slate-100 bg-white">
+  <!-- Ambient corner glow -->
+  <div class="glow-top-right"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+      {stats.map((stat, index) => (
+        <div class="flex flex-col items-center justify-center text-center pt-8 md:pt-0 first:pt-0 stat-item opacity-0 translate-y-6 transition-all duration-700 ease-out" style={`transition-delay: ${index * 150}ms`}>
+          <div class="text-4xl md:text-5xl font-bold text-slate-900 mb-2 stat-value" data-value={stat.value}>{stat.value}</div>
+          <div class="text-sm md:text-base font-medium text-slate-500 max-w-[150px]">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function initStatsAnimation() {
+    function animateValue(obj: Element, start: number, end: number, duration: number, prefix = '', suffix = '', decimals = 0) {
+      let startTimestamp: number | null = null;
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        // easeOutExpo for smooth deceleration
+        const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentVal = easeOut * (end - start) + start;
+        const formattedVal = decimals > 0 ? currentVal.toFixed(decimals) : Math.floor(currentVal).toString();
+        
+        obj.innerHTML = prefix + formattedVal + suffix;
+        
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          obj.innerHTML = prefix + end + suffix;
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const itemEl = entry.target;
+          if (itemEl.classList.contains('animated')) return;
+          
+          itemEl.classList.add('animated');
+          
+          // Trigger fade in and slide up
+          itemEl.classList.remove('opacity-0', 'translate-y-6');
+          itemEl.classList.add('opacity-100', 'translate-y-0');
+          
+          const valEl = itemEl.querySelector('.stat-value');
+          if (valEl) {
+            const finalValueStr = valEl.getAttribute('data-value');
+            if (!finalValueStr) return;
+            let prefix = '';
+            let suffix = '';
+            let numStr = finalValueStr;
+            
+            if (numStr.startsWith('+')) {
+              prefix = '+';
+              numStr = numStr.substring(1);
+            }
+            
+            if (numStr.endsWith('%')) {
+              suffix = '%';
+              numStr = numStr.substring(0, numStr.length - 1);
+            } else if (numStr.endsWith('M+')) {
+              suffix = 'M+';
+              numStr = numStr.substring(0, numStr.length - 2);
+            } else if (numStr.endsWith('+')) {
+              suffix = '+';
+              numStr = numStr.substring(0, numStr.length - 1);
+            }
+            
+            const endValue = parseInt(numStr, 10);
+            
+            if (!isNaN(endValue)) {
+              // Extract delay to stagger animation start as well
+              const delayMatch = itemEl instanceof HTMLElement ? itemEl.style.transitionDelay.match(/(\d+)ms/) : null;
+              const delay = delayMatch ? parseInt(delayMatch[1], 10) : 0;
+              
+              const decimals = endValue < 10 ? 1 : 0;
+              setTimeout(() => {
+                animateValue(valEl, 0, endValue, 2000, prefix, suffix, decimals);
+              }, delay);
+            }
+          }
+          
+          observer.unobserve(itemEl);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.stat-item').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Run immediately for initial load
+  initStatsAnimation();
+  // Support for Astro View Transitions if enabled
+  document.addEventListener('astro:page-load', initStatsAnimation);
+</script>

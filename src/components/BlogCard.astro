@@ -17,6 +17,7 @@ interface Props {
 
 const { post, index, lang = 'en' } = Astro.props;
 const readMore = lang === 'sv' ? "Läs mer" : "Read more";
+const postHref = `/sv/blogg/${post.id}`;
 const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'sv' ? 'sv-SE' : 'en-US', {
   year: 'numeric',
   month: 'long',
@@ -25,7 +26,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'sv' ? 'sv-S
 ---
 
 <a
-  href={`/blog/${post.id}`}
+  href={postHref}
   class="group relative glass-outer transition-all duration-1000 md:col-span-1 lg:col-span-2 block"
   data-scene-card
   style={`--card-index:${index};`}
