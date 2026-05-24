@@ -1,34 +1,50 @@
 ---
+import { DASHBOARD_SIGNUP_URL } from "../data/site";
+
 interface Props {
   lang?: 'en' | 'sv';
 }
 const { lang = 'en' } = Astro.props;
 
 const homeHref = lang === 'sv' ? '/sv/' : '/';
-const navLinks = [
-  { name: lang === 'sv' ? 'Hem' : 'Home', href: homeHref },
-  { name: lang === 'sv' ? 'Funktioner' : 'Features', href: `${homeHref}#services` },
-  { name: lang === 'sv' ? 'Priser' : 'Pricing', href: `${homeHref}#pricing` },
-  { name: lang === 'sv' ? 'Kontakt' : 'Contact', href: `${homeHref}#contact` }
-];
+const navLinks = lang === 'sv'
+  ? [
+      { name: 'Hem', href: homeHref },
+      { name: 'AI agent', href: '/sv/ai-chatbot-foretag' },
+      { name: 'AI-kundtjänst', href: '/sv/ai-kundtjanst' },
+      { name: 'Priser', href: `${homeHref}#pricing` },
+      { name: 'Blogg', href: '/sv/blogg' },
+      { name: 'Kontakt', href: `${homeHref}#contact` },
+    ]
+  : [
+      { name: 'Home', href: homeHref },
+      { name: 'Features', href: `${homeHref}#services` },
+      { name: 'Pricing', href: `${homeHref}#pricing` },
+      { name: 'Contact', href: `${homeHref}#contact` },
+    ];
 
 const loginText = lang === 'sv' ? 'Logga in' : 'Log in';
-const demoText = lang === 'sv' ? 'Boka en demo' : 'Book a Demo';
+const demoText = lang === 'sv' ? 'Skapa AI agent' : 'Create AI agent';
+const currentPath = Astro.url.pathname;
+const isActiveLink = (href: string) => !href.includes('#') && currentPath === href;
 ---
 
-<header class="fixed top-0 inset-x-0 z-50 bg-[#0C0C0C]/95 backdrop-blur-md border-b border-white/10 h-16 md:h-20 flex items-center overflow-visible">
-  <div class="max-w-7xl w-full mx-auto px-6 flex items-center justify-between overflow-visible">
+<header class="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-[#0C0C0C]/95 backdrop-blur-md">
+  <div class="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20">
     <!-- Logo -->
     <a href={homeHref} class="flex items-center gap-2 group relative z-10 overflow-visible">
       <img src="/Logotransparant.svg" alt="Agentergroup Logo" class="h-[116px] md:h-[148px] w-auto transition-transform duration-300 ease-out hover:scale-105" />
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-8">
+    <nav class="hidden md:flex items-center gap-5 lg:gap-8">
       {navLinks.map((link) => (
         <a 
           href={link.href} 
-          class="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+          class:list={[
+            "text-sm font-medium transition-colors",
+            isActiveLink(link.href) ? "text-white" : "text-slate-300 hover:text-white",
+          ]}
         >
           {link.name}
         </a>
@@ -41,7 +57,7 @@ const demoText = lang === 'sv' ? 'Boka en demo' : 'Book a Demo';
         {loginText}
       </a>
       <a
-        href={`${homeHref}#contact`}
+        href={DASHBOARD_SIGNUP_URL}
         class="text-sm font-semibold text-white bg-brand-orange hover:bg-orange-600 px-5 py-2.5 rounded-full transition-colors shadow-sm shadow-brand-orange/20 text-center"
       >
         {demoText}
@@ -49,32 +65,56 @@ const demoText = lang === 'sv' ? 'Boka en demo' : 'Book a Demo';
     </div>
 
     <!-- Mobile Menu Button -->
-    <button class="md:hidden p-2 text-slate-300 hover:text-white" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" data-mobile-menu-button>
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <button
+      class="group relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-200 transition-colors hover:bg-white/[0.08] hover:text-white md:hidden"
+      type="button"
+      aria-label="Öppna meny"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-mobile-menu-button
+    >
+      <svg class="h-5 w-5 transition-transform duration-300 group-aria-expanded:scale-90 group-aria-expanded:opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-menu-open-icon>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg class="absolute h-5 w-5 scale-90 opacity-0 transition-all duration-300 group-aria-expanded:scale-100 group-aria-expanded:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-menu-close-icon>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 6l12 12M18 6L6 18"></path>
       </svg>
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0C0C0C] px-6 pb-6 md:hidden" data-mobile-menu>
-    <nav class="flex flex-col gap-1 py-4">
+  <div
+    id="mobile-menu"
+    class="absolute inset-x-0 top-full hidden border-t border-white/10 bg-[#0C0C0C]/98 px-4 pb-5 pt-3 shadow-[0_24px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl md:hidden"
+    data-mobile-menu
+  >
+    <nav class="mx-auto flex max-w-7xl flex-col gap-2">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="rounded-lg px-3 py-3 text-sm font-semibold text-slate-300 hover:bg-white/5 hover:text-white"
+          class:list={[
+            "flex min-h-12 items-center justify-between rounded-2xl border px-4 py-3 text-[15px] font-semibold transition-colors",
+            isActiveLink(link.href)
+              ? "border-brand-orange/35 bg-brand-orange/10 text-white"
+              : "border-white/[0.06] bg-white/[0.03] text-slate-300 hover:border-white/15 hover:bg-white/[0.07] hover:text-white",
+          ]}
           data-mobile-menu-link
         >
-          {link.name}
+          <span>{link.name}</span>
+          <svg class="h-4 w-4 text-white/25" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"></path>
+          </svg>
         </a>
       ))}
     </nav>
-    <div class="flex flex-col gap-3">
-      <a href="https://dashboard.agentergroup.com/login" class="rounded-lg px-3 py-3 text-sm font-semibold text-slate-300 hover:bg-white/5 hover:text-white">
+
+    <div class="mx-auto mt-4 grid max-w-7xl grid-cols-1 gap-3 border-t border-white/10 pt-4 sm:grid-cols-2">
+      <a href="https://dashboard.agentergroup.com/login" class="rounded-2xl border border-white/[0.06] bg-white/[0.03] px-5 py-3.5 text-center text-sm font-semibold text-slate-300 transition-colors hover:bg-white/[0.07] hover:text-white">
         {loginText}
       </a>
       <a
-        href={`${homeHref}#contact`}
-        class="rounded-full bg-brand-orange px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-brand-orange/20 hover:bg-orange-600 text-center font-bold"
+        href={DASHBOARD_SIGNUP_URL}
+        class="rounded-2xl bg-brand-orange px-5 py-3.5 text-center text-sm font-bold text-white shadow-lg shadow-brand-orange/20 transition-colors hover:bg-orange-600"
+        data-mobile-menu-link
       >
         {demoText}
       </a>
@@ -90,15 +130,26 @@ const demoText = lang === 'sv' ? 'Boka en demo' : 'Book a Demo';
   function closeMobileMenu() {
     mobileMenu?.classList.add('hidden');
     menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.setAttribute('aria-label', 'Öppna meny');
   }
 
   menuButton?.addEventListener('click', () => {
     const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
     mobileMenu?.classList.toggle('hidden', isOpen);
-    menuButton.setAttribute('aria-expanded', String(!isOpen));
+    const nextOpen = !isOpen;
+    menuButton.setAttribute('aria-expanded', String(nextOpen));
+    menuButton.setAttribute('aria-label', nextOpen ? 'Stäng meny' : 'Öppna meny');
   });
 
   menuLinks.forEach((link) => {
     link.addEventListener('click', closeMobileMenu);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMobileMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) closeMobileMenu();
   });
 </script>

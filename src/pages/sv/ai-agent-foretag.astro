@@ -1,0 +1,140 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
+
+const title = "AI agent för företag | Automatisera arbetsflöden";
+const description =
+  "Skapa AI-agenter för företag i AgenterGroup och koppla ihop webbplats, CRM, kalender, e-post och kunskapsbas för smartare automation.";
+
+const faqs = [
+  {
+    question: "Vad är skillnaden mellan en AI agent och ett enkelt chattflöde?",
+    answer:
+      "Ett enkelt chattflöde svarar främst i dialog. En AI agent kan även utföra uppgifter, hämta information, kvalificera ärenden och koppla ihop flera system i ett arbetsflöde.",
+  },
+  {
+    question: "Vilka system kan en AI agent kopplas till?",
+    answer:
+      "Vanliga kopplingar är CRM, kalender, e-post, formulär, dokument, kunskapsbaser och interna verktyg. Exakt setup beror på ert flöde.",
+  },
+  {
+    question: "Behöver vi kunna teknik själva?",
+    answer:
+      "Nej. Plattformen är byggd för att ni ska kunna skapa agenten, lägga in kunskap, skriva instruktioner och testa flöden utan att börja med kod.",
+  },
+  {
+    question: "Vilka företag passar AI-agenter för?",
+    answer:
+      "De passar företag som har återkommande frågor, många manuella överlämningar eller sälj- och supportflöden där snabb respons påverkar resultatet.",
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/sv/ai-agent-foretag`,
+    inLanguage: "sv-SE",
+    about: ["AI agent för företag", "AI automation", "arbetsflöden", "CRM integration"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI agent för företag",
+    serviceType: "AI automation",
+    provider: {
+      "@type": "Organization",
+      name: "AgenterGroup",
+      url: SITE_URL,
+    },
+    areaServed: "SE",
+    availableLanguage: "sv-SE",
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<Layout
+  lang="sv"
+  title={title}
+  description={description}
+  canonicalPath="/sv/ai-agent-foretag"
+  alternateLinks={[
+    { hreflang: "sv", href: "/sv/ai-agent-foretag" },
+    { hreflang: "x-default", href: "/sv/ai-agent-foretag" },
+  ]}
+  structuredData={structuredData}
+>
+  <ServicePageTemplate
+    lang="sv"
+    badge="AI agent för företag"
+    title="Bygg AI-agenter som gör mer än att svara"
+    description="Skapa AI-agenter som kan föra dialog, förstå behov, hämta rätt information och driva nästa steg i era sälj-, support- och administrationsflöden."
+    secondaryHref="/sv/ai-chatbot-foretag"
+    secondaryLabel="Se AI agent"
+    stats={[
+      { label: "Sökintention", value: "AI agent för företag" },
+      { label: "Primärt mål", value: "Automatiserade flöden" },
+      { label: "Kopplas till", value: "CRM, kalender och data" },
+    ]}
+    blocks={[
+      {
+        title: "Från svar till faktisk automation",
+        body: "En AI agent kan göra mer än att ge ett svar. Den kan strukturera information, kvalificera ärenden och hjälpa användaren vidare i rätt process.",
+        bullets: [
+          "Förstå kundens behov genom följdfrågor",
+          "Hämta svar från dokument och kunskapsbas",
+          "Skicka vidare ärenden med rätt sammanhang",
+        ],
+      },
+      {
+        title: "Koppla ihop de verktyg ni redan använder",
+        body: "AI blir mest värdefullt när det sitter nära era faktiska arbetsflöden. Koppla agenten till system som redan används av sälj, support och administration.",
+        bullets: [
+          "CRM för leads, företag och kontaktuppgifter",
+          "Kalenderflöden för bokning och uppföljning",
+          "E-post, formulär och interna dokument",
+        ],
+      },
+      {
+        title: "Styrt av era affärsregler",
+        body: "Ni definierar vad agenten får svara på, när den ska fråga mer och när den ska lämna över. Det ger bättre kontroll än en generisk AI-lösning.",
+        bullets: [
+          "Instruktioner för ton, gränser och överlämning",
+          "Testning mot verkliga frågor före lansering",
+          "Löpande förbättring av svar och flöden",
+        ],
+      },
+      {
+        title: "För företag som vill skala responsen",
+        body: "När varje ny förfrågan kräver manuell sortering blir tillväxt tungt. En AI agent hjälper er hantera fler dialoger utan att tappa struktur.",
+        bullets: [
+          "Snabbare respons på webbplatsen",
+          "Mindre manuellt informationssamlande",
+          "Bättre underlag till nästa mänskliga steg",
+        ],
+      },
+    ]}
+    faqs={faqs}
+    relatedLinks={[
+      { href: "/sv/ai-chatbot-foretag", title: "AI agent för företag" },
+      { href: "/sv/ai-kundtjanst", title: "AI-kundtjänst" },
+      { href: "/sv/hemsida-med-ai-chatbot", title: "Hemsida med AI agent" },
+    ]}
+  />
+</Layout>

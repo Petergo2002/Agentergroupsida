@@ -1,0 +1,140 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
+
+const title = "AI agent för företag | Kundservice, leads & bokning";
+const description =
+  "Skapa en AI agent för företag i AgenterGroup. Träna den på ert innehåll, publicera den på hemsidan och automatisera kundtjänst, leads och bokning.";
+
+const faqs = [
+  {
+    question: "Vad gör en AI agent för företag?",
+    answer:
+      "Den svarar på vanliga frågor, guidar besökare, samlar kontaktuppgifter, kvalificerar leads och kan skicka rätt ärenden vidare till sälj eller support.",
+  },
+  {
+    question: "Kan AI-agenten tränas på vårt eget innehåll?",
+    answer:
+      "Ja. Ni laddar upp webbplats, dokument, vanliga frågor och instruktioner så att AI-agenten kan svara utifrån ert eget innehåll.",
+  },
+  {
+    question: "Passar det för mindre företag?",
+    answer:
+      "Ja. En AI agent passar särskilt bra när samma frågor återkommer ofta eller när varje missad förfrågan kan betyda ett förlorat lead.",
+  },
+  {
+    question: "Kan AI-agenten boka möten?",
+    answer:
+      "Ja. Den kan kvalificera besökaren och sedan leda vidare till bokning eller kopplas mot kalenderflöden beroende på hur säljprocessen ser ut.",
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/sv/ai-chatbot-foretag`,
+    inLanguage: "sv-SE",
+    about: ["AI agent för företag", "AI agent på hemsidan", "leadkvalificering", "mötesbokning"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI agent för företag",
+    serviceType: "AI agent",
+    provider: {
+      "@type": "Organization",
+      name: "AgenterGroup",
+      url: SITE_URL,
+    },
+    areaServed: "SE",
+    availableLanguage: "sv-SE",
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<Layout
+  lang="sv"
+  title={title}
+  description={description}
+  canonicalPath="/sv/ai-chatbot-foretag"
+  alternateLinks={[
+    { hreflang: "sv", href: "/sv/ai-chatbot-foretag" },
+    { hreflang: "x-default", href: "/sv/ai-chatbot-foretag" },
+  ]}
+  structuredData={structuredData}
+>
+  <ServicePageTemplate
+    lang="sv"
+    badge="AI agent för företag"
+    title="Skapa en AI agent som gör besökare till leads"
+    description="Med AgenterGroup skapar ni själva en AI agent som förstår ert erbjudande, svarar på frågor, kvalificerar besökare och hjälper rätt personer vidare till kontakt eller bokning."
+    secondaryHref="/sv/"
+    secondaryLabel="Till startsidan"
+    stats={[
+      { label: "Sökintention", value: "AI agent för företag" },
+      { label: "Primärt mål", value: "Svar, leads och bokning" },
+      { label: "Kom igång", value: "Skapa, träna, publicera" },
+    ]}
+    blocks={[
+      {
+        title: "Skapa AI-agenten och publicera på hemsidan",
+        body: "Besökare vill förstå pris, process, leverans och nästa steg utan att vänta. I plattformen skapar ni en AI agent, tränar den på ert innehåll och lägger in den på hemsidan.",
+        bullets: [
+          "Lägg till webbplats, FAQ, dokument och instruktioner",
+          "Anpassa ton, välkomstmeddelande och samtalsmål",
+          "Publicera AI-agenten och förbättra svaren över tid",
+        ],
+      },
+      {
+        title: "Leadkvalificering innan sälj tar över",
+        body: "Alla leads är inte lika värdefulla. Ni kan låta AI-agenten ställa rätt följdfrågor, förstå behovet och samla informationen innan säljteamet tar över.",
+        bullets: [
+          "Samla namn, e-post, företag och behov",
+          "Identifiera varma leads utifrån era kriterier",
+          "Skicka strukturerad leadinformation vidare till teamet",
+        ],
+      },
+      {
+        title: "Ni styr kunskapen och tonen",
+        body: "Målet är inte en generisk bot. Ni tränar AI-agenten på ert material och styr hur den ska prata, vilka frågor den ska svara på och när den ska lämna över.",
+        bullets: [
+          "Svenska svar och branschspecifika formuleringar",
+          "Regler för när AI-agenten ska lämna över",
+          "GDPR-medveten hantering av kontaktuppgifter",
+        ],
+      },
+      {
+        title: "Från fråga till bokat möte",
+        body: "När en besökare är redo ska vägen vidare vara kort. AI-agenten kan leda till bokningsflöden, formulär eller direkt kontakt beroende på hur ni säljer.",
+        bullets: [
+          "Boka möte, rådgivning eller uppföljning",
+          "Minska friktion jämfört med statiska formulär",
+          "Fånga intresse även utanför kontorstid",
+        ],
+      },
+    ]}
+    faqs={faqs}
+    relatedLinks={[
+      { href: "/sv/ai-kundtjanst", title: "AI-kundtjänst" },
+      { href: "/sv/hemsida-med-ai-chatbot", title: "Hemsida med AI agent" },
+      { href: "/sv/blogg", title: "Blogg om AI" },
+    ]}
+  />
+</Layout>

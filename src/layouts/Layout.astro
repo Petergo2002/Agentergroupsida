@@ -11,6 +11,8 @@ interface Props {
 	alternateLinks?: Array<{ href: string; hreflang: string }>;
 	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 	lang?: 'en' | 'sv';
+	imagePath?: string;
+	robots?: string;
 }
 
 const { 
@@ -19,11 +21,14 @@ const {
 	canonicalPath = "/",
 	alternateLinks = [],
 	structuredData = [],
-	lang = 'en'
+	lang = 'en',
+	imagePath = "/brand.png",
+	robots = "index,follow,max-image-preview:large"
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
+const ogImageUrl = imagePath.startsWith("http") ? imagePath : `${siteUrl}${imagePath}`;
 const normalizedAlternateLinks = alternateLinks.map((link) => ({
 	...link,
 	href: link.href.startsWith("http") ? link.href : `${siteUrl}${link.href}`,
@@ -38,6 +43,16 @@ const allStructuredData = [
 		url: siteUrl,
 		logo: logoUrl,
 		email: "info@agentergroup.com",
+		description: SITE_DESCRIPTION,
+		areaServed: {
+			"@type": "Country",
+			name: "Sweden",
+		},
+		address: {
+			"@type": "PostalAddress",
+			addressLocality: "Borås",
+			addressCountry: "SE",
+		},
 		contactPoint: [
 			{
 				"@type": "ContactPoint",
@@ -53,6 +68,11 @@ const allStructuredData = [
 		name: SITE_NAME,
 		url: siteUrl,
 		inLanguage: lang === 'sv' ? "sv-SE" : "en-US",
+		publisher: {
+			"@type": "Organization",
+			name: SITE_NAME,
+			url: siteUrl,
+		},
 	},
 	...pageStructuredData,
 ].filter(Boolean);
@@ -75,17 +95,19 @@ const allStructuredData = [
 		<!-- SEO -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="robots" content={robots} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content={lang === 'sv' ? "sv_SE" : "en_US"} />
-		<meta property="og:image" content={logoUrl} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:alt" content={`${SITE_NAME} AI chatbot platform`} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={logoUrl} />
+		<meta name="twitter:image" content={ogImageUrl} />
 		
 		<!-- Fonts: Instrument Sans -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">

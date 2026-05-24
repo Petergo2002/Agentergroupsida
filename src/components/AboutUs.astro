@@ -5,14 +5,14 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 
 const copy = {
-  label: lang === 'sv' ? 'Om Oss' : 'About Us',
-  title: lang === 'sv' ? 'Byggt för att lösa verkliga problem.' : 'Built to solve real problems.',
+  label: lang === 'sv' ? 'Plattformen' : 'Platform',
+  title: lang === 'sv' ? 'Bygg din AI-agent utan utveckling.' : 'Build your AI agent without development.',
   p1: lang === 'sv' 
-    ? 'På Agentergroup tror vi att AI inte bara är en trend – det är det mest kraftfulla verktyget för att skala mänsklig kapacitet. Vi grundades med en enkel mission: att demokratisera tillgången till avancerade AI-agenter för företag i alla storlekar.'
-    : 'At Agentergroup, we believe AI isn\'t just a buzzword—it\'s the most powerful lever for scaling human capability. We were founded on a simple mission: to democratize access to enterprise-grade AI agents for businesses of all sizes.',
+    ? 'AgenterGroup är byggt för företag som vill äga sin AI-agent själva. Skapa en agent, lägg in kunskap, testa svaren och publicera den direkt på hemsidan.'
+    : 'AgenterGroup is built for companies that want to own their AI agent themselves. Create an agent, add knowledge, test responses, and publish it directly on your website.',
   p2: lang === 'sv'
-    ? 'Oavsett om det handlar om att automatisera kundtjänst dygnet runt, kvalificera leads eller driva komplexa backend-processer, så bygger vi intelligenta lösningar som minskar kostnader och ökar intäkter från dag ett.'
-    : 'Whether it\'s automating 24/7 customer support, qualifying leads, or driving complex backend operations, we build intelligent workflows that reduce overhead and drive revenue from day one.',
+    ? 'Du behöver inte vänta på ett projekt för att komma igång. Plattformen ger er verktygen för kundtjänst, leadkvalificering, mötesbokning och löpande förbättring i samma arbetsyta.'
+    : 'You do not need to wait for a project to get started. The platform gives your team tools for support, lead qualification, meeting booking, and continuous improvement in one workspace.',
   stats: [
     { label: lang === 'sv' ? 'Milj.' : 'Million', value: '5+', sub: lang === 'sv' ? 'Hanterade interaktioner' : 'Interactions handled' },
     { label: lang === 'sv' ? 'Timmar' : 'Hours', value: '100+', sub: lang === 'sv' ? 'Sparad arbetstid' : 'Time saved for clients' },

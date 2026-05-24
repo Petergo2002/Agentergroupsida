@@ -1,6 +1,6 @@
 ---
 import DashboardPreview from './DashboardPreview.astro';
-import { DASHBOARD_LOGIN_URL } from '../data/site';
+import { DASHBOARD_SIGNUP_URL } from '../data/site';
 
 interface Props {
   lang?: 'en' | 'sv';
@@ -10,19 +10,19 @@ const { lang = 'en' } = Astro.props;
 
 const content = {
   en: {
-    badge: "Built for businesses",
-    title: "AI Chatbots for",
+    badge: "Build your own AI agent",
+    title: "Create AI agents for",
     titleSuffix: "growing companies.",
-    subtitle: "Sell with a website that explains your offer and an AI chat widget that answers visitors, captures leads, and books the next step.",
+    subtitle: "Use the platform to train an AI agent on your content, publish it on your website, capture leads, and book the next step.",
     ctaPrimary: "Try free",
     ctaSecondary: "Website offer",
     secondaryHref: "/sv/hemsida-med-ai-chatbot"
   },
   sv: {
-    badge: "Byggt för svenska företag",
-    title: "AI chatbot för",
+    badge: "Bygg din egen AI agent",
+    title: "Skapa AI agent för",
     titleSuffix: "företag i Sverige.",
-    subtitle: "Sälj med en hemsida som förklarar erbjudandet och en AI-chatt som svarar besökare, fångar leads och bokar nästa steg.",
+    subtitle: "Använd plattformen för att träna AI-agenten på ert innehåll, publicera den på hemsidan, fånga leads och boka nästa steg.",
     ctaPrimary: "Testa gratis",
     ctaSecondary: "Hemsida",
     secondaryHref: "/sv/hemsida-med-ai-chatbot"
@@ -59,7 +59,7 @@ const content = {
         <!-- CTAs -->
         <div class="mb-14 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center lg:mb-16">
           <a
-            href={DASHBOARD_LOGIN_URL}
+            href={DASHBOARD_SIGNUP_URL}
             class="group relative w-full overflow-hidden rounded-full bg-white py-2 pl-6 pr-2 text-[9px] font-bold uppercase tracking-[0.16em] text-black shadow-[0_30px_60px_rgba(255,255,255,0.05)] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] sm:w-auto sm:pl-8 sm:text-[10px] sm:tracking-[0.2em]"
           >
             <span class="relative z-10 flex items-center justify-between gap-6">

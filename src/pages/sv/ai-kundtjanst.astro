@@ -1,0 +1,140 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
+import { SITE_URL } from "../../data/site";
+
+const title = "AI-kundtjänst | Automatisera support dygnet runt";
+const description =
+  "Automatisera kundtjänst med AI som svarar på vanliga frågor, minskar svarstider, avlastar supportteamet och skickar vidare rätt ärenden.";
+
+const faqs = [
+  {
+    question: "Vad är AI-kundtjänst?",
+    answer:
+      "AI-kundtjänst är en AI-agent som använder ert innehåll för att svara kunder, hantera vanliga ärenden och lämna över när en människa behövs.",
+  },
+  {
+    question: "Kan AI ersätta hela kundtjänsten?",
+    answer:
+      "Nej, den ska främst ta hand om repetitiva frågor och förkvalificera ärenden. Komplexa eller känsliga frågor bör fortfarande kunna gå vidare till personal.",
+  },
+  {
+    question: "Vilka frågor kan automatiseras?",
+    answer:
+      "Vanliga frågor om öppettider, priser, produkter, leverans, bokning, onboarding, dokumentation och interna rutiner passar ofta bra för automatisering.",
+  },
+  {
+    question: "Hur kommer man igång?",
+    answer:
+      "Ni skapar en AI agent, laddar upp vanliga frågor, dokument och instruktioner, testar svaren och publicerar den när den är redo.",
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_URL}/sv/ai-kundtjanst`,
+    inLanguage: "sv-SE",
+    about: ["AI-kundtjänst", "automatisera kundtjänst", "AI support", "AI agent kundtjänst"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "AI-kundtjänst",
+    serviceType: "Customer service automation",
+    provider: {
+      "@type": "Organization",
+      name: "AgenterGroup",
+      url: SITE_URL,
+    },
+    areaServed: "SE",
+    availableLanguage: "sv-SE",
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<Layout
+  lang="sv"
+  title={title}
+  description={description}
+  canonicalPath="/sv/ai-kundtjanst"
+  alternateLinks={[
+    { hreflang: "sv", href: "/sv/ai-kundtjanst" },
+    { hreflang: "x-default", href: "/sv/ai-kundtjanst" },
+  ]}
+  structuredData={structuredData}
+>
+  <ServicePageTemplate
+    lang="sv"
+    badge="AI-kundtjänst"
+    title="Skapa AI-kundtjänst utan att tappa kontroll"
+    description="I AgenterGroup skapar ni AI-kundtjänst som kan era svar, era regler och era överlämningar. Kunder får hjälp direkt och teamet kan fokusera på ärenden som kräver mänskligt omdöme."
+    secondaryHref="/sv/ai-chatbot-foretag"
+    secondaryLabel="Se AI agent"
+    stats={[
+      { label: "Sökintention", value: "AI-kundtjänst" },
+      { label: "Primärt mål", value: "Kortare svarstider" },
+      { label: "Passar för", value: "Support och service" },
+    ]}
+    blocks={[
+      {
+        title: "Lägg in er kunskapsbas",
+        body: "Många supportflöden bromsas av samma frågor om och om igen. Ladda upp FAQ, dokument och webbinnehåll så att AI-agenten kan ta hand om rutinsvaren direkt.",
+        bullets: [
+          "Svarar på återkommande frågor dygnet runt",
+          "Hämtar svar från er kunskapsbas och era instruktioner",
+          "Minskar trycket på inkorg, telefon och kontaktformulär",
+        ],
+      },
+      {
+        title: "Tydliga regler för överlämning",
+        body: "En bra AI-lösning ska veta när den inte ska fortsätta själv. I plattformen kan ni styra när ärenden ska lämnas vidare till support, sälj eller ansvarig person.",
+        bullets: [
+          "Eskalering vid känsliga eller komplexa frågor",
+          "Sammanfattning av konversationen före överlämning",
+          "Mindre dubbelarbete för supportteamet",
+        ],
+      },
+      {
+        title: "Svenska svar med er ton",
+        body: "AI-kundtjänsten anpassas efter ert språk, era policies och er bransch genom innehållet och instruktionerna ni lägger in. Det gör svaren mer relevanta än en standardiserad supportbot.",
+        bullets: [
+          "Svar på svenska med tydlig och professionell ton",
+          "Kunskapsbas baserad på webbplats, dokument och FAQ",
+          "Löpande förbättring utifrån verkliga kundfrågor",
+        ],
+      },
+      {
+        title: "Kundservice som också skapar affär",
+        body: "Supportfrågor kan ofta visa köpintresse. När kunden frågar om pris, paket eller tillgänglighet kan AI-agenten hjälpa vidare mot rätt erbjudande eller bokat möte.",
+        bullets: [
+          "Identifiera frågor med kommersiell potential",
+          "Koppla kundservice till leadkvalificering",
+          "Gör det enkelt att gå från support till nästa steg",
+        ],
+      },
+    ]}
+    faqs={faqs}
+    relatedLinks={[
+      { href: "/sv/ai-chatbot-foretag", title: "AI agent för företag" },
+      { href: "/sv/ai-agent-foretag", title: "AI agent för företag" },
+      { href: "/sv/blogg", title: "Blogg om AI" },
+    ]}
+  />
+</Layout>

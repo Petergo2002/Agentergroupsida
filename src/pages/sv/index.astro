@@ -3,28 +3,45 @@ import Layout from '../../layouts/Layout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import StatsGrid from '../../components/StatsGrid.astro';
 import ServicesGrid from '../../components/ServicesGrid.astro';
+import UseCaseGrid from '../../components/UseCaseGrid.astro';
 import AboutUs from '../../components/AboutUs.astro';
 import TargetAudience from '../../components/TargetAudience.astro';
 import Pricing from '../../components/Pricing.astro';
 import ContactSection from '../../components/ContactSection.astro';
-import { SITE_URL, SITE_NAME } from '../../data/site';
+import { SITE_URL, SITE_NAME, serviceLinkCards } from '../../data/site';
 
 const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "AI chatbot för företag i Sverige | AgenterGroup",
-    description: "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
+    name: "AI agent för företag i Sverige | AgenterGroup",
+    description: "AgenterGroup är en SaaS-plattform där svenska företag skapar, tränar och lanserar sin egen AI agent för kundservice, leads och mötesbokning.",
     url: `${SITE_URL}/sv/`,
     inLanguage: "sv-SE",
+    about: [
+      "AI agent för företag",
+      "AI-kundtjänst",
+      "AI agent på hemsidan",
+      "leadkvalificering",
+      "mötesbokning",
+    ],
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: serviceLinkCards.map((card, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE_URL}${card.href}`,
+        name: card.title,
+      })),
+    },
   },
 ];
 ---
 
 <Layout
   lang="sv"
-  title={`AI Chatbots & Agenter för Företag | ${SITE_NAME}`}
-  description="Hantera kundfrågor, kvalificera leads och boka möten – allt från en smart och intuitiv plattform."
+  title={`Skapa egen AI agent | Kundtjänst, leads & bokning | ${SITE_NAME}`}
+  description="Skapa din egen AI agent i AgenterGroup. Träna den på ert innehåll, publicera den på hemsidan och automatisera support, leads och bokning."
   canonicalPath="/sv/"
   alternateLinks={[
     { hreflang: "en", href: "/" },
@@ -36,6 +53,7 @@ const structuredData = [
   <HeroSection lang="sv" />
   <StatsGrid lang="sv" />
   <ServicesGrid lang="sv" />
+  <UseCaseGrid cards={serviceLinkCards} lang="sv" />
   <AboutUs lang="sv" />
   <TargetAudience lang="sv" />
   <Pricing lang="sv" />

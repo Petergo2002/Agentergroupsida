@@ -1,10 +1,11 @@
 export const SITE_URL = "https://agentergroup.com";
 export const SITE_NAME = "AgenterGroup";
 export const DASHBOARD_LOGIN_URL = "https://dashboard.agentergroup.com/login";
+export const DASHBOARD_SIGNUP_URL = "https://dashboard.agentergroup.com/signup";
 
 export const SITE_CONTENT = {
   en: {
-    description: "We build AI agents and AI chatbots for companies in customer service, lead qualification, and meeting booking.",
+    description: "AgenterGroup is a SaaS platform where companies create, train, and launch their own AI agents for support, leads, and meeting booking.",
     primaryCta: "Talk to AI directly",
     login: "Login",
     demo: "Demo",
@@ -12,7 +13,7 @@ export const SITE_CONTENT = {
     aiWidgetLabel: "Talk to our AI",
     footer: {
       whoWeAre: "Who are we?",
-      description: "We build intelligent AI systems that automate customer conversations, lead management, and meeting bookings. We redefine how modern companies operate in the digital era.",
+      description: "A SaaS platform for creating AI agents that answer visitors, qualify leads, and automate customer conversations directly from your website.",
       contactUs: "Contact Us",
       explorePlatform: "Explore the Platform",
       locationTitle: "Location",
@@ -20,7 +21,7 @@ export const SITE_CONTENT = {
     }
   },
   sv: {
-    description: "Vi bygger AI-agenter och AI-chatbots för svenska företag inom kundservice, leadkvalificering och mötesbokning.",
+    description: "AgenterGroup är en SaaS-plattform där företag enkelt skapar, tränar och lanserar sin egen AI agent för kundtjänst, leads och bokning.",
     primaryCta: "Prata med AI direkt",
     login: "Logga in",
     demo: "Demo",
@@ -28,7 +29,7 @@ export const SITE_CONTENT = {
     aiWidgetLabel: "Prata med vår AI",
     footer: {
       whoWeAre: "Vilka är vi?",
-      description: "Vi bygger intelligenta AI-system som automatiserar kundkonversationer, leadhantering och mötesbokning. Vi omdefinierar hur moderna företag opererar i den digitala eran.",
+      description: "En SaaS-plattform där företag skapar AI-agenter som svarar besökare, kvalificerar leads och automatiserar kunddialoger direkt från hemsidan.",
       contactUs: "Kontakta Oss",
       explorePlatform: "Utforska Plattformen",
       locationTitle: "Location",
@@ -54,7 +55,7 @@ export const getNavLinks = (lang: 'en' | 'sv' = 'en') => {
     footer: [
       { href: `${prefix}/`, label: isSv ? "Hem" : "Home" },
       { href: "/sv/blogg", label: isSv ? "Blogg" : "Blog" },
-      { href: "/sv/hemsida-med-ai-chatbot", label: isSv ? "Hemsida med AI chatbot" : "Website with AI Chatbot" },
+      { href: "/sv/hemsida-med-ai-chatbot", label: isSv ? "AI agent på hemsidan" : "Website AI Agent" },
     ]
   };
 };
@@ -67,16 +68,37 @@ export const footerNavLinks = getNavLinks('sv').footer;
 
 export const serviceLinkCards = [
   {
-    href: "/sv/hemsida-med-ai-chatbot",
-    title: "Hemsida med AI chatbot",
+    href: "/sv/ai-chatbot-foretag",
+    title: "AI agent på hemsidan",
     description:
-      "En säljande hemsida där erbjudande, AI-chatt, lead capture och bokningsflöde arbetar tillsammans.",
+      "Skapa en AI agent som svarar på frågor, fångar leads och hjälper besökare vidare direkt på webbplatsen.",
+  },
+  {
+    href: "/sv/ai-kundtjanst",
+    title: "AI-kundtjänst",
+    description:
+      "Automatisera kundtjänst och support med en AI-agent som hanterar vanliga frågor och eskalerar rätt ärenden.",
+  },
+  {
+    href: "/sv/ai-agent-foretag",
+    title: "AI agent för företag",
+    description:
+      "Bygg AI-agenter i plattformen och koppla ihop dialog, CRM, kalender, kunskapsbas och interna arbetsflöden.",
+  },
+  {
+    href: "/sv/hemsida-med-ai-chatbot",
+    title: "AI agent för hemsidan",
+    description:
+      "Installera en AI agent på hemsidan och låt erbjudande, lead capture och bokningsflöde arbeta tillsammans.",
   },
 ] as const;
 
 export const sitemapPaths = [
   "/",
   "/sv/",
+  "/sv/ai-chatbot-foretag",
+  "/sv/ai-kundtjanst",
+  "/sv/ai-agent-foretag",
   "/sv/hemsida-med-ai-chatbot",
   "/sv/blogg",
   "/privacy",

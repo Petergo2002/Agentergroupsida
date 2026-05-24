@@ -3,30 +3,30 @@ import Layout from "../../layouts/Layout.astro";
 import ServicePageTemplate from "../../components/ServicePageTemplate.astro";
 import { SITE_URL } from "../../data/site";
 
-const title = "Hemsida med AI chatbot | AgenterGroup";
+const title = "Hemsida med AI agent för fler leads | AgenterGroup";
 const description =
-  "Vi bygger hemsidor som arbetar tillsammans med en AI chatbot för att svara på besökare, fånga leads och boka möten.";
+  "Lägg till en AI agent på hemsidan med AgenterGroup. Skapa agenten, träna den på ert innehåll och fånga leads direkt från webbplatsen.";
 
 const faqs = [
   {
-    question: "Är det här en hemsida eller ett AI chatbot-projekt?",
+    question: "Är det här en hemsida eller ett AI agent-projekt?",
     answer:
-      "Det är båda. Vi bygger hemsidan och AI-chatten som ett gemensamt konverteringssystem där struktur, text, leadflöde och chatt arbetar mot samma mål.",
+      "Det handlar om att göra hemsidan mer aktiv. Ni installerar en AI-agent som kan svara, kvalificera besökare och leda dem vidare till kontakt eller bokning.",
   },
   {
-    question: "Kan ni bygga om en befintlig hemsida?",
+    question: "Fungerar det på en befintlig hemsida?",
     answer:
-      "Ja. Om den befintliga hemsidan har en bra grund kan vi behålla det som fungerar och bygga om de delar som bromsar förtroende, tydlighet, leads eller bokningar.",
+      "Ja. AgenterGroups AI agent kan användas på en befintlig hemsida så att ni snabbt kan testa den utan att börja om från noll.",
   },
   {
-    question: "Vad gör chat widgeten på hemsidan?",
+    question: "Vad gör AI-agenten på hemsidan?",
     answer:
-      "Widgeten kan svara på vanliga frågor, kvalificera besökare, samla kontaktuppgifter, skicka vidare leads och leda rätt personer mot ett bokat möte.",
+      "AI-agenten kan svara på vanliga frågor, kvalificera besökare, samla kontaktuppgifter, skicka vidare leads och leda rätt personer mot ett bokat möte.",
   },
   {
     question: "Måste vi själva sätta upp AI-flöden och prompts?",
     answer:
-      "Nej. AgenterGroup hjälper till med setup, hemsidesstruktur, chattflöde och affärslogik så att systemet är redo att användas.",
+      "Ni kan skapa agenten själva i plattformen genom att lägga in kunskap, instruktioner och mål. Det är byggt för att vara enkelt även utan kod.",
   },
 ];
 
@@ -42,7 +42,8 @@ const structuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: "Hemsida med AI chatbot",
+    serviceType: "Hemsida med AI agent",
+    name: "Hemsida med AI agent",
     provider: {
       "@type": "Organization",
       name: "AgenterGroup",
@@ -50,6 +51,10 @@ const structuredData = [
     },
     areaServed: "SE",
     availableLanguage: "sv-SE",
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType: "Svenska B2B- och tjänsteföretag",
+    },
     description,
   },
   {
@@ -80,29 +85,29 @@ const structuredData = [
 >
   <ServicePageTemplate
     lang="sv"
-    badge="Hemsida + AI chatbot"
-    title="Hemsidor som säljer med chatten"
-    description="Vi bygger hemsidor som går hand i hand med AgenterGroups chat widget, så att besökare kan förstå erbjudandet, ställa frågor, kvalificera sig och boka nästa steg."
+    badge="Hemsida + AI agent"
+    title="Gör hemsidan säljande med egen AI-agent"
+    description="Skapa en AI agent i AgenterGroup, publicera den på hemsidan och låt den svara direkt, fånga leads och leda rätt personer till bokning."
     secondaryHref="/"
     secondaryLabel="Till startsidan"
     stats={[
       { label: "Primärt mål", value: "Fler kvalificerade leads" },
-      { label: "Byggt runt", value: "Hemsida, text och AI-chatt" },
+      { label: "Byggt runt", value: "Agent, kunskap och flöden" },
       { label: "Passar för", value: "Tjänsteföretag och B2B" },
     ]}
     blocks={[
       {
-        title: "Hemsida och widget som ett system",
-        body: "En bra hemsida ska inte lämna varje besökare vid ett statiskt kontaktformulär. Vi bygger sidstruktur och AI-chattflöde tillsammans, så att besökaren får svar samtidigt som ni fångar rätt information.",
+        title: "Hemsida och AI agent som ett system",
+        body: "En bra hemsida ska inte lämna varje besökare vid ett statiskt kontaktformulär. Med AI-agenten kan ni lägga till en aktiv dialog som svarar samtidigt som ni fångar rätt information.",
         bullets: [
-          "Tydliga tjänstesidor som förklarar erbjudandet snabbt",
-          "AI-chattflöden som svarar på frågor och kvalificerar behov",
+          "Träna agenten på era tjänster, frågor och dokument",
+          "AI-agentflöden som svarar på frågor och kvalificerar behov",
           "Call to actions som leder mot kontakt eller bokning",
         ],
       },
       {
         title: "Varför en vanlig hemsida inte räcker",
-        body: "Många hemsidor ser okej ut men tappar köpare eftersom nästa steg är otydligt. Chat widgeten ger besökaren ett direkt sätt att fråga, jämföra och agera utan att vänta på manuellt svar.",
+        body: "Många hemsidor ser okej ut men tappar köpare eftersom nästa steg är otydligt. En AI agent ger besökaren ett direkt sätt att fråga, jämföra och agera utan att vänta på manuellt svar.",
         bullets: [
           "Ersätt passiva formulär med aktiva konversationer",
           "Fånga frågor som annars försvinner",
@@ -110,17 +115,17 @@ const structuredData = [
         ],
       },
       {
-        title: "Det AgenterGroup bygger",
-        body: "Vi tar hand om hemsidesstruktur, budskap, AI widget-setup, lead capture och bokningsflöde så att sidan fungerar som en säljresurs, inte bara en digital broschyr.",
+        title: "Det ni skapar i AgenterGroup",
+        body: "I plattformen skapar ni agenten, lägger in kunskap, styr tonen, aktiverar lead capture och publicerar den så att hemsidan fungerar som en säljresurs.",
         bullets: [
-          "Landningssidor och tjänstesidor matchade mot ert erbjudande",
-          "Chatbot-setup för FAQ, kvalificering och överlämning",
+          "Kunskapsbas med webbplats, dokument och FAQ",
+          "Agent-regler för kvalificering och överlämning",
           "Boknings- och leadflöden kopplade till er säljprocess",
         ],
       },
       {
         title: "Vilka det passar för",
-        body: "Det här är byggt för företag som säljer genom förtroende, förklaring och timing. Om era kunder behöver svar innan de kontaktar er ska hemsidan och chatten arbeta tillsammans.",
+        body: "Det här passar företag som säljer genom förtroende, förklaring och timing. Om era kunder behöver svar innan de kontaktar er kan hemsidan och AI-agenten arbeta tillsammans.",
         bullets: [
           "Lokala tjänsteföretag och konsulter",
           "B2B-team som vill höja leadkvaliteten",
@@ -130,7 +135,8 @@ const structuredData = [
     ]}
     faqs={faqs}
     relatedLinks={[
-      { href: "/", title: "Hem" },
+      { href: "/sv/ai-chatbot-foretag", title: "AI agent för företag" },
+      { href: "/sv/ai-kundtjanst", title: "AI-kundtjänst" },
       { href: "/sv/blogg", title: "Blogg" },
     ]}
   />

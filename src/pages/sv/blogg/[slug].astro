@@ -37,12 +37,16 @@ const structuredData = {
   author: {
     '@type': 'Organization',
     name: post.data.author,
+    url: SITE_URL,
   },
   publisher: {
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
   },
+  image: post.data.heroImage,
+  articleSection: post.data.tags,
+  keywords: post.data.tags.join(', '),
   mainEntityOfPage: `${SITE_URL}${canonicalPath}`,
 };
 ---

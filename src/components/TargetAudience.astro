@@ -6,10 +6,10 @@ const { lang = 'en' } = Astro.props;
 
 const copy = {
   label: lang === 'sv' ? 'Målgrupper' : 'Who It\'s For',
-  title: lang === 'sv' ? 'Byggt för framtidens företag' : 'Built for Forward-Thinking Teams',
+  title: lang === 'sv' ? 'För team som vill skapa själva' : 'For teams that want to build themselves',
   description: lang === 'sv' 
-    ? 'Oavsett bransch hjälper Agentergroup dig att skala upp verksamheten genom intelligent automatisering och data-drivna insikter.' 
-    : 'Regardless of industry, Agentergroup helps you scale operations through intelligent automation and data-driven workflows.',
+    ? 'Oavsett bransch kan teamet skapa en egen AI agent, träna den på rätt innehåll och förbättra den löpande utan att starta ett utvecklingsprojekt.' 
+    : 'Regardless of industry, your team can create its own AI agent, train it on the right content, and improve it continuously without starting a development project.',
   cta: lang === 'sv' ? 'Börja gratis idag' : 'Start Free Today',
   audiences: [
     {
@@ -120,7 +120,7 @@ const copy = {
       </p>
 
       <a 
-        href="https://dashboard.agentergroup.com/login" 
+        href="https://dashboard.agentergroup.com/signup" 
         class="inline-flex h-[48px] items-center justify-center rounded-full bg-white/[0.06] border border-white/10 px-8 text-[11px] font-bold uppercase tracking-[0.08em] text-white/80 transition-all duration-500 hover:bg-white hover:text-black hover:scale-[1.02] active:scale-[0.98]"
       >
         {copy.cta}
